@@ -58,7 +58,7 @@ function initMap() {
     center: [127.12, 37.46], zoom: 9.6, pitch: 0, antialias: true,
   });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
-  map.on('load', () => { $('map-status').textContent = ''; fitAll(); setTimeout(() => map.resize(), 300); });
+  map.on('load', () => { $('map-status').textContent = ''; if (!focus) fitAll(); setTimeout(() => map.resize(), 300); });
   map.on('moveend', scheduleLabels); map.on('zoomend', scheduleLabels); map.on('resize', scheduleLabels); map.on('movestart', () => { if (labelLayer) { labelLayer.innerHTML = ''; labelSvg.innerHTML = ''; } });
   window.addEventListener('resize', () => { map.resize(); scheduleLabels(); });
   window.addEventListener('orientationchange', () => setTimeout(() => { map.resize(); scheduleLabels(); }, 400));
@@ -73,7 +73,7 @@ function initMap() {
   });
   renderDiscMarkers();
   initInfra();
-  $('fit').onclick = fitAll;
+  $('fit').onclick = () => { clearFocus(); fitAll(); };
   $('view').onclick = () => { const on = $('view').getAttribute('aria-pressed') !== 'true'; $('view').setAttribute('aria-pressed', String(on)); $('view').textContent = on ? '3D 켜짐' : '2D 보기'; map.easeTo({ pitch: on ? 50 : 0, bearing: on ? -15 : 0 }); };
 }
 function fitAll() {
@@ -94,6 +94,7 @@ function circlePoly(center, r, n = 64) { const [lng, lat] = center; const kx = 1
 function focusInfra(lng, lat, fit) {
   if (!infraLoaded) { focus = { lng, lat }; return; }
   focus = { lng, lat };
+  Object.keys(INFRA_STYLE).forEach(k => { infraOn[k] = true; const b = document.querySelector(`#infra-chips .chip[data-k="${k}"]`); if (b) b.setAttribute('aria-pressed', 'true'); });
   const near = infraFC.features.filter(f => { const d = distM([lng, lat], f.geometry.coordinates); if (d > 1000) return false; f.properties.d = Math.round(d); return true; });
   map.getSource('infra-near').setData({ type: 'FeatureCollection', features: near });
   map.getSource('focus-ring').setData({ type: 'FeatureCollection', features: [circlePoly([lng, lat], 1000), circlePoly([lng, lat], 500)] });
@@ -107,6 +108,7 @@ function focusInfra(lng, lat, fit) {
 function clearFocus() {
   focus = null;
   if (!infraLoaded) return;
+  Object.keys(INFRA_STYLE).forEach(k => { infraOn[k] = (k === 'transit') || (k === 'education' && innerWidth > 900); const b = document.querySelector(`#infra-chips .chip[data-k="${k}"]`); if (b) b.setAttribute('aria-pressed', String(infraOn[k])); });
   map.getSource('infra-near').setData({ type: 'FeatureCollection', features: [] });
   map.getSource('focus-ring').setData({ type: 'FeatureCollection', features: [] });
   Object.keys(INFRA_STYLE).forEach(k => { map.setLayoutProperty('infra-' + k, 'visibility', infraOn[k] ? 'visible' : 'none'); map.setLayoutProperty('infra-near-' + k, 'visibility', 'none'); });
@@ -135,7 +137,7 @@ function initInfra() {
         });
       });
       infraLoaded = true;
-      if (focus) focusInfra(focus.lng, focus.lat, false); else map.once('idle', scheduleLabels);
+      if (focus) focusInfra(focus.lng, focus.lat, true); else map.once('idle', scheduleLabels);
     };
     map.loaded() ? add() : map.on('load', add);
     $('infra-chips').innerHTML = Object.entries(INFRA_STYLE).map(([k, [label, col]]) => `<button class="chip" data-k="${k}" aria-pressed="${infraOn[k]}"><i style="background:${col}"></i>${label}</button>`).join('') + `<span class="chip-note">${j.points.length.toLocaleString()}개 시설 · OSM</span>`;
