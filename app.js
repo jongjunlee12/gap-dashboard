@@ -89,8 +89,8 @@ function fitAll() {
 }
 
 /* ---------- 주변 인프라 레이어 (OSM) ---------- */
-const INFRA_STYLE = { transit: ['교통', '#172126'], culture: ['문화', '#7a4fd1'], public: ['공공', '#1a9e6c'], education: ['교육', '#d9a21b'], medical: ['의료', '#c8322f'] };
-const infraOn = { transit: true, culture: false, public: false, education: innerWidth > 900, medical: false };
+const INFRA_STYLE = { transit: ['교통', '#172126'], culture: ['문화', '#7a4fd1'], public: ['공공', '#1a9e6c'], education: ['교육', '#d9a21b'] };
+const infraOn = { transit: true, culture: false, public: false, education: innerWidth > 900 };
 let infraLoaded = false, infraFC = null, focus = null;
 function distM(a, b) { const R = 6371000, p1 = a[1] * Math.PI / 180, p2 = b[1] * Math.PI / 180, dp = (b[1] - a[1]) * Math.PI / 180, dl = (b[0] - a[0]) * Math.PI / 180; const x = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); }
 function circlePoly(center, r, n = 64) { const [lng, lat] = center; const kx = 111320 * Math.cos(lat * Math.PI / 180), ky = 110574; const ring = []; for (let i = 0; i <= n; i++) { const t = i / n * 2 * Math.PI; ring.push([lng + r * Math.cos(t) / kx, lat + r * Math.sin(t) / ky]); } return { type: 'Feature', properties: { r }, geometry: { type: 'Polygon', coordinates: [ring] } }; }
@@ -182,7 +182,7 @@ function ensureLabelLayer() {
   labelLayer = document.createElement('div'); labelLayer.className = 'infra-labels';
   c.appendChild(labelSvg); c.appendChild(labelLayer);
 }
-const LAYER_PRI = { transit: 0, education: 1, medical: 2, culture: 3, public: 4 };
+const LAYER_PRI = { transit: 0, education: 1, culture: 2, public: 3 };
 function placeLabels() {
   if (!map) return;
   ensureLabelLayer();

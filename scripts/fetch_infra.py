@@ -2,7 +2,7 @@
 """주변 인프라 수집 (OpenStreetMap · Overpass API) → data/infra.json
 
 - 대상 영역: config/targets.json 의 복합 bbox (남양주·광주·수원·성남)
-- 5개 레이어: 교통(지하철·전철역) · 문화(도서관·공연장·박물관·영화관) · 공공(시청·구청·주민센터·경찰·소방·우체국) · 교육(초중고·대학) · 의료(병원·종합병원)
+- 4개 레이어: 교통(지하철·전철역) · 문화(도서관·공연장·박물관·영화관) · 공공(시청·구청·주민센터·경찰·소방·우체국) · 교육(초중고·대학)
 - 30일 안에 받은 파일이 있으면 건너뜀 (--force 로 강제)
 """
 import json, sys, time, urllib.request, urllib.parse
@@ -25,7 +25,6 @@ LAYERS = {
     "culture": {"label": "문화", "q": ['nwr["amenity"~"^(library|theatre|arts_centre|cinema|community_centre)$"]', 'nwr["tourism"~"^(museum|gallery)$"]']},
     "public": {"label": "공공", "q": ['nwr["amenity"~"^(townhall|police|fire_station|post_office|courthouse)$"]', 'nwr["office"="government"]']},
     "education": {"label": "교육", "q": ['nwr["amenity"~"^(school|university|college)$"]']},
-    "medical": {"label": "의료", "q": ['nwr["amenity"~"^(hospital|clinic)$"]', 'nwr["healthcare"="hospital"]']},
 }
 
 
@@ -81,8 +80,6 @@ def main():
                 # 학교 세분
                 if layer == "education":
                     kind = "university" if t.get("amenity") in ("university", "college") else ("elementary" if "초등" in name else "middle" if "중학" in name else "high" if "고등" in name else "school")
-                if layer == "medical" and t.get("amenity") == "clinic":
-                    continue  # 의원은 너무 많아 제외, 병원급만
                 pts.append({"layer": layer, "kind": kind, "name": name, "lat": round(lat, 6), "lng": round(lon, 6), "region": region,
                             **({"line": t["line"]} if t.get("line") else {}), **({"operator": t["operator"]} if t.get("operator") else {})})
             print(f"{region} {LAYERS[layer]['label']}: 누적 {len(pts)}")

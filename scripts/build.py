@@ -344,7 +344,7 @@ import math
 INFRA = []
 ip = ROOT / "data" / "infra.json"
 if ip.exists():
-    INFRA = json.loads(ip.read_text(encoding="utf-8")).get("points", [])
+    INFRA = [p for p in json.loads(ip.read_text(encoding="utf-8")).get("points", []) if p.get("layer") != "medical"]  # 의료는 지역 간 편차가 커 제외
 def _dist_m(lat1, lng1, lat2, lng2):
     R = 6371000.0
     p1, p2 = math.radians(lat1), math.radians(lat2)
