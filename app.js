@@ -634,7 +634,9 @@ function bindFilters() {
   $('group-seg').querySelectorAll('button').forEach(b => b.onclick = () => { state.group = b.dataset.g; $('group-seg').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); renderList(); fitAll(); });
   $('only-budget').onchange = e => { state.onlyBudget = e.target.checked; renderList(); };
   $('only-new').onchange = e => { state.onlyNew = e.target.checked; renderList(); };
-  $('map-status').onclick = e => { if (e.target.closest('button')) return; $('map-status').innerHTML = ''; };
+  $('map-status').onclick = e => { if (e.target.closest('button')) return; $('map-status').innerHTML = ''; $('map-status').hidden = true; };
+  // 내용이 바뀌면 자동으로 다시 보이기 (빈 내용이면 숨김)
+  new MutationObserver(() => { const el = $('map-status'); const empty = !el.textContent.trim(); el.hidden = empty; }).observe($('map-status'), { childList: true, subtree: true, characterData: true });
   $('focus-info').onclick = e => { if (e.target.closest('button')) return; $('focus-info').classList.toggle('mini-mode'); };
   $('info').onclick = () => $('data-dialog').showModal(); $('close-info').onclick = () => $('data-dialog').close();
 }
