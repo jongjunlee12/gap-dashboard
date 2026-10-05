@@ -108,3 +108,6 @@ html,body{overflow-x:hidden;max-width:100%}
 
 .focus-info{position:absolute;right:22px;bottom:24px;background:#ffffffeb;border-radius:10px;padding:8px 12px;font-size:13.5px;z-index:2}.focus-info:empty{display:none}
 @media(max-width:900px){.focus-info{right:12px;bottom:46px;font-size:12px}}
+
+/* PC: 발굴·호가 표는 전체 폭 사용 */
+.wide{margin-top:10px}.wide .market{padding:46px 0 0}

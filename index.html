@@ -5,7 +5,7 @@
 <title>갭 대시보드 · 3억으로 사는 아파트</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="style.css?v=20261005i">
+<link rel="stylesheet" href="style.css?v=20261005j">
 </head>
 <body>
 <header><a class="brand" href="./"><span class="brand-symbol">g.</span> 갭 대시보드</a><span class="header-note">실거래 위에, 3억의 자리를.</span><span id="updated" class="header-updated"></span><button id="info">데이터 안내 ↗</button></header>
@@ -39,6 +39,15 @@
   <div class="panel"><div id="scatter"></div><p class="chart-caption"><span>가로 70% 선 = 갭투자 안전선 · 파란 띠 = 예산 2.8~3.5억</span><span>실거래 중앙값 기준</span></p></div>
 </section>
 
+</div><div class="col-map"><section class="map-panel" aria-label="후보 단지 지도">
+  <div id="map"></div>
+  <div class="map-top"><span class="map-tag">GYEONGGI · CARTO LIGHT</span><div><button id="view" aria-pressed="false">2D 보기</button><button id="fit">전체 보기</button></div></div>
+  <div class="infra-chips" id="infra-chips"></div>
+  <div class="focus-info" id="focus-info"></div>
+  <div id="map-status" role="status">지도를 불러오는 중입니다…</div>
+  <div class="map-legend"><i class="in"></i> 예산 안 <i class="under"></i> 예산 여유 <i class="over"></i> 예산 초과 <i class="na"></i> 자료 없음 <i class="newdot"></i> 새 신고 <i class="disc-key"></i> 발굴 단지</div>
+</section></div></div>
+<div class="wide">
 <section class="market">
   <div class="market-heading"><div><div class="eyebrow">04 / DISCOVER</div><h2>조건에 맞는 단지 자동 발굴</h2></div><span id="discover-meta" class="muted"></span></div>
   <div class="panel" id="discover"></div>
@@ -48,14 +57,7 @@
   <div class="market-heading"><div><div class="eyebrow">05 / LISTINGS</div><h2>현재 호가 · 지난 파일과 비교</h2></div><span id="listing-meta" class="muted"></span></div>
   <div class="panel" id="listings"></div>
 </section>
-</div><div class="col-map"><section class="map-panel" aria-label="후보 단지 지도">
-  <div id="map"></div>
-  <div class="map-top"><span class="map-tag">GYEONGGI · CARTO LIGHT</span><div><button id="view" aria-pressed="false">2D 보기</button><button id="fit">전체 보기</button></div></div>
-  <div class="infra-chips" id="infra-chips"></div>
-  <div class="focus-info" id="focus-info"></div>
-  <div id="map-status" role="status">지도를 불러오는 중입니다…</div>
-  <div class="map-legend"><i class="in"></i> 예산 안 <i class="under"></i> 예산 여유 <i class="over"></i> 예산 초과 <i class="na"></i> 자료 없음 <i class="newdot"></i> 새 신고 <i class="disc-key"></i> 발굴 단지</div>
-</section></div></div>
+</div>
 </main>
 <footer><strong>갭 대시보드</strong><span>판단 근거이며 매수 권유가 아닙니다 · 세금 별도</span><span>PRIVATE PREVIEW · 2026</span></footer>
 
@@ -69,5 +71,5 @@
 </ul><p id="data-stats" class="muted"></p></dialog>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="app.js?v=20261005i"></script>
+<script src="app.js?v=20261005j"></script>
 </body></html>
