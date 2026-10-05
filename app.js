@@ -452,9 +452,28 @@ function renderScatter() {
   for (let v = Math.ceil(y0 * 2) / 2; v <= y1; v += .5) s += `<line x1="${pl}" x2="${W - pr}" y1="${y(v)}" y2="${y(v)}" stroke="#e3e8ec"/><text x="${pl - 8}" y="${y(v) + 4}" font-size="10.5" fill="#7b878e" text-anchor="end">${v.toFixed(1)}</text>`;
   for (let v = Math.ceil(x0 / 5) * 5; v <= x1; v += 5) s += `<text x="${x(v)}" y="${H - 20}" font-size="10.5" fill="#7b878e" text-anchor="middle">${v}%</text>`;
   s += `<text x="${W / 2}" y="${H - 4}" font-size="11" fill="#57676f" text-anchor="middle">전세가율 (%)</text><text transform="translate(12 ${H / 2}) rotate(-90)" font-size="11" fill="#57676f" text-anchor="middle">필요자금 (억)</text>`;
+  // 라벨 겹침 회피: 점(원) 자리와 이미 놓인 라벨을 피해 오른쪽→왼쪽→위→아래, 그래도 겹치면 위아래로 조금씩 밀어서 배치
+  const fs = 11.5, lh = 14, placed = pts.map(({ u }) => ({ x1: x(u.jeonse_ratio) - 10, y1: y(u.required) - 10, x2: x(u.jeonse_ratio) + 10, y2: y(u.required) + 10 }));
+  const hit = b => placed.some(o => !(b.x2 < o.x1 || b.x1 > o.x2 || b.y2 < o.y1 || b.y1 > o.y2)) || b.x1 < pl || b.x2 > W - pr || b.y1 < pt || b.y2 > pt + ih;
   pts.forEach(({ c, u }) => {
     const st = budgetState(u), col = st === 'in' ? '#0064e0' : st === 'under' ? '#1a9e6c' : '#8a969d';
-    s += `<g style="cursor:pointer" data-sel="${c.id}" data-area="${u.area}"><circle cx="${x(u.jeonse_ratio)}" cy="${y(u.required)}" r="${c.group === 'after_1231' ? 7 : 9}" fill="${c.group === 'after_1231' ? '#fff' : col}" stroke="${col}" stroke-width="2.5" data-tip="${esc(c.name)} ${u.area}㎡ · 전세가율 ${fmt(u.jeonse_ratio, 1)}% · 필요자금 ${fmt(u.required)}억${c.group === 'after_1231' ? ' · 12.31 해제 시' : ''}"/><text x="${x(u.jeonse_ratio) + 12}" y="${y(u.required) + 4}" font-size="11.5" fill="#172126" font-weight="600">${esc(c.name)} ${u.area}</text></g>`;
+    const cx = x(u.jeonse_ratio), cy = y(u.required), label = `${c.name} ${u.area}`, lw = label.length * fs * 0.78 + 4;
+    const cands = [[12, 0], [-12 - lw, 0], [-lw / 2, -16], [-lw / 2, 16]];
+    let box = null, dx = 12, dy = 0;
+    for (let step = 0; step < 12 && !box; step++) {
+      for (const [ox, oy] of cands) {
+        const nudge = step === 0 ? 0 : (step % 2 ? -1 : 1) * Math.ceil(step / 2) * lh;
+        const b = { x1: cx + ox, y1: cy + oy + nudge - lh / 2, x2: cx + ox + lw, y2: cy + oy + nudge + lh / 2 };
+        if (!hit(b)) { box = b; dx = ox; dy = oy + nudge; break; }
+      }
+    }
+    if (!box) box = { x1: cx + 12, y1: cy - lh / 2, x2: cx + 12 + lw, y2: cy + lh / 2 };
+    placed.push(box);
+    const tx = box.x1, ty = (box.y1 + box.y2) / 2 + 4;
+    // 라벨이 점에서 떨어졌으면 지시선
+    const ax = Math.max(box.x1, Math.min(box.x2, cx)), ay = Math.max(box.y1, Math.min(box.y2, cy));
+    const leader = Math.hypot(ax - cx, ay - cy) > 14 ? `<line x1="${cx}" y1="${cy}" x2="${ax}" y2="${ay}" stroke="#9aa6ad" stroke-width="1"/>` : '';
+    s += `<g style="cursor:pointer" data-sel="${c.id}" data-area="${u.area}">${leader}<circle cx="${cx}" cy="${cy}" r="${c.group === 'after_1231' ? 7 : 9}" fill="${c.group === 'after_1231' ? '#fff' : col}" stroke="${col}" stroke-width="2.5" data-tip="${esc(c.name)} ${u.area}㎡ · 전세가율 ${fmt(u.jeonse_ratio, 1)}% · 필요자금 ${fmt(u.required)}억${c.group === 'after_1231' ? ' · 12.31 해제 시' : ''}"/><text x="${tx}" y="${ty}" font-size="${fs}" fill="#172126" font-weight="600">${esc(label)}</text></g>`;
   });
   $('scatter').innerHTML = s + '</svg>';
   $('scatter').querySelectorAll('[data-sel]').forEach(g => g.onclick = () => { state.area = +g.dataset.area; select(g.dataset.sel, true); });
