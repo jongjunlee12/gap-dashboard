@@ -506,6 +506,11 @@
   }
  ],
  "discovered": [],
+ "propx": {
+  "generated_at": null,
+  "files": [],
+  "n": 0
+ },
  "discovery": {
   "enabled": true,
   "regions": [
@@ -523,7 +528,7 @@
   "min_trades_6m": 3,
   "min_rents_12m": 2,
   "require_budget": true,
-  "note": "20~34평(전용 49~85㎡) · 매매 중앙값 12억 미만 · 필요자금 예산 안쪽 · 최근 6개월 매매 3건↑ · 전세 1년 2건↑ 이면 자동 후보",
+  "note": "20~34평(전용 49~85㎡) · 매매 12억 미만 · 필요자금 3.5억 이하(예산 여유 포함) · 실거래는 6개월 매매 3건↑·전세 1년 2건↑",
   "exclu_min": 49,
   "exclu_max": 85.5,
   "area_buckets": [

@@ -46,7 +46,7 @@ function renderKpis() {
     <div class="kpi dark"><strong>${inB}<small style="font-size:16px"> / ${units.length}</small></strong><span>예산 2.8~3.5억 안쪽 평형 (실거래 중앙값 기준)</span></div>
     <div class="kpi"><strong>${D.totals.new_trades + D.totals.new_rents}</strong><span>지난 갱신 이후 새로 신고된 매매·전세</span></div>
     <div class="kpi"><strong>${ls ? ls.total : '—'}</strong><span>현재 호가 매물 ${ls ? `· 신규 ${ls.new} · 인하 ${ls.reduced} · 사라짐 ${ls.removed}` : '(listings/ 파일 없음)'}</span></div>
-    <div class="kpi"><strong>${D.source === 'rtms' ? '실거래 API' : '보고서 값'}</strong><span>${D.source === 'rtms' ? `국토부 ${D.history_from}~ · 매주 자동 갱신` : '국토부 API 연결 전 · 2026.09.30 자료'}</span></div>`;
+    <div class="kpi"><strong>${D.source === 'rtms' ? '실거래 API' : (D.propx && D.propx.n ? 'PropX 시세' : '보고서 값')}</strong><span>${D.source === 'rtms' ? `국토부 ${D.history_from}~ · 매주 자동 갱신` : (D.propx && D.propx.n ? `PropX ${D.propx.n}개 단지·평형 · ${D.propx.generated_at}` : '국토부 API 연결 전 · 2026.09.30 자료')}</span></div>`;
 }
 
 /* ---------- 지도 ---------- */
@@ -97,7 +97,7 @@ function renderDetail(c) {
   const askReq = asking && u.jeonse_median ? asking.min - u.jeonse_median + asking.min * D.tax_rate : null;
   const tags = [...(c.tags || []), ...(u.flags || [])];
   $('detail').innerHTML = `
-    <div class="tags"><span class="tag">${esc(c.region_label)} · ${esc(c.umd)}</span><span class="tag">${c.households.toLocaleString()}세대 · ${c.built}년</span><span class="tag">${esc(c.station)}</span>${tags.map(t => `<span class="tag ${/의심|확인|미확보|초과/.test(t) ? 'warn' : ''}">${esc(t)}</span>`).join('')}<span class="tag">${u.source === 'rtms' ? '국토부 실거래' : '보고서 값'}</span></div>
+    <div class="tags"><span class="tag">${esc(c.region_label)} · ${esc(c.umd)}</span><span class="tag">${c.households.toLocaleString()}세대 · ${c.built}년</span><span class="tag">${esc(c.station)}</span>${tags.map(t => `<span class="tag ${/의심|확인|미확보|초과/.test(t) ? 'warn' : ''}">${esc(t)}</span>`).join('')}<span class="tag">${{ rtms: '국토부 실거래', propx: 'PropX 시세', seed: '보고서 값' }[u.source] || u.source}</span></div>
     <div class="metric-row">
       <div><strong>${fmt(u.sale_median)}억</strong><span>매매 중앙값 · ${u.sale_n ? u.sale_n + '건' : '표본 없음'}${u.sale_min ? ` · ${fmt(u.sale_min, 1)}~${fmt(u.sale_max, 1)}` : ''}</span></div>
       <div><strong>${fmt(u.jeonse_median)}억</strong><span>전세 중앙값${u.jeonse_n ? ` · ${u.jeonse_n}건` : ''}</span></div>
@@ -112,6 +112,8 @@ function renderDetail(c) {
       <div class="card"><h4>현재 호가 ${asking ? `<span class="badge">협상 시작선 ${fmt(asking.negotiation_start, 1)}억 미만</span>` : ''}</h4>
         ${asking ? `<p class="sub">${esc(asking.note || '')}</p><div class="metric-row" style="grid-template-columns:1fr 1fr;margin:8px 0"><div><strong>${fmt(asking.min, 2)}${asking.max > asking.min ? '~' + fmt(asking.max, 2) : ''}억</strong><span>호가 범위 · 중앙값 대비 ${pct(asking.min / u.sale_median * 100 - 100)}</span></div><div><strong>${askReq ? fmt(askReq) + '억' : '—'}</strong><span>호가로 사면 필요자금</span></div></div>` : ''}
         ${listingTable(u.listings || [], true)}</div>
+      <div class="card"><h4>PropX 시세 ${u.propx ? `<span class="badge gray">${esc(u.propx.file || '')}</span>` : ''}</h4>
+        ${u.propx ? `<p class="sub">부동산114 단지 시세 · 세대수 가중 평균 · ${u.propx.sedae ?? '—'}세대${u.propx.subway ? ' · ' + esc(u.propx.subway) : ''}</p><div class="metric-row" style="grid-template-columns:1fr 1fr 1fr;margin:8px 0"><div><strong>${fmt(u.propx.mm)}억</strong><span>매매 평균 · ${fmt(u.propx.mm_l, 1)}~${fmt(u.propx.mm_h, 1)}</span></div><div><strong>${fmt(u.propx.js)}억</strong><span>전세 평균</span></div><div><strong>${pct(u.propx.mm_chg)}</strong><span>매매 1년 · 전세 ${pct(u.propx.js_chg)}</span></div></div>${u.source === 'rtms' && u.propx.mm && u.sale_median ? `<p class="sub">실거래 중앙값 대비 시세 ${pct(u.propx.mm / u.sale_median * 100 - 100)}</p>` : ''}` : '<p class="muted" style="font-size:15px">propx/ 폴더에 PropX 단지정보 엑셀을 올리면 표시됩니다.</p>'}</div>
       <div class="card"><h4>최근 전세 계약</h4><p class="sub">신규/갱신 구분 · 종전 보증금 = 승계 보증금의 실체</p>${rentTable(u)}</div>
     </div>`;
   bindTips($('detail'));
@@ -207,7 +209,7 @@ function renderDiscover() {
   const ds = D.discovered || [], rule = D.discovery || {};
   $('discover-meta').textContent = rule.note || '';
   if (!ds.length) { $('discover').innerHTML = `<p class="muted" style="font-size:15px">${D.source === 'rtms' ? '조건에 맞는 단지가 아직 없습니다.' : '국토부 실거래가 연결되면 수원·성남·남양주·광주 전체에서 조건에 맞는 단지를 자동으로 찾아 여기에 올립니다.'}</p>`; return; }
-  $('discover').innerHTML = `<table class="disc"><tr><th>지역</th><th>단지</th><th>㎡</th><th>준공</th><th>매매 중앙값</th><th>6개월 거래</th><th>전세 중앙값</th><th>전세가율</th><th>필요자금</th><th>저층 비중</th></tr>${ds.map(d => `<tr class="disc-row" data-name="${esc(d.name)}" data-umd="${esc(d.umd)}" style="cursor:pointer"><td>${esc(d.region)} · ${esc(d.umd)}</td><td><b>${esc(d.name)}</b></td><td>${d.area}</td><td>${d.built || '—'}</td><td>${fmt(d.sale_median)}억<small style="color:#8a969d"> ${fmt(d.sale_min, 1)}~${fmt(d.sale_max, 1)}</small></td><td>${d.sale_n}건</td><td>${fmt(d.jeonse_median)}억 <small style="color:#8a969d">${d.jeonse_n}건</small></td><td>${fmt(d.jeonse_ratio, 1)}%${d.jeonse_ratio >= 70 ? ' <span class="badge">안전선 위</span>' : ''}</td><td><b style="color:var(--blue)">${fmt(d.required)}억</b></td><td>${d.low_floor_share}%</td></tr>`).join('')}</table><p class="chart-caption" style="margin-top:12px"><span>행을 누르면 지도에서 해당 읍면동으로 이동합니다 (단지 좌표는 등록 후 표시).</span><span>${ds.length}개 단지</span></p>`;
+  $('discover').innerHTML = `<table class="disc"><tr><th>지역</th><th>단지</th><th>㎡</th><th>입주</th><th>매매</th><th>표본</th><th>전세</th><th>전세가율</th><th>필요자금</th><th>1년 변동</th><th>출처</th></tr>${ds.map(d => `<tr class="disc-row" data-name="${esc(d.name)}" data-umd="${esc(d.umd)}" style="cursor:pointer"><td>${esc(d.region)} · ${esc(d.umd)}</td><td><b>${esc(d.name)}</b></td><td>${d.area}</td><td>${d.built || '—'}${d.sedae ? `<small style="color:#8a969d"> · ${d.sedae}세대</small>` : ''}</td><td>${fmt(d.sale_median)}억<small style="color:#8a969d"> ${d.sale_min ? fmt(d.sale_min, 1) + '~' + fmt(d.sale_max, 1) : ''}</small></td><td>${d.sale_n != null ? d.sale_n + '건' : '시세'}</td><td>${fmt(d.jeonse_median)}억${d.jeonse_n != null ? ` <small style="color:#8a969d">${d.jeonse_n}건</small>` : ''}</td><td>${fmt(d.jeonse_ratio, 1)}%${d.jeonse_ratio >= 70 ? ' <span class="badge">안전선 위</span>' : ''}</td><td><b style="color:${d.required < D.budget.min ? 'var(--green)' : 'var(--blue)'}">${fmt(d.required)}억</b></td><td>${d.mm_chg != null ? pct(d.mm_chg) : (d.low_floor_share != null ? '저층 ' + d.low_floor_share + '%' : '—')}</td><td><span class="badge ${d.source === 'propx' ? 'gray' : ''}">${d.source === 'propx' ? 'PropX 시세' : '실거래'}</span></td></tr>`).join('')}</table><p class="chart-caption" style="margin-top:12px"><span>행을 누르면 지도에서 해당 읍면동으로 이동합니다 (단지 좌표는 등록 후 표시).</span><span>${ds.length}개 단지</span></p>`;
   $('discover').querySelectorAll('.disc-row').forEach(r => r.onclick = () => flyToUmd(r.dataset.umd, r.dataset.name));
 }
 

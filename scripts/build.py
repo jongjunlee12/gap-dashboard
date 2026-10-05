@@ -24,6 +24,11 @@ if lp.exists():
     listings = json.loads(lp.read_text(encoding="utf-8"))
 
 TAX = cfg["acquisition_tax_rate"]
+propx = {"complexes": []}
+pp = ROOT / "data" / "propx.json"
+if pp.exists():
+    propx = json.loads(pp.read_text(encoding="utf-8"))
+propx_rows = propx.get("complexes", [])
 LOW_FLOOR = 5
 region_label = {r["code"]: r["label"] for r in cfg["regions"]}
 
@@ -181,6 +186,17 @@ for c in cfg["complexes"]:
             unit.setdefault("quarters", [])
             unit.setdefault("trades", [])
             unit.setdefault("rents", [])
+        # PropX 시세 붙이기 (단지명 유사 + 같은 평형)
+        px = [r for r in propx_rows if r["area"] == a and any(norm(al) in norm(r["name"]) or norm(r["name"]) in norm(al) for al in c["aliases"])]
+        if px:
+            px = sorted(px, key=lambda r: -(r.get("sedae") or 0))[0]
+            unit["propx"] = {k: px.get(k) for k in ("mm", "mm_l", "mm_h", "js", "mm_chg", "js_chg", "sedae", "danji", "ibju", "subway", "file")}
+            if not unit.get("sale_median") and px.get("mm"):
+                unit.update({"sale_median": px["mm"], "sale_min": px.get("mm_l"), "sale_max": px.get("mm_h"), "source": "propx"})
+            if not unit.get("jeonse_median") and px.get("js"):
+                unit["jeonse_median"] = px["js"]
+            if unit.get("change_1y") is None and px.get("mm_chg") is not None:
+                unit["change_1y"] = px["mm_chg"]
         # 파생 지표
         sm, jm = unit.get("sale_median"), unit.get("jeonse_median")
         if sm and jm:
@@ -246,7 +262,7 @@ if disc.get("enabled") and has_raw:
                 continue
             jm = median(rr)
             req = round(sm - jm + sm * TAX, 2)
-            if disc.get("require_budget") and not (cfg["budget"]["min"] <= req <= cfg["budget"]["max"]):
+            if disc.get("require_budget") and req > cfg["budget"]["max"]:
                 continue
             yr = [t[3] for t in ts if t[3]]
             discovered.append({
@@ -258,6 +274,27 @@ if disc.get("enabled") and has_raw:
             })
     discovered.sort(key=lambda x: (x["required"], -x["jeonse_ratio"]))
 
+if disc.get("enabled") and propx_rows:
+    known = {norm(a) for c in cfg["complexes"] for a in c["aliases"]}
+    have = {(d["name"], d["area"]) for d in discovered}
+    for r in propx_rows:
+        if not r.get("mm") or not r.get("js") or r["mm"] >= disc["max_sale_median"]:
+            continue
+        if any(norm(r["name"]) in a or a in norm(r["name"]) for a in known):
+            continue
+        if disc.get("require_budget") and r["required"] > cfg["budget"]["max"]:
+            continue
+        if (r["name"], r["area"]) in have:
+            continue
+        discovered.append({
+            "region": r["sgg"], "umd": r["umd"], "name": r["name"], "area": r["area"], "source": "propx",
+            "sale_median": r["mm"], "sale_n": None, "sale_min": r.get("mm_l"), "sale_max": r.get("mm_h"),
+            "jeonse_median": r["js"], "jeonse_n": None, "jeonse_ratio": r["jeonse_ratio"], "gap": r["gap"], "required": r["required"],
+            "built": (str(r.get("ibju") or "")[:4] or None), "sedae": r.get("sedae"), "danji": r.get("danji"), "subway": r.get("subway"),
+            "mm_chg": r.get("mm_chg"), "low_floor_share": None,
+        })
+    discovered.sort(key=lambda x: (x["required"], -(x.get("jeonse_ratio") or 0)))
+
 dash = {
     "generated_at": date.today().isoformat(),
     "source": "rtms" if has_raw else "seed",
@@ -267,6 +304,7 @@ dash = {
     "history_from": cfg["history_from"],
     "complexes": complexes,
     "discovered": discovered,
+    "propx": {"generated_at": propx.get("generated_at"), "files": propx.get("files", []), "n": len(propx_rows)},
     "discovery": disc,
     "listings": {k: listings.get(k) for k in ("date", "file", "prev_file", "summary", "removed")} if listings else None,
     "totals": {
