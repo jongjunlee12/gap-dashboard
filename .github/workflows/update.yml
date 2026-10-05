@@ -46,6 +46,10 @@ jobs:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: echo "::warning::DATA_GO_KR_KEY 가 없어 실거래 수집을 건너뜁니다. 보고서 seed 값으로 빌드합니다."
 
+      - name: 주변 인프라 수집 (OpenStreetMap, 월 1회)
+        continue-on-error: true
+        run: python scripts/fetch_infra.py
+
       - name: PropX 단지정보 정리
         run: python scripts/propx.py
 

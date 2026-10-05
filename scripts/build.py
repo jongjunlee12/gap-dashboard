@@ -339,6 +339,40 @@ for d in discovered:
         if not d.get("subway") and g.get("subway"):
             d["subway"] = g["subway"]
 
+# ---------- 주변 인프라 (OSM) : 반경 집계 · 최근접 역 ----------
+import math
+INFRA = []
+ip = ROOT / "data" / "infra.json"
+if ip.exists():
+    INFRA = json.loads(ip.read_text(encoding="utf-8")).get("points", [])
+def _dist_m(lat1, lng1, lat2, lng2):
+    R = 6371000.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp, dl = math.radians(lat2 - lat1), math.radians(lng2 - lng1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * R * math.asin(math.sqrt(a))
+def nearby(lat, lng):
+    if not INFRA or lat is None:
+        return None
+    out = {"r500": {}, "r1000": {}, "nearest": {}}
+    for pt in INFRA:
+        if abs(pt["lat"] - lat) > 0.02 or abs(pt["lng"] - lng) > 0.025:
+            continue
+        d = _dist_m(lat, lng, pt["lat"], pt["lng"])
+        L = pt["layer"]
+        if d <= 500:
+            out["r500"][L] = out["r500"].get(L, 0) + 1
+        if d <= 1000:
+            out["r1000"][L] = out["r1000"].get(L, 0) + 1
+        if d <= 2500 and (L not in out["nearest"] or d < out["nearest"][L]["d"]):
+            out["nearest"][L] = {"name": pt["name"], "d": int(d), "kind": pt.get("kind")}
+    return out
+for c in complexes:
+    c["infra"] = nearby(c["lat"], c["lng"])
+for d in discovered:
+    if d.get("lat") is not None:
+        d["infra"] = nearby(d["lat"], d["lng"])
+
 dash = {
     "generated_at": date.today().isoformat(),
     "source": "rtms" if has_raw else "seed",
@@ -349,6 +383,7 @@ dash = {
     "complexes": complexes,
     "discovered": discovered,
     "propx": {"generated_at": propx.get("generated_at"), "files": propx.get("files", []), "n": len(propx_rows)},
+    "infra": {"n": len(INFRA), "fetched": (json.loads(ip.read_text(encoding="utf-8")).get("fetched") if ip.exists() else None)},
     "discovery": disc,
     "listings": {k: listings.get(k) for k in ("date", "file", "prev_file", "summary", "removed")} if listings else None,
     "totals": {

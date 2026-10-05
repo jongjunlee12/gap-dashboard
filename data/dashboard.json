@@ -113,7 +113,8 @@
      "required": 3.72,
      "listings": []
     }
-   ]
+   ],
+   "infra": null
   },
   {
    "id": "dasan-epyeon",
@@ -141,7 +142,8 @@
      "rents": [],
      "listings": []
     }
-   ]
+   ],
+   "infra": null
   },
   {
    "id": "dasan-river2",
@@ -169,7 +171,8 @@
      "rents": [],
      "listings": []
     }
-   ]
+   ],
+   "infra": null
   },
   {
    "id": "dasan-natural3",
@@ -257,7 +260,8 @@
      "required": 3.3,
      "listings": []
     }
-   ]
+   ],
+   "infra": null
   },
   {
    "id": "dasan-xi",
@@ -344,7 +348,8 @@
      "required": 4.16,
      "listings": []
     }
-   ]
+   ],
+   "infra": null
   },
   {
    "id": "gwangju-thesharp",
@@ -395,7 +400,8 @@
      "required": 3.06,
      "listings": []
     }
-   ]
+   ],
+   "infra": null
   },
   {
    "id": "gwangju-ipark",
@@ -443,7 +449,8 @@
      "gap": 1.3,
      "listings": []
     }
-   ]
+   ],
+   "infra": null
   },
   {
    "id": "gwangju-hillstate",
@@ -494,7 +501,8 @@
      "required": 1.58,
      "listings": []
     }
-   ]
+   ],
+   "infra": null
   },
   {
    "id": "suwon-skyview",
@@ -535,7 +543,8 @@
      "rents": [],
      "listings": []
     }
-   ]
+   ],
+   "infra": null
   },
   {
    "id": "suwon-hwaseo",
@@ -564,7 +573,8 @@
      "rents": [],
      "listings": []
     }
-   ]
+   ],
+   "infra": null
   }
  ],
  "discovered": [
@@ -591,7 +601,8 @@
    "low_floor_share": null,
    "lat": 37.43265,
    "lng": 127.25441,
-   "geo_name": "대주파크빌"
+   "geo_name": "대주파크빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -616,7 +627,8 @@
    "low_floor_share": null,
    "lat": 37.35318,
    "lng": 127.20728,
-   "geo_name": "오포우림퓨전빌"
+   "geo_name": "오포우림퓨전빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -641,7 +653,8 @@
    "low_floor_share": null,
    "lat": 37.37569,
    "lng": 127.26163,
-   "geo_name": "대주파크빌1차"
+   "geo_name": "대주파크빌1차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -666,7 +679,8 @@
    "low_floor_share": null,
    "lat": 37.39857,
    "lng": 127.29124,
-   "geo_name": "우림퓨전빌2단지"
+   "geo_name": "우림퓨전빌2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -691,7 +705,8 @@
    "low_floor_share": null,
    "lat": 37.31748,
    "lng": 127.33336,
-   "geo_name": "근형심포니"
+   "geo_name": "근형심포니",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -716,7 +731,8 @@
    "low_floor_share": null,
    "lat": 37.39715,
    "lng": 127.29078,
-   "geo_name": "우림퓨전빌1단지"
+   "geo_name": "우림퓨전빌1단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -741,7 +757,8 @@
    "low_floor_share": null,
    "lat": 37.41638,
    "lng": 127.29657,
-   "geo_name": "금강아미움"
+   "geo_name": "금강아미움",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -766,7 +783,8 @@
    "low_floor_share": null,
    "lat": 37.35749,
    "lng": 127.32629,
-   "geo_name": "킴스빌리지"
+   "geo_name": "킴스빌리지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -791,7 +809,8 @@
    "low_floor_share": null,
    "lat": 37.37609,
    "lng": 127.2572,
-   "geo_name": "쌍용2차"
+   "geo_name": "쌍용2차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -816,7 +835,8 @@
    "low_floor_share": null,
    "lat": 37.36397,
    "lng": 127.30903,
-   "geo_name": "대주파크빌"
+   "geo_name": "대주파크빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -841,7 +861,8 @@
    "low_floor_share": null,
    "lat": 37.38955,
    "lng": 127.29446,
-   "geo_name": "신일드림빌"
+   "geo_name": "신일드림빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -866,7 +887,8 @@
    "low_floor_share": null,
    "lat": 37.34639,
    "lng": 127.34516,
-   "geo_name": "삼주노블리제"
+   "geo_name": "삼주노블리제",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -891,7 +913,8 @@
    "low_floor_share": null,
    "lat": 37.39444,
    "lng": 127.28971,
-   "geo_name": "대주피오레"
+   "geo_name": "대주피오레",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -916,7 +939,8 @@
    "low_floor_share": null,
    "lat": 37.35975,
    "lng": 127.21798,
-   "geo_name": "오포추자서희스타힐스"
+   "geo_name": "오포추자서희스타힐스",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -941,7 +965,8 @@
    "low_floor_share": null,
    "lat": 37.3547,
    "lng": 127.21259,
-   "geo_name": "신영프로방스"
+   "geo_name": "신영프로방스",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -966,7 +991,8 @@
    "low_floor_share": null,
    "lat": 37.42131,
    "lng": 127.24054,
-   "geo_name": "우림루미아트"
+   "geo_name": "우림루미아트",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -991,7 +1017,8 @@
    "low_floor_share": null,
    "lat": 37.39521,
    "lng": 127.29259,
-   "geo_name": "신일"
+   "geo_name": "신일",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1016,7 +1043,8 @@
    "low_floor_share": null,
    "lat": 37.39725,
    "lng": 127.27823,
-   "geo_name": "쌍령2차동성"
+   "geo_name": "쌍령2차동성",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1041,7 +1069,8 @@
    "low_floor_share": null,
    "lat": 37.37707,
    "lng": 127.25954,
-   "geo_name": "양벌리우림"
+   "geo_name": "양벌리우림",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1066,7 +1095,8 @@
    "low_floor_share": null,
    "lat": 37.35584,
    "lng": 127.32797,
-   "geo_name": "현진에버빌"
+   "geo_name": "현진에버빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1091,7 +1121,8 @@
    "low_floor_share": null,
    "lat": 37.38708,
    "lng": 127.23673,
-   "geo_name": "쌍용스윗닷홈3단지"
+   "geo_name": "쌍용스윗닷홈3단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1116,7 +1147,8 @@
    "low_floor_share": null,
    "lat": 37.35953,
    "lng": 127.313,
-   "geo_name": "코아루햇빛마을"
+   "geo_name": "코아루햇빛마을",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1141,7 +1173,8 @@
    "low_floor_share": null,
    "lat": 37.36353,
    "lng": 127.24635,
-   "geo_name": "대성"
+   "geo_name": "대성",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1166,7 +1199,8 @@
    "low_floor_share": null,
    "lat": 37.35975,
    "lng": 127.21798,
-   "geo_name": "오포추자서희스타힐스"
+   "geo_name": "오포추자서희스타힐스",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1191,7 +1225,8 @@
    "low_floor_share": null,
    "lat": 37.43265,
    "lng": 127.25441,
-   "geo_name": "대주파크빌"
+   "geo_name": "대주파크빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1216,7 +1251,8 @@
    "low_floor_share": null,
    "lat": 37.37609,
    "lng": 127.2572,
-   "geo_name": "쌍용2차"
+   "geo_name": "쌍용2차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1241,7 +1277,8 @@
    "low_floor_share": null,
    "lat": 37.3631,
    "lng": 127.31096,
-   "geo_name": "벽산블루밍"
+   "geo_name": "벽산블루밍",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1266,7 +1303,8 @@
    "low_floor_share": null,
    "lat": 37.37609,
    "lng": 127.2572,
-   "geo_name": "쌍용2차"
+   "geo_name": "쌍용2차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1291,7 +1329,8 @@
    "low_floor_share": null,
    "lat": 37.38784,
    "lng": 127.22803,
-   "geo_name": "성원상떼빌5단지"
+   "geo_name": "성원상떼빌5단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1316,7 +1355,8 @@
    "low_floor_share": null,
    "lat": 37.37609,
    "lng": 127.2572,
-   "geo_name": "쌍용2차"
+   "geo_name": "쌍용2차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1341,7 +1381,8 @@
    "low_floor_share": null,
    "lat": 37.3882,
    "lng": 127.23895,
-   "geo_name": "쌍용스윗닷홈1단지"
+   "geo_name": "쌍용스윗닷홈1단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1366,7 +1407,8 @@
    "low_floor_share": null,
    "lat": 37.42857,
    "lng": 127.23556,
-   "geo_name": "신일드림빌"
+   "geo_name": "신일드림빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1391,7 +1433,8 @@
    "low_floor_share": null,
    "lat": 37.39941,
    "lng": 127.27867,
-   "geo_name": "쌍령현대"
+   "geo_name": "쌍령현대",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1416,7 +1459,8 @@
    "low_floor_share": null,
    "lat": 37.4261,
    "lng": 127.28708,
-   "geo_name": "세광엔리치빌"
+   "geo_name": "세광엔리치빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1441,7 +1485,8 @@
    "low_floor_share": null,
    "lat": 37.38667,
    "lng": 127.23784,
-   "geo_name": "쌍용스윗닷홈2단지"
+   "geo_name": "쌍용스윗닷홈2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1466,7 +1511,8 @@
    "low_floor_share": null,
    "lat": 37.41112,
    "lng": 127.25051,
-   "geo_name": "대우"
+   "geo_name": "대우",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1491,7 +1537,8 @@
    "low_floor_share": null,
    "lat": 37.38667,
    "lng": 127.23784,
-   "geo_name": "쌍용스윗닷홈2단지"
+   "geo_name": "쌍용스윗닷홈2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1516,7 +1563,8 @@
    "low_floor_share": null,
    "lat": 37.42769,
    "lng": 127.24626,
-   "geo_name": "벽산블루밍"
+   "geo_name": "벽산블루밍",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1541,7 +1589,8 @@
    "low_floor_share": null,
    "lat": 37.37707,
    "lng": 127.25954,
-   "geo_name": "양벌리우림"
+   "geo_name": "양벌리우림",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1566,7 +1615,8 @@
    "low_floor_share": null,
    "lat": 37.37022,
    "lng": 127.2489,
-   "geo_name": "양촌현대"
+   "geo_name": "양촌현대",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1591,7 +1641,8 @@
    "low_floor_share": null,
    "lat": 37.36397,
    "lng": 127.30903,
-   "geo_name": "대주파크빌"
+   "geo_name": "대주파크빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1616,7 +1667,8 @@
    "low_floor_share": null,
    "lat": 37.42131,
    "lng": 127.24054,
-   "geo_name": "우림루미아트"
+   "geo_name": "우림루미아트",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1641,7 +1693,8 @@
    "low_floor_share": null,
    "lat": 37.41924,
    "lng": 127.27633,
-   "geo_name": "금강펜테리움1단지"
+   "geo_name": "금강펜테리움1단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1666,7 +1719,8 @@
    "low_floor_share": null,
    "lat": 37.37629,
    "lng": 127.29003,
-   "geo_name": "초월e편한세상1단지"
+   "geo_name": "초월e편한세상1단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1691,7 +1745,8 @@
    "low_floor_share": null,
    "lat": 37.39852,
    "lng": 127.27714,
-   "geo_name": "동성1차"
+   "geo_name": "동성1차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1716,7 +1771,8 @@
    "low_floor_share": null,
    "lat": 37.41865,
    "lng": 127.25556,
-   "geo_name": "파라다이스2단지"
+   "geo_name": "파라다이스2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1741,7 +1797,8 @@
    "low_floor_share": null,
    "lat": 37.36777,
    "lng": 127.16122,
-   "geo_name": "신현2차현대모닝사이드"
+   "geo_name": "신현2차현대모닝사이드",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1766,7 +1823,8 @@
    "low_floor_share": null,
    "lat": 37.38999,
    "lng": 127.29267,
-   "geo_name": "쌍용더플래티넘광주"
+   "geo_name": "쌍용더플래티넘광주",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1791,7 +1849,8 @@
    "low_floor_share": null,
    "lat": 37.36536,
    "lng": 127.24717,
-   "geo_name": "대주파크빌2차"
+   "geo_name": "대주파크빌2차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1816,7 +1875,8 @@
    "low_floor_share": null,
    "lat": 37.39852,
    "lng": 127.27714,
-   "geo_name": "동성1차"
+   "geo_name": "동성1차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1841,7 +1901,8 @@
    "low_floor_share": null,
    "lat": 37.38065,
    "lng": 127.23188,
-   "geo_name": "태전e편한세상"
+   "geo_name": "태전e편한세상",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1866,7 +1927,8 @@
    "low_floor_share": null,
    "lat": 37.39725,
    "lng": 127.27823,
-   "geo_name": "쌍령2차동성"
+   "geo_name": "쌍령2차동성",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1891,7 +1953,8 @@
    "low_floor_share": null,
    "lat": 37.38999,
    "lng": 127.29267,
-   "geo_name": "쌍용더플래티넘광주"
+   "geo_name": "쌍용더플래티넘광주",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1916,7 +1979,8 @@
    "low_floor_share": null,
    "lat": 37.40723,
    "lng": 127.24982,
-   "geo_name": "해태그린"
+   "geo_name": "해태그린",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1941,7 +2005,8 @@
    "low_floor_share": null,
    "lat": 37.39785,
    "lng": 127.27543,
-   "geo_name": "광주역대광로제비앙"
+   "geo_name": "광주역대광로제비앙",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1966,7 +2031,8 @@
    "low_floor_share": null,
    "lat": 37.34639,
    "lng": 127.34516,
-   "geo_name": "삼주노블리제"
+   "geo_name": "삼주노블리제",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -1991,7 +2057,8 @@
    "low_floor_share": null,
    "lat": 37.3767,
    "lng": 127.29443,
-   "geo_name": "동광모닝스카이"
+   "geo_name": "동광모닝스카이",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2016,7 +2083,8 @@
    "low_floor_share": null,
    "lat": 37.3979,
    "lng": 127.27997,
-   "geo_name": "쌍령2차현대모닝사이드"
+   "geo_name": "쌍령2차현대모닝사이드",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2041,7 +2109,8 @@
    "low_floor_share": null,
    "lat": 37.3979,
    "lng": 127.27997,
-   "geo_name": "쌍령2차현대모닝사이드"
+   "geo_name": "쌍령2차현대모닝사이드",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2066,7 +2135,8 @@
    "low_floor_share": null,
    "lat": 37.39283,
    "lng": 127.23429,
-   "geo_name": "장지리현대"
+   "geo_name": "장지리현대",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2091,7 +2161,8 @@
    "low_floor_share": null,
    "lat": 37.37196,
    "lng": 127.25345,
-   "geo_name": "세양청마루"
+   "geo_name": "세양청마루",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2116,7 +2187,8 @@
    "low_floor_share": null,
    "lat": 37.41052,
    "lng": 127.23774,
-   "geo_name": "경남아너스빌2단지"
+   "geo_name": "경남아너스빌2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2141,7 +2213,8 @@
    "low_floor_share": null,
    "lat": 37.38799,
    "lng": 127.23031,
-   "geo_name": "성원2차"
+   "geo_name": "성원2차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2166,7 +2239,8 @@
    "low_floor_share": null,
    "lat": 37.41112,
    "lng": 127.25051,
-   "geo_name": "대우"
+   "geo_name": "대우",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2191,7 +2265,8 @@
    "low_floor_share": null,
    "lat": 37.41112,
    "lng": 127.25051,
-   "geo_name": "대우"
+   "geo_name": "대우",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2216,7 +2291,8 @@
    "low_floor_share": null,
    "lat": 37.38708,
    "lng": 127.23673,
-   "geo_name": "쌍용스윗닷홈3단지"
+   "geo_name": "쌍용스윗닷홈3단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2241,7 +2317,8 @@
    "low_floor_share": null,
    "lat": 37.41753,
    "lng": 127.25838,
-   "geo_name": "송정현대"
+   "geo_name": "송정현대",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2266,7 +2343,8 @@
    "low_floor_share": null,
    "lat": 37.4178,
    "lng": 127.25395,
-   "geo_name": "탄벌동파라다이스"
+   "geo_name": "탄벌동파라다이스",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2291,7 +2369,8 @@
    "low_floor_share": null,
    "lat": 37.42131,
    "lng": 127.24054,
-   "geo_name": "우림루미아트"
+   "geo_name": "우림루미아트",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2316,7 +2395,8 @@
    "low_floor_share": null,
    "lat": 37.379,
    "lng": 127.25941,
-   "geo_name": "e편한세상광주양벌"
+   "geo_name": "e편한세상광주양벌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2341,7 +2421,8 @@
    "low_floor_share": null,
    "lat": 37.34589,
    "lng": 127.17767,
-   "geo_name": "오포베르빌"
+   "geo_name": "오포베르빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2366,7 +2447,8 @@
    "low_floor_share": null,
    "lat": 37.37501,
    "lng": 127.28907,
-   "geo_name": "초월e편한세상2단지"
+   "geo_name": "초월e편한세상2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2391,7 +2473,8 @@
    "low_floor_share": null,
    "lat": 37.40824,
    "lng": 127.25626,
-   "geo_name": "광주금호리첸시아"
+   "geo_name": "광주금호리첸시아",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2416,7 +2499,8 @@
    "low_floor_share": null,
    "lat": 37.37341,
    "lng": 127.23155,
-   "geo_name": "더샵오포센트리체(C2)"
+   "geo_name": "더샵오포센트리체(C2)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2441,7 +2525,8 @@
    "low_floor_share": null,
    "lat": 37.38276,
    "lng": 127.28549,
-   "geo_name": "광주초월역한라비발디"
+   "geo_name": "광주초월역한라비발디",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2466,7 +2551,8 @@
    "low_floor_share": null,
    "lat": 37.42769,
    "lng": 127.24626,
-   "geo_name": "벽산블루밍"
+   "geo_name": "벽산블루밍",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2491,7 +2577,8 @@
    "low_floor_share": null,
    "lat": 37.39785,
    "lng": 127.27543,
-   "geo_name": "광주역대광로제비앙"
+   "geo_name": "광주역대광로제비앙",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2516,7 +2603,8 @@
    "low_floor_share": null,
    "lat": 37.40735,
    "lng": 127.23702,
-   "geo_name": "벽산블루밍2단지"
+   "geo_name": "벽산블루밍2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2541,7 +2629,8 @@
    "low_floor_share": null,
    "lat": 37.41654,
    "lng": 127.27084,
-   "geo_name": "송정우림필유"
+   "geo_name": "송정우림필유",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2566,7 +2655,8 @@
    "low_floor_share": null,
    "lat": 37.41865,
    "lng": 127.25556,
-   "geo_name": "파라다이스2단지"
+   "geo_name": "파라다이스2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2591,7 +2681,8 @@
    "low_floor_share": null,
    "lat": 37.40778,
    "lng": 127.23555,
-   "geo_name": "벽산블루밍1단지"
+   "geo_name": "벽산블루밍1단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2616,7 +2707,8 @@
    "low_floor_share": null,
    "lat": 37.38625,
    "lng": 127.22838,
-   "geo_name": "우림필유"
+   "geo_name": "우림필유",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2641,7 +2733,8 @@
    "low_floor_share": null,
    "lat": 37.40723,
    "lng": 127.24982,
-   "geo_name": "해태그린"
+   "geo_name": "해태그린",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2666,7 +2759,8 @@
    "low_floor_share": null,
    "lat": 37.36549,
    "lng": 127.30177,
-   "geo_name": "힐스테이트초월역(2BL)"
+   "geo_name": "힐스테이트초월역(2BL)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2691,7 +2785,8 @@
    "low_floor_share": null,
    "lat": 37.41074,
    "lng": 127.23539,
-   "geo_name": "경남아너스빌1단지"
+   "geo_name": "경남아너스빌1단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2716,7 +2811,8 @@
    "low_floor_share": null,
    "lat": 37.41676,
    "lng": 127.24767,
-   "geo_name": "탄벌리현대"
+   "geo_name": "탄벌리현대",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2741,7 +2837,8 @@
    "low_floor_share": null,
    "lat": 37.36549,
    "lng": 127.30177,
-   "geo_name": "힐스테이트초월역(2BL)"
+   "geo_name": "힐스테이트초월역(2BL)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2766,7 +2863,8 @@
    "low_floor_share": null,
    "lat": 37.38999,
    "lng": 127.29267,
-   "geo_name": "쌍용더플래티넘광주"
+   "geo_name": "쌍용더플래티넘광주",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2791,7 +2889,8 @@
    "low_floor_share": null,
    "lat": 37.33746,
    "lng": 127.20817,
-   "geo_name": "오포문형양우내안애"
+   "geo_name": "오포문형양우내안애",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2816,7 +2915,8 @@
    "low_floor_share": null,
    "lat": 37.38349,
    "lng": 127.23209,
-   "geo_name": "힐스테이트태전5지구(C6)"
+   "geo_name": "힐스테이트태전5지구(C6)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2841,7 +2941,8 @@
    "low_floor_share": null,
    "lat": 37.35372,
    "lng": 127.16275,
-   "geo_name": "오포현대"
+   "geo_name": "오포현대",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2866,7 +2967,8 @@
    "low_floor_share": null,
    "lat": 37.38676,
    "lng": 127.23046,
-   "geo_name": "성원3차"
+   "geo_name": "성원3차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2891,7 +2993,8 @@
    "low_floor_share": null,
    "lat": 37.38349,
    "lng": 127.23209,
-   "geo_name": "힐스테이트태전5지구(C6)"
+   "geo_name": "힐스테이트태전5지구(C6)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2916,7 +3019,8 @@
    "low_floor_share": null,
    "lat": 37.3802,
    "lng": 127.23269,
-   "geo_name": "힐스테이트태전2차에듀포레"
+   "geo_name": "힐스테이트태전2차에듀포레",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2941,7 +3045,8 @@
    "low_floor_share": null,
    "lat": 37.37617,
    "lng": 127.29158,
-   "geo_name": "광주초월역모아미래도파크힐스"
+   "geo_name": "광주초월역모아미래도파크힐스",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2966,7 +3071,8 @@
    "low_floor_share": null,
    "lat": 37.39467,
    "lng": 127.26017,
-   "geo_name": "광주역우방아이유쉘(2단지)"
+   "geo_name": "광주역우방아이유쉘(2단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -2991,7 +3097,8 @@
    "low_floor_share": null,
    "lat": 37.37848,
    "lng": 127.23224,
-   "geo_name": "힐스테이트태전2차(11단지)"
+   "geo_name": "힐스테이트태전2차(11단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3016,7 +3123,8 @@
    "low_floor_share": null,
    "lat": 37.39118,
    "lng": 127.23452,
-   "geo_name": "태전경남아너스빌시그니처"
+   "geo_name": "태전경남아너스빌시그니처",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3041,7 +3149,8 @@
    "low_floor_share": null,
    "lat": 37.38276,
    "lng": 127.28549,
-   "geo_name": "광주초월역한라비발디"
+   "geo_name": "광주초월역한라비발디",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3066,7 +3175,8 @@
    "low_floor_share": null,
    "lat": 37.38349,
    "lng": 127.23209,
-   "geo_name": "힐스테이트태전5지구(C6)"
+   "geo_name": "힐스테이트태전5지구(C6)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3091,7 +3201,8 @@
    "low_floor_share": null,
    "lat": 37.38349,
    "lng": 127.23209,
-   "geo_name": "힐스테이트태전5지구(C6)"
+   "geo_name": "힐스테이트태전5지구(C6)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3116,7 +3227,8 @@
    "low_floor_share": null,
    "lat": 37.3802,
    "lng": 127.23269,
-   "geo_name": "힐스테이트태전2차에듀포레"
+   "geo_name": "힐스테이트태전2차에듀포레",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3141,7 +3253,8 @@
    "low_floor_share": null,
    "lat": 37.38349,
    "lng": 127.23209,
-   "geo_name": "힐스테이트태전5지구(C6)"
+   "geo_name": "힐스테이트태전5지구(C6)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3166,7 +3279,8 @@
    "low_floor_share": null,
    "lat": 37.37325,
    "lng": 127.2277,
-   "geo_name": "금호"
+   "geo_name": "금호",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3191,7 +3305,8 @@
    "low_floor_share": null,
    "lat": 37.36975,
    "lng": 127.17047,
-   "geo_name": "e편한세상테라스오포3단지"
+   "geo_name": "e편한세상테라스오포3단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3216,7 +3331,8 @@
    "low_floor_share": null,
    "lat": 37.38835,
    "lng": 127.23219,
-   "geo_name": "e편한세상태전2차(C1)"
+   "geo_name": "e편한세상태전2차(C1)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3241,7 +3357,8 @@
    "low_floor_share": null,
    "lat": 37.41849,
    "lng": 127.27475,
-   "geo_name": "금강펜테리움2단지"
+   "geo_name": "금강펜테리움2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3266,7 +3383,8 @@
    "low_floor_share": null,
    "lat": 37.37286,
    "lng": 127.22244,
-   "geo_name": "오포자이디오브(C4)"
+   "geo_name": "오포자이디오브(C4)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3291,7 +3409,8 @@
    "low_floor_share": null,
    "lat": 37.37267,
    "lng": 127.29819,
-   "geo_name": "초월롯데낙천대2단지"
+   "geo_name": "초월롯데낙천대2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3316,7 +3435,8 @@
    "low_floor_share": null,
    "lat": 37.38349,
    "lng": 127.23209,
-   "geo_name": "힐스테이트태전5지구(C6)"
+   "geo_name": "힐스테이트태전5지구(C6)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3341,7 +3461,8 @@
    "low_floor_share": null,
    "lat": 37.38835,
    "lng": 127.23219,
-   "geo_name": "e편한세상태전2차(C1)"
+   "geo_name": "e편한세상태전2차(C1)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3366,7 +3487,8 @@
    "low_floor_share": null,
    "lat": 37.38835,
    "lng": 127.23219,
-   "geo_name": "e편한세상태전2차(C1)"
+   "geo_name": "e편한세상태전2차(C1)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3391,7 +3513,8 @@
    "low_floor_share": null,
    "lat": 37.38022,
    "lng": 127.23454,
-   "geo_name": "태전파크자이14BL"
+   "geo_name": "태전파크자이14BL",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3416,7 +3539,8 @@
    "low_floor_share": null,
    "lat": 37.36549,
    "lng": 127.30177,
-   "geo_name": "힐스테이트초월역(2BL)"
+   "geo_name": "힐스테이트초월역(2BL)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3441,7 +3565,8 @@
    "low_floor_share": null,
    "lat": 37.39662,
    "lng": 127.26945,
-   "geo_name": "광주센트럴푸르지오"
+   "geo_name": "광주센트럴푸르지오",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3466,7 +3591,8 @@
    "low_floor_share": null,
    "lat": 37.37286,
    "lng": 127.22244,
-   "geo_name": "오포자이디오브(C4)"
+   "geo_name": "오포자이디오브(C4)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3491,7 +3617,8 @@
    "low_floor_share": null,
    "lat": 37.39662,
    "lng": 127.26945,
-   "geo_name": "광주센트럴푸르지오"
+   "geo_name": "광주센트럴푸르지오",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3516,7 +3643,8 @@
    "low_floor_share": null,
    "lat": 37.37617,
    "lng": 127.29158,
-   "geo_name": "광주초월역모아미래도파크힐스"
+   "geo_name": "광주초월역모아미래도파크힐스",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3541,7 +3669,8 @@
    "low_floor_share": null,
    "lat": 37.37848,
    "lng": 127.23224,
-   "geo_name": "힐스테이트태전2차(11단지)"
+   "geo_name": "힐스테이트태전2차(11단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3566,7 +3695,8 @@
    "low_floor_share": null,
    "lat": 37.39186,
    "lng": 127.22836,
-   "geo_name": "광주태전효성해링턴플레이스"
+   "geo_name": "광주태전효성해링턴플레이스",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3591,7 +3721,8 @@
    "low_floor_share": null,
    "lat": 37.37196,
    "lng": 127.29944,
-   "geo_name": "초월롯데캐슬"
+   "geo_name": "초월롯데캐슬",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3616,7 +3747,8 @@
    "low_floor_share": null,
    "lat": 37.39186,
    "lng": 127.22836,
-   "geo_name": "광주태전효성해링턴플레이스"
+   "geo_name": "광주태전효성해링턴플레이스",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3641,7 +3773,8 @@
    "low_floor_share": null,
    "lat": 37.40824,
    "lng": 127.25626,
-   "geo_name": "광주금호리첸시아"
+   "geo_name": "광주금호리첸시아",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3666,7 +3799,8 @@
    "low_floor_share": null,
    "lat": 37.37267,
    "lng": 127.29819,
-   "geo_name": "초월롯데낙천대2단지"
+   "geo_name": "초월롯데낙천대2단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3691,7 +3825,8 @@
    "low_floor_share": null,
    "lat": 37.38349,
    "lng": 127.23209,
-   "geo_name": "힐스테이트태전5지구(C6)"
+   "geo_name": "힐스테이트태전5지구(C6)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3716,7 +3851,8 @@
    "low_floor_share": null,
    "lat": 37.39118,
    "lng": 127.23452,
-   "geo_name": "태전경남아너스빌시그니처"
+   "geo_name": "태전경남아너스빌시그니처",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3741,7 +3877,8 @@
    "low_floor_share": null,
    "lat": 37.38835,
    "lng": 127.23219,
-   "geo_name": "e편한세상태전2차(C1)"
+   "geo_name": "e편한세상태전2차(C1)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3766,7 +3903,8 @@
    "low_floor_share": null,
    "lat": 37.37341,
    "lng": 127.23155,
-   "geo_name": "더샵오포센트리체(C2)"
+   "geo_name": "더샵오포센트리체(C2)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3791,7 +3929,8 @@
    "low_floor_share": null,
    "lat": 37.36549,
    "lng": 127.30177,
-   "geo_name": "힐스테이트초월역(2BL)"
+   "geo_name": "힐스테이트초월역(2BL)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3816,7 +3955,8 @@
    "low_floor_share": null,
    "lat": 37.38349,
    "lng": 127.23209,
-   "geo_name": "힐스테이트태전5지구(C6)"
+   "geo_name": "힐스테이트태전5지구(C6)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3841,7 +3981,8 @@
    "low_floor_share": null,
    "lat": 37.42005,
    "lng": 127.25431,
-   "geo_name": "광주행정타운아이파크(1BL)"
+   "geo_name": "광주행정타운아이파크(1BL)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3866,7 +4007,8 @@
    "low_floor_share": null,
    "lat": 37.38349,
    "lng": 127.23209,
-   "geo_name": "힐스테이트태전5지구(C6)"
+   "geo_name": "힐스테이트태전5지구(C6)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3891,7 +4033,8 @@
    "low_floor_share": null,
    "lat": 37.3802,
    "lng": 127.23269,
-   "geo_name": "힐스테이트태전2차에듀포레"
+   "geo_name": "힐스테이트태전2차에듀포레",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3916,7 +4059,8 @@
    "low_floor_share": null,
    "lat": 37.36549,
    "lng": 127.30177,
-   "geo_name": "힐스테이트초월역(2BL)"
+   "geo_name": "힐스테이트초월역(2BL)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3941,7 +4085,8 @@
    "low_floor_share": null,
    "lat": 37.38276,
    "lng": 127.28549,
-   "geo_name": "광주초월역한라비발디"
+   "geo_name": "광주초월역한라비발디",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3966,7 +4111,8 @@
    "low_floor_share": null,
    "lat": 37.38124,
    "lng": 127.23449,
-   "geo_name": "태전파크자이13BL"
+   "geo_name": "태전파크자이13BL",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -3991,7 +4137,8 @@
    "low_floor_share": null,
    "lat": 37.37848,
    "lng": 127.23224,
-   "geo_name": "힐스테이트태전2차(11단지)"
+   "geo_name": "힐스테이트태전2차(11단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4016,7 +4163,8 @@
    "low_floor_share": null,
    "lat": 37.37196,
    "lng": 127.29944,
-   "geo_name": "초월롯데캐슬"
+   "geo_name": "초월롯데캐슬",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4041,7 +4189,8 @@
    "low_floor_share": null,
    "lat": 37.35692,
    "lng": 127.15014,
-   "geo_name": "신현라온프라이빗"
+   "geo_name": "신현라온프라이빗",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4066,7 +4215,8 @@
    "low_floor_share": null,
    "lat": 37.37286,
    "lng": 127.22244,
-   "geo_name": "오포자이디오브(C4)"
+   "geo_name": "오포자이디오브(C4)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4091,7 +4241,8 @@
    "low_floor_share": null,
    "lat": 37.39467,
    "lng": 127.26017,
-   "geo_name": "광주역우방아이유쉘(2단지)"
+   "geo_name": "광주역우방아이유쉘(2단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4116,7 +4267,8 @@
    "low_floor_share": null,
    "lat": 37.39467,
    "lng": 127.26017,
-   "geo_name": "광주역우방아이유쉘(2단지)"
+   "geo_name": "광주역우방아이유쉘(2단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4141,7 +4293,8 @@
    "low_floor_share": null,
    "lat": 37.36171,
    "lng": 127.15507,
-   "geo_name": "신현현대모닝사이드1-1"
+   "geo_name": "신현현대모닝사이드1-1",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4166,7 +4319,8 @@
    "low_floor_share": null,
    "lat": 37.39662,
    "lng": 127.26945,
-   "geo_name": "광주센트럴푸르지오"
+   "geo_name": "광주센트럴푸르지오",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4191,7 +4345,8 @@
    "low_floor_share": null,
    "lat": 37.38124,
    "lng": 127.23449,
-   "geo_name": "태전파크자이13BL"
+   "geo_name": "태전파크자이13BL",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4216,7 +4371,8 @@
    "low_floor_share": null,
    "lat": 37.35788,
    "lng": 127.15521,
-   "geo_name": "e편한세상태재1단지"
+   "geo_name": "e편한세상태재1단지",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4241,7 +4397,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4266,7 +4423,8 @@
    "low_floor_share": null,
    "lat": 37.40824,
    "lng": 127.25626,
-   "geo_name": "광주금호리첸시아"
+   "geo_name": "광주금호리첸시아",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4291,7 +4449,8 @@
    "low_floor_share": null,
    "lat": 37.35692,
    "lng": 127.15014,
-   "geo_name": "신현라온프라이빗"
+   "geo_name": "신현라온프라이빗",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4316,7 +4475,8 @@
    "low_floor_share": null,
    "lat": 37.35692,
    "lng": 127.15014,
-   "geo_name": "신현라온프라이빗"
+   "geo_name": "신현라온프라이빗",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4341,7 +4501,8 @@
    "low_floor_share": null,
    "lat": 37.38022,
    "lng": 127.23454,
-   "geo_name": "태전파크자이14BL"
+   "geo_name": "태전파크자이14BL",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4366,7 +4527,8 @@
    "low_floor_share": null,
    "lat": 37.40997,
    "lng": 127.19671,
-   "geo_name": "힐스테이트삼동역"
+   "geo_name": "힐스테이트삼동역",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4391,7 +4553,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4416,7 +4579,8 @@
    "low_floor_share": null,
    "lat": 37.39467,
    "lng": 127.26017,
-   "geo_name": "광주역우방아이유쉘(2단지)"
+   "geo_name": "광주역우방아이유쉘(2단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4441,7 +4605,8 @@
    "low_floor_share": null,
    "lat": 37.37341,
    "lng": 127.23155,
-   "geo_name": "더샵오포센트리체(C2)"
+   "geo_name": "더샵오포센트리체(C2)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4466,7 +4631,8 @@
    "low_floor_share": null,
    "lat": 37.38124,
    "lng": 127.23449,
-   "geo_name": "태전파크자이13BL"
+   "geo_name": "태전파크자이13BL",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4491,7 +4657,8 @@
    "low_floor_share": null,
    "lat": 37.39467,
    "lng": 127.26017,
-   "geo_name": "광주역우방아이유쉘(2단지)"
+   "geo_name": "광주역우방아이유쉘(2단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4516,7 +4683,8 @@
    "low_floor_share": null,
    "lat": 37.35918,
    "lng": 127.14981,
-   "geo_name": "e편한세상오포3차"
+   "geo_name": "e편한세상오포3차",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4541,7 +4709,8 @@
    "low_floor_share": null,
    "lat": 37.4089,
    "lng": 127.19925,
-   "geo_name": "우남퍼스트빌"
+   "geo_name": "우남퍼스트빌",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4566,7 +4735,8 @@
    "low_floor_share": null,
    "lat": 37.39467,
    "lng": 127.26017,
-   "geo_name": "광주역우방아이유쉘(2단지)"
+   "geo_name": "광주역우방아이유쉘(2단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4591,7 +4761,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4616,7 +4787,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4641,7 +4813,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4666,7 +4839,8 @@
    "low_floor_share": null,
    "lat": 37.37286,
    "lng": 127.22244,
-   "geo_name": "오포자이디오브(C4)"
+   "geo_name": "오포자이디오브(C4)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4691,7 +4865,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4716,7 +4891,8 @@
    "low_floor_share": null,
    "lat": 37.36549,
    "lng": 127.30177,
-   "geo_name": "힐스테이트초월역(2BL)"
+   "geo_name": "힐스테이트초월역(2BL)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4741,7 +4917,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4766,7 +4943,8 @@
    "low_floor_share": null,
    "lat": 37.38022,
    "lng": 127.23454,
-   "geo_name": "태전파크자이14BL"
+   "geo_name": "태전파크자이14BL",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4791,7 +4969,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4816,7 +4995,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4841,7 +5021,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4866,7 +5047,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4891,7 +5073,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4916,7 +5099,8 @@
    "low_floor_share": null,
    "lat": 37.39751,
    "lng": 127.24645,
-   "geo_name": "e편한세상광주역(5단지)"
+   "geo_name": "e편한세상광주역(5단지)",
+   "infra": null
   },
   {
    "region": "광주시",
@@ -4941,7 +5125,8 @@
    "low_floor_share": null,
    "lat": 37.40334,
    "lng": 127.2519,
-   "geo_name": "광주역자연앤자이(공공분양)"
+   "geo_name": "광주역자연앤자이(공공분양)",
+   "infra": null
   }
  ],
  "propx": {
@@ -4953,6 +5138,10 @@
    }
   ],
   "n": 250
+ },
+ "infra": {
+  "n": 0,
+  "fetched": null
  },
  "discovery": {
   "enabled": true,

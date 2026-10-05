@@ -85,3 +85,10 @@ dialog{border:0;border-radius:32px;max-width:760px;width:92%;padding:40px;line-h
 button.mini{min-height:30px;padding:3px 10px;font-size:13px;margin-left:8px}
 #map-status b{font-weight:700}
 .map-legend .disc-key{background:#9cbdf2;width:7px;height:7px}
+
+.infra-chips{position:absolute;left:22px;top:76px;display:flex;gap:6px;flex-wrap:wrap;z-index:2;max-width:70%}
+.chip{min-height:34px;padding:4px 12px;font-size:14px;background:#ffffffeb;display:flex;align-items:center;gap:6px}.chip i{width:10px;height:10px;border-radius:50%;display:inline-block}.chip[aria-pressed=true]{background:#172126;color:#fff;border-color:#172126}
+.chip-note{font-size:12px;color:#59656c;background:#ffffffeb;border-radius:100px;padding:8px 10px;align-self:center}
+#map-status{top:120px}
+.infra-tags{margin:10px 0 4px}.infra-tags .dot{width:8px;height:8px;margin-right:6px}
+@media(max-width:900px){.infra-chips{top:64px;left:12px}.chip{min-height:30px;font-size:13px;padding:3px 10px}#map-status{top:104px}}

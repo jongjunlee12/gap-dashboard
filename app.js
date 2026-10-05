@@ -67,6 +67,7 @@ function initMap() {
     markers[c.id] = new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([c.lng, c.lat]).addTo(map);
   });
   renderDiscMarkers();
+  initInfra();
   $('fit').onclick = fitAll;
   $('view').onclick = () => { const on = $('view').getAttribute('aria-pressed') !== 'true'; $('view').setAttribute('aria-pressed', String(on)); $('view').textContent = on ? '3D 켜짐' : '2D 보기'; map.easeTo({ pitch: on ? 50 : 0, bearing: on ? -15 : 0 }); };
 }
@@ -76,6 +77,38 @@ function fitAll() {
   const b = new maplibregl.LngLatBounds();
   vis.forEach(c => b.extend([c.lng, c.lat]));
   map.fitBounds(b, { padding: { top: 90, bottom: 70, left: 80, right: 120 }, maxZoom: 13.5, duration: 700 });
+}
+
+/* ---------- 주변 인프라 레이어 (OSM) ---------- */
+const INFRA_STYLE = { transit: ['교통', '#172126'], culture: ['문화', '#7a4fd1'], public: ['공공', '#1a9e6c'], education: ['교육', '#d9a21b'], medical: ['의료', '#c8322f'] };
+const infraOn = { transit: true, culture: false, public: false, education: true, medical: false };
+let infraLoaded = false;
+function initInfra() {
+  fetch('data/infra.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).then(j => {
+    if (!j || !j.points?.length) return;
+    const fc = { type: 'FeatureCollection', features: j.points.map(p => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [p.lng, p.lat] }, properties: { layer: p.layer, name: p.name, kind: p.kind || '' } })) };
+    const add = () => {
+      map.addSource('infra', { type: 'geojson', data: fc });
+      Object.entries(INFRA_STYLE).forEach(([k, [label, col]]) => {
+        map.addLayer({ id: 'infra-' + k, type: 'circle', source: 'infra', filter: ['==', ['get', 'layer'], k],
+          layout: { visibility: infraOn[k] ? 'visible' : 'none' },
+          paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 2, 14, k === 'transit' ? 7 : 5], 'circle-color': col, 'circle-opacity': 0.85, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5 } });
+        map.on('mouseenter', 'infra-' + k, () => map.getCanvas().style.cursor = 'pointer');
+        map.on('mouseleave', 'infra-' + k, () => { map.getCanvas().style.cursor = ''; tip.style.display = 'none'; });
+        map.on('mousemove', 'infra-' + k, e => { const p = e.features[0].properties; tip.style.display = 'block'; tip.textContent = `${label} · ${p.name}`; tip.style.left = e.originalEvent.clientX + 14 + 'px'; tip.style.top = e.originalEvent.clientY + 14 + 'px'; });
+      });
+      infraLoaded = true;
+    };
+    map.loaded() ? add() : map.on('load', add);
+    $('infra-chips').innerHTML = Object.entries(INFRA_STYLE).map(([k, [label, col]]) => `<button class="chip" data-k="${k}" aria-pressed="${infraOn[k]}"><i style="background:${col}"></i>${label}</button>`).join('') + `<span class="chip-note">${j.points.length.toLocaleString()}개 시설 · OSM</span>`;
+    $('infra-chips').querySelectorAll('.chip').forEach(b => b.onclick = () => { const k = b.dataset.k; infraOn[k] = !infraOn[k]; b.setAttribute('aria-pressed', infraOn[k]); if (infraLoaded) map.setLayoutProperty('infra-' + k, 'visibility', infraOn[k] ? 'visible' : 'none'); });
+  }).catch(() => {});
+}
+function infraLine(inf) {
+  if (!inf) return '';
+  const r = inf.r1000 || {}, n = inf.nearest || {};
+  const parts = Object.entries(INFRA_STYLE).map(([k, [label]]) => `<span class="tag"><i class="dot" style="background:${INFRA_STYLE[k][1]}"></i>${label} ${r[k] || 0}${n[k] ? ` · ${esc(n[k].name)} ${n[k].d}m` : ''}</span>`);
+  return `<div class="tags infra-tags"><span class="tag" style="background:#172126;color:#fff;border-color:#172126">반경 1km</span>${parts.join('')}</div>`;
 }
 
 /* ---------- 선택 · 상세 ---------- */
@@ -106,6 +139,7 @@ function renderDetail(c) {
       <div><strong style="color:${st === 'in' ? 'var(--blue)' : st === 'under' ? 'var(--green)' : '#172126'}">${fmt(u.required)}억</strong><span>필요자금 · ${stateLabel[st]}${u.gap ? ` · 갭 ${fmt(u.gap)}` : ''}</span></div>
       <div><strong>${pct(u.change_1y)}</strong><span>1년 매매 변동${u.change_3y != null ? ` · 3년 ${pct(u.change_3y)}` : ''}</span></div>
     </div>
+    ${infraLine(c.infra)}
     ${u.note ? `<p class="muted" style="font-size:15px;margin:0 0 12px">${esc(u.note)}</p>` : ''}
     <div class="detail-grid">
       <div class="card"><h4>분기별 매매 중앙값</h4><p class="sub">막대 = 중앙값 · 아래 숫자 = 거래 건수 · 전세 중앙값은 점선</p>${quarterChart(u)}</div>
@@ -220,7 +254,7 @@ function renderDiscMarkers() {
 }
 function showDisc(d) {
   map.flyTo({ center: [d.lng, d.lat], zoom: Math.max(map.getZoom(), 14) });
-  $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''} <button class="mini" id="disc-add">후보에 추가 요청</button>`;
+  $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''}${d.infra?.nearest?.transit ? ` · 🚇 ${esc(d.infra.nearest.transit.name)} ${d.infra.nearest.transit.d}m` : ''}${d.infra?.nearest?.education ? ` · 🏫 ${d.infra.nearest.education.d}m` : ''} <button class="mini" id="disc-add">후보에 추가 요청</button>`;
   $('disc-add').onclick = () => { navigator.clipboard?.writeText(`${d.name} ${d.area}㎡ (${d.region} ${d.umd}) 후보 추가`); $('disc-add').textContent = '복사됨 · 채팅에 붙여넣기'; };
   const row = [...document.querySelectorAll('.disc-row')].find(r => r.dataset.name === d.name && r.dataset.area == d.area);
   if (row) { document.querySelectorAll('.disc-row.hl').forEach(r => r.classList.remove('hl')); row.classList.add('hl'); row.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
