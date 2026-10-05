@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "infra.json"
-OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
+OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://overpass.kumi.systems/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter"]
 
 # 영역: (south, west, north, east)
 BBOXES = {
@@ -43,7 +43,8 @@ def query(bbox, layer):
                     return json.loads(r.read())
             except Exception as e:  # noqa: BLE001
                 last = e
-                time.sleep(5 * (attempt + 1))
+                print(f"::warning::{url} {layer} 시도 {attempt + 1}: {type(e).__name__} {str(e)[:120]}", file=sys.stderr)
+                time.sleep(10 * (attempt + 1))
     raise RuntimeError(f"Overpass 실패: {last}")
 
 
@@ -54,10 +55,15 @@ def main():
         if (date.today() - date.fromisoformat(meta.get("fetched", "2000-01-01"))).days < 30:
             print(f"infra.json 최근({meta['fetched']}) · 건너뜀")
             return
-    pts, seen = [], set()
+    pts, seen, failed = [], set(), []
     for region, bbox in BBOXES.items():
         for layer in LAYERS:
-            j = query(bbox, layer)
+            try:
+                j = query(bbox, layer)
+            except RuntimeError as e:
+                failed.append(f"{region}/{layer}")
+                print(f"::warning::{region} {layer} 건너뜀: {e}", file=sys.stderr)
+                continue
             for el in j.get("elements", []):
                 lat = el.get("lat") or (el.get("center") or {}).get("lat")
                 lon = el.get("lon") or (el.get("center") or {}).get("lon")
@@ -81,9 +87,12 @@ def main():
                             **({"line": t["line"]} if t.get("line") else {}), **({"operator": t["operator"]} if t.get("operator") else {})})
             print(f"{region} {LAYERS[layer]['label']}: 누적 {len(pts)}")
             time.sleep(2)
-    OUT.write_text(json.dumps({"fetched": date.today().isoformat(), "source": "OpenStreetMap contributors (ODbL) · Overpass API",
+    if not pts:
+        print("::error::인프라를 하나도 받지 못했습니다. 기존 파일 유지.", file=sys.stderr)
+        sys.exit(1)
+    OUT.write_text(json.dumps({"fetched": date.today().isoformat(), "failed": failed, "source": "OpenStreetMap contributors (ODbL) · Overpass API",
                                "layers": {k: v["label"] for k, v in LAYERS.items()}, "points": pts}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"infra.json: {len(pts)}개 시설")
+    print(f"infra.json: {len(pts)}개 시설 · 실패 {failed}")
 
 
 if __name__ == "__main__":
