@@ -377,7 +377,7 @@ function renderDetail(c) {
     </div>
     ${u.note ? `<p class="muted" style="font-size:15px;margin:0 0 12px">${esc(u.note)}</p>` : ''}
     <div class="detail-grid">
-      <div class="card"><h4>분기별 매매 중앙값</h4><p class="sub">막대 = 중앙값 · 아래 숫자 = 거래 건수 · 전세 중앙값은 점선</p>${quarterChart(u)}</div>
+      <div class="card"><h4>분기별 매매 중앙값</h4><p class="sub">막대 = 중앙값 · 아래 숫자 = 거래 건수 · 전세 최고가는 점선</p>${quarterChart(u)}</div>
       <div class="card"><h4>개별 실거래 분포 · 호가 위치</h4><p class="sub">속 빈 점 = 5층 이하 · 주황 선 = 현재 호가 · 테두리 = 새 신고</p>${tradeChart(u, asking)}</div>
       <div class="card"><h4>현재 호가 ${asking ? `<span class="badge">협상 시작선 ${fmt(asking.negotiation_start, 1)}억 미만</span>` : ''}</h4>
         ${asking ? `<p class="sub">${esc(asking.note || '')}</p><div class="metric-row" style="grid-template-columns:1fr 1fr;margin:8px 0"><div><strong>${fmt(asking.min, 2)}${asking.max > asking.min ? '~' + fmt(asking.max, 2) : ''}억</strong><span>호가 범위 · 중앙값 대비 ${pct(asking.min / u.sale_median * 100 - 100)}</span></div><div><strong>${askReq ? fmt(askReq) + '억' : '—'}</strong><span>호가로 사면 필요자금</span></div></div>` : ''}
@@ -406,7 +406,7 @@ function quarterChart(u) {
     const x = pl + i * bw + bw * .2, w = bw * .6;
     if (q.sale_median) s += `<rect x="${x}" y="${y(q.sale_median)}" width="${w}" height="${pt + ih - y(q.sale_median)}" rx="4" fill="${i === qs.length - 1 ? '#0064e0' : '#9cbdf2'}" data-tip="${q.q} 매매 중앙값 ${fmt(q.sale_median)}억 · ${q.sale_n || 0}건${q.chg != null ? ' · 전분기 대비 ' + pct(q.chg) : ''}"/>`;
     else if (q.chg != null) s += `<text x="${x + w / 2}" y="${pt + ih - 6}" font-size="10.5" fill="#57676f" text-anchor="middle">${pct(q.chg)}</text>`;
-    if (q.jeonse_median) s += `<line x1="${x}" x2="${x + w}" y1="${y(q.jeonse_median)}" y2="${y(q.jeonse_median)}" stroke="#172126" stroke-width="2" stroke-dasharray="3 2" data-tip="${q.q} 전세 중앙값 ${fmt(q.jeonse_median)}억 · ${q.jeonse_n}건"/>`;
+    if (q.jeonse_median) s += `<line x1="${x}" x2="${x + w}" y1="${y(q.jeonse_median)}" y2="${y(q.jeonse_median)}" stroke="#172126" stroke-width="2" stroke-dasharray="3 2" data-tip="${q.q} 전세 최고가 ${fmt(q.jeonse_median)}억 · ${q.jeonse_n}건"/>`;
     s += `<text x="${x + w / 2}" y="${H - 22}" font-size="10.5" fill="#57676f" text-anchor="middle">${q.q}</text><text x="${x + w / 2}" y="${H - 8}" font-size="10" fill="#9aa6ad" text-anchor="middle">${q.sale_n != null ? 'n=' + q.sale_n : ''}</text>`;
   });
   return s + '</svg>';
