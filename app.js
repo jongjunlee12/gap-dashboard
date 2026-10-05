@@ -110,8 +110,11 @@ function focusInfra(lng, lat, fit) {
     let top = 8, bottom = 8;
     ['.map-top', '.infra-chips', '.focus-info'].forEach(sel => { const el = map.getContainer().parentElement.querySelector(sel); if (el && el.offsetParent) top = Math.max(top, el.getBoundingClientRect().bottom - cr.top + 8); });
     const lg = map.getContainer().parentElement.querySelector('.map-legend'); if (lg && lg.offsetParent) bottom = Math.max(bottom, cr.bottom - lg.getBoundingClientRect().top + 8);
+    // 작은 화면(폰)에서는 UI가 지도 대부분을 덮으므로 패딩을 제한
+    const H = cr.height; if (top + bottom > H * 0.55) { top = Math.min(top, H * 0.3); bottom = Math.min(bottom, H * 0.12); } if (top + bottom > H * 0.55) { top = bottom = 8; }
     const b = new maplibregl.LngLatBounds(); circlePoly([lng, lat], 1000, 16).geometry.coordinates[0].forEach(c => b.extend(c));
-    map.fitBounds(b, { padding: { top, bottom, left: 12, right: 12 }, duration: 600, maxZoom: 15.5 });
+    try { map.fitBounds(b, { padding: { top, bottom, left: 12, right: 12 }, duration: 600, maxZoom: 15.5 }); }
+    catch (e) { map.easeTo({ center: [lng, lat], zoom: Math.min(15.5, map.getZoom() < 13 ? 13.5 : map.getZoom()), duration: 600 }); }
   }
   const cnt = { r500: near.filter(f => f.properties.d <= 500).length, r1000: near.length };
   $('focus-info').innerHTML = `<b>반경 1km</b> 시설 ${cnt.r1000}개 · 500m 안 ${cnt.r500}개 <button class="mini" id="focus-clear">전체 보기</button>`;
