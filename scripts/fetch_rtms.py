@@ -49,11 +49,14 @@ def fetch(kind, key, lawd, ym, rows=1000):
                 if attempt == 3:
                     raise
                 time.sleep(2 * (attempt + 1))
-        root = ET.fromstring(body)
-        code = root.findtext(".//resultCode")
+        try:
+            root = ET.fromstring(body)
+        except ET.ParseError:
+            raise RuntimeError(f"{kind} {lawd} {ym}: XML 아님 → {body[:300]!r}")
+        code = (root.findtext(".//resultCode") or root.findtext(".//returnReasonCode") or "").strip()
         if code not in ("00", "000"):
-            msg = root.findtext(".//resultMsg")
-            raise RuntimeError(f"{kind} {lawd} {ym}: API 오류 {code} {msg}")
+            msg = root.findtext(".//resultMsg") or root.findtext(".//returnAuthMsg") or body[:300]
+            raise RuntimeError(f"{kind} {lawd} {ym}: API 오류 code={code} msg={msg}")
         page_items = [{c.tag: (c.text or "").strip() for c in it} for it in root.iter("item")]
         items += page_items
         total = int(root.findtext(".//totalCount") or 0)
@@ -72,8 +75,20 @@ def main():
     if not key:
         print("DATA_GO_KR_KEY 가 없습니다. 저장소 Secrets 에 등록하세요.", file=sys.stderr)
         sys.exit(2)
+    # Encoding 키(%2B, %3D 포함)를 넣은 경우 Decoding 키로 되돌림
+    if "%" in key:
+        key = urllib.parse.unquote(key)
 
     cfg = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+
+    # 키 점검: 한 달치 1건만 조회
+    try:
+        probe = fetch("trade", key, cfg["regions"][0]["code"], date.today().strftime("%Y%m"), rows=1)
+        print(f"키 확인 OK · 남양주 이번 달 매매 표본 {len(probe)}건")
+    except RuntimeError as e:
+        print(f"::error::{e}", file=sys.stderr)
+        print("※ 흔한 원인: (1) 활용신청 직후라 키가 아직 활성화 전(최대 1시간) (2) 매매 '상세' 자료가 아닌 다른 API 신청 (3) 일일 한도 초과", file=sys.stderr)
+        sys.exit(3)
     today = date.today()
     months = months_between(cfg["history_from"], today)
     if args.months:
