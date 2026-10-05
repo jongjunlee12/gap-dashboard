@@ -18,11 +18,7 @@
 "file": "seongnam_sujeong_20261005.xlsx"
 },
 {
-"sgg": "수원시장안구",
-"file": "suwon_20261005.xlsx"
-},
-{
-"sgg": "수원시권선구",
+"sgg": "수원시영통구",
 "file": "suwon_20261005.xlsx"
 },
 {
@@ -30,7 +26,11 @@
 "file": "suwon_20261005.xlsx"
 },
 {
-"sgg": "수원시영통구",
+"sgg": "수원시장안구",
+"file": "suwon_20261005.xlsx"
+},
+{
+"sgg": "수원시권선구",
 "file": "suwon_20261005.xlsx"
 }
 ],
