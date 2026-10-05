@@ -87,26 +87,59 @@ function fitAll() {
 /* ---------- 주변 인프라 레이어 (OSM) ---------- */
 const INFRA_STYLE = { transit: ['교통', '#172126'], culture: ['문화', '#7a4fd1'], public: ['공공', '#1a9e6c'], education: ['교육', '#d9a21b'], medical: ['의료', '#c8322f'] };
 const infraOn = { transit: true, culture: false, public: false, education: innerWidth > 900, medical: false };
-let infraLoaded = false;
+let infraLoaded = false, infraFC = null, focus = null;
+function distM(a, b) { const R = 6371000, p1 = a[1] * Math.PI / 180, p2 = b[1] * Math.PI / 180, dp = (b[1] - a[1]) * Math.PI / 180, dl = (b[0] - a[0]) * Math.PI / 180; const x = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); }
+function circlePoly(center, r, n = 64) { const [lng, lat] = center; const kx = 111320 * Math.cos(lat * Math.PI / 180), ky = 110574; const ring = []; for (let i = 0; i <= n; i++) { const t = i / n * 2 * Math.PI; ring.push([lng + r * Math.cos(t) / kx, lat + r * Math.sin(t) / ky]); } return { type: 'Feature', properties: { r }, geometry: { type: 'Polygon', coordinates: [ring] } }; }
+/* 단지를 고르면 반경 500m·1km 안 시설만 보여주고, 라벨도 그 안에서만 */
+function focusInfra(lng, lat, fit) {
+  if (!infraLoaded) { focus = { lng, lat }; return; }
+  focus = { lng, lat };
+  const near = infraFC.features.filter(f => { const d = distM([lng, lat], f.geometry.coordinates); if (d > 1000) return false; f.properties.d = Math.round(d); return true; });
+  map.getSource('infra-near').setData({ type: 'FeatureCollection', features: near });
+  map.getSource('focus-ring').setData({ type: 'FeatureCollection', features: [circlePoly([lng, lat], 1000), circlePoly([lng, lat], 500)] });
+  Object.keys(INFRA_STYLE).forEach(k => { map.setLayoutProperty('infra-' + k, 'visibility', 'none'); map.setLayoutProperty('infra-near-' + k, 'visibility', infraOn[k] ? 'visible' : 'none'); });
+  if (fit) { const b = new maplibregl.LngLatBounds(); circlePoly([lng, lat], 1000, 16).geometry.coordinates[0].forEach(c => b.extend(c)); map.fitBounds(b, { padding: 30, duration: 600, maxZoom: 15.5 }); }
+  const cnt = { r500: near.filter(f => f.properties.d <= 500).length, r1000: near.length };
+  $('focus-info').innerHTML = `<b>반경 1km</b> 시설 ${cnt.r1000}개 · 500m 안 ${cnt.r500}개 <button class="mini" id="focus-clear">전체 보기</button>`;
+  $('focus-clear').onclick = clearFocus;
+  scheduleLabels();
+}
+function clearFocus() {
+  focus = null;
+  if (!infraLoaded) return;
+  map.getSource('infra-near').setData({ type: 'FeatureCollection', features: [] });
+  map.getSource('focus-ring').setData({ type: 'FeatureCollection', features: [] });
+  Object.keys(INFRA_STYLE).forEach(k => { map.setLayoutProperty('infra-' + k, 'visibility', infraOn[k] ? 'visible' : 'none'); map.setLayoutProperty('infra-near-' + k, 'visibility', 'none'); });
+  $('focus-info').innerHTML = '';
+  scheduleLabels();
+}
 function initInfra() {
   fetch('data/infra.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).then(j => {
     if (!j || !j.points?.length) return;
     const fc = { type: 'FeatureCollection', features: j.points.map(p => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [p.lng, p.lat] }, properties: { layer: p.layer, name: p.name, kind: p.kind || '' } })) };
+    infraFC = fc;
     const add = () => {
       map.addSource('infra', { type: 'geojson', data: fc });
+      map.addSource('infra-near', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+      map.addSource('focus-ring', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+      map.addLayer({ id: 'focus-fill', type: 'fill', source: 'focus-ring', paint: { 'fill-color': '#0064e0', 'fill-opacity': ['case', ['==', ['get', 'r'], 500], 0.10, 0.05] } });
+      map.addLayer({ id: 'focus-line', type: 'line', source: 'focus-ring', paint: { 'line-color': '#0064e0', 'line-width': ['case', ['==', ['get', 'r'], 500], 1.5, 1], 'line-dasharray': [3, 2], 'line-opacity': 0.7 } });
       Object.entries(INFRA_STYLE).forEach(([k, [label, col]]) => {
-        map.addLayer({ id: 'infra-' + k, type: 'circle', source: 'infra', filter: ['==', ['get', 'layer'], k],
-          layout: { visibility: infraOn[k] ? 'visible' : 'none' },
-          paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 2, 14, k === 'transit' ? 7 : 5], 'circle-color': col, 'circle-opacity': 0.85, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5 } });
-        map.on('mouseenter', 'infra-' + k, () => map.getCanvas().style.cursor = 'pointer');
-        map.on('mouseleave', 'infra-' + k, () => { map.getCanvas().style.cursor = ''; tip.style.display = 'none'; });
-        map.on('mousemove', 'infra-' + k, e => { const p = e.features[0].properties; tip.style.display = 'block'; tip.textContent = `${label} · ${p.name}`; tip.style.left = e.originalEvent.clientX + 14 + 'px'; tip.style.top = e.originalEvent.clientY + 14 + 'px'; });
+        const paint = { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 2, 14, k === 'transit' ? 7 : 5], 'circle-color': col, 'circle-opacity': 0.85, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5 };
+        map.addLayer({ id: 'infra-' + k, type: 'circle', source: 'infra', filter: ['==', ['get', 'layer'], k], layout: { visibility: infraOn[k] ? 'visible' : 'none' }, paint });
+        map.addLayer({ id: 'infra-near-' + k, type: 'circle', source: 'infra-near', filter: ['==', ['get', 'layer'], k], layout: { visibility: 'none' }, paint: { ...paint, 'circle-radius': ['interpolate', ['linear'], ['zoom'], 12, 4, 15, k === 'transit' ? 9 : 7] } });
+        ['infra-' + k, 'infra-near-' + k].forEach(id => {
+          map.on('mouseenter', id, () => map.getCanvas().style.cursor = 'pointer');
+          map.on('mouseleave', id, () => { map.getCanvas().style.cursor = ''; tip.style.display = 'none'; });
+          map.on('mousemove', id, e => { const p = e.features[0].properties; tip.style.display = 'block'; tip.textContent = `${label} · ${p.name}${p.d ? ' · ' + p.d + 'm' : ''}`; tip.style.left = e.originalEvent.clientX + 14 + 'px'; tip.style.top = e.originalEvent.clientY + 14 + 'px'; });
+        });
       });
-      infraLoaded = true; map.once('idle', scheduleLabels);
+      infraLoaded = true;
+      if (focus) focusInfra(focus.lng, focus.lat, false); else map.once('idle', scheduleLabels);
     };
     map.loaded() ? add() : map.on('load', add);
     $('infra-chips').innerHTML = Object.entries(INFRA_STYLE).map(([k, [label, col]]) => `<button class="chip" data-k="${k}" aria-pressed="${infraOn[k]}"><i style="background:${col}"></i>${label}</button>`).join('') + `<span class="chip-note">${j.points.length.toLocaleString()}개 시설 · OSM</span>`;
-    $('infra-chips').querySelectorAll('.chip').forEach(b => b.onclick = () => { const k = b.dataset.k; infraOn[k] = !infraOn[k]; b.setAttribute('aria-pressed', infraOn[k]); if (infraLoaded) map.setLayoutProperty('infra-' + k, 'visibility', infraOn[k] ? 'visible' : 'none'); setTimeout(scheduleLabels, 150); });
+    $('infra-chips').querySelectorAll('.chip').forEach(b => b.onclick = () => { const k = b.dataset.k; infraOn[k] = !infraOn[k]; b.setAttribute('aria-pressed', infraOn[k]); if (infraLoaded) map.setLayoutProperty((focus ? 'infra-near-' : 'infra-') + k, 'visibility', infraOn[k] ? 'visible' : 'none'); setTimeout(scheduleLabels, 150); });
   }).catch(() => {});
 }
 function infraLine(inf) {
@@ -149,16 +182,15 @@ function placeLabels() {
   });
   // 2) 시설 라벨: 보이는 레이어의 화면 안 점 중 우선순위대로, 화면이 붐비지 않을 만큼만
   labelLayer.innerHTML = ''; labelSvg.innerHTML = '';
-  if (!infraLoaded || map.getZoom() < 12.5) return;
-  const vis = Object.keys(INFRA_STYLE).filter(k => infraOn[k] && map.getLayer('infra-' + k));
+  if (!infraLoaded || !focus || map.getZoom() < 12) return;
+  const vis = Object.keys(INFRA_STYLE).filter(k => infraOn[k] && map.getLayer('infra-near-' + k));
   if (!vis.length) return;
   let feats = [];
-  try { feats = map.queryRenderedFeatures({ layers: vis.map(k => 'infra-' + k) }); } catch (e) { return; }
+  try { feats = map.queryRenderedFeatures({ layers: vis.map(k => 'infra-near-' + k) }); } catch (e) { return; }
   const seen = new Set();
-  const pts = feats.map(f => ({ layer: f.properties.layer, name: f.properties.name, kind: f.properties.kind, lngLat: f.geometry.coordinates })).filter(f => { const k = f.layer + f.name; if (seen.has(k)) return false; seen.add(k); return true; });
-  const z = map.getZoom();
-  const maxN = Math.max(4, Math.min(W < 600 ? 8 : 22, Math.round((W * H) / (W < 600 ? 28000 : 16000) * Math.min(1, (z - 12) / 3))));
-  pts.sort((a, b) => (LAYER_PRI[a.layer] - LAYER_PRI[b.layer]) || a.name.length - b.name.length);
+  const pts = feats.map(f => ({ layer: f.properties.layer, name: f.properties.name, d: f.properties.d || 0, lngLat: f.geometry.coordinates })).filter(f => { const k = f.layer + f.name; if (seen.has(k)) return false; seen.add(k); return true; });
+  const maxN = W < 600 ? 14 : 40;   // 반경 안에서 겹치지 않는 만큼만
+  pts.sort((a, b) => ((a.d <= 500) === (b.d <= 500) ? (LAYER_PRI[a.layer] - LAYER_PRI[b.layer]) || a.d - b.d : a.d <= 500 ? -1 : 1));
   const sfs = Math.round(fs * 0.7); // 아파트명의 0.7배
   let n = 0;
   for (const pt of pts) {
@@ -198,6 +230,7 @@ function select(id, fly) {
   Object.entries(markers).forEach(([k, m]) => m.getElement().classList.toggle('selected', k === id));
   renderList();
   if (fly) map.flyTo({ center: [c.lng, c.lat], zoom: Math.max(map.getZoom(), 13.5), padding: { top: 60, bottom: 40 } });
+  focusInfra(c.lng, c.lat, true);
   renderDetail(c);
   if (fly) requestAnimationFrame(() => $('detail-section').scrollIntoView({ behavior: 'smooth', block: 'start' }));
 }
@@ -334,7 +367,7 @@ function renderDiscMarkers() {
   scheduleLabels();
 }
 function showDisc(d) {
-  map.flyTo({ center: [d.lng, d.lat], zoom: Math.max(map.getZoom(), 14) });
+  focusInfra(d.lng, d.lat, true);
   $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''}${d.infra?.nearest?.transit ? ` · 🚇 ${esc(d.infra.nearest.transit.name)} ${d.infra.nearest.transit.d}m` : ''}${d.infra?.nearest?.education ? ` · 🏫 ${d.infra.nearest.education.d}m` : ''} <button class="mini" id="disc-add">후보에 추가 요청</button>`;
   $('disc-add').onclick = () => { navigator.clipboard?.writeText(`${d.name} ${d.area}㎡ (${d.region} ${d.umd}) 후보 추가`); $('disc-add').textContent = '복사됨 · 채팅에 붙여넣기'; };
   const row = [...document.querySelectorAll('.disc-row')].find(r => r.dataset.name === d.name && r.dataset.area == d.area);
