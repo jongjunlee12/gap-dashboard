@@ -157,3 +157,13 @@ body.has-zoom{overflow:hidden}
 .fav-table td.nm small{display:block;color:#8a969d;font-size:12px}.fav-table td.best{background:#e6f0fd;color:#0064e0;font-weight:700;border-radius:6px}.fav-table td small{color:#8a969d;font-size:12px;margin-left:3px}
 .fav-x{border:0;background:transparent;color:#8a969d;cursor:pointer;font-size:14px}.fav-x:hover{color:#c8322f}
 @media(max-width:900px){.fav-panel{left:8px;right:8px;bottom:44px;font-size:13.5px}.fav-head{padding:6px 10px}.fav-table-wrap{max-height:30vh}body:not(.map-full) .fav-panel.open .fav-table-wrap{max-height:22vh}}
+
+/* PC: 지도 전체화면 (⤢ 크게 / ✕ 닫기 / ESC) */
+@media(min-width:901px){
+  body.map-full{overflow:hidden}
+  body.map-full .col-map{position:fixed;inset:0;top:0;height:100vh;height:100dvh;width:100%;z-index:50;background:#fff}
+  body.map-full .col-map .map-panel{border-radius:0;height:100%}
+  body.map-full #map{height:100%}
+  body.map-full .map-legend{bottom:20px}
+  body.map-full .focus-info{bottom:56px}
+}

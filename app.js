@@ -75,9 +75,10 @@ function initMap() {
   initInfra();
   $('fit').onclick = () => { clearFocus(); fitAll(); };
   // 휴대폰: 지도를 탭하면 전체 화면 ↔ 원위치
-  const toggleFull = () => { if (innerWidth > 900) return; document.body.classList.toggle('map-full'); const on = document.body.classList.contains('map-full'); $('full').textContent = on ? '✕ 닫기' : '⤢ 크게'; setTimeout(() => { map.resize(); scheduleLabels(); }, 50); };
+  const toggleFull = () => { document.body.classList.toggle('map-full'); const on = document.body.classList.contains('map-full'); $('full').textContent = on ? '✕ 닫기' : '⤢ 크게'; setTimeout(() => { map.resize(); scheduleLabels(); }, 50); };
   map.on('click', e => { if (innerWidth > 900) return; if (e.originalEvent.target.closest('.marker, button, .chip, .focus-info')) return; toggleFull(); });
   $('full').onclick = e => { e.stopPropagation(); toggleFull(); };
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('map-full')) toggleFull(); });
   $('view').onclick = () => { const on = $('view').getAttribute('aria-pressed') !== 'true'; $('view').setAttribute('aria-pressed', String(on)); $('view').textContent = on ? '3D 켜짐' : '2D 보기'; map.easeTo({ pitch: on ? 50 : 0, bearing: on ? -15 : 0 }); };
 }
 function fitAll() {
