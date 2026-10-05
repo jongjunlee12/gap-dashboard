@@ -56,14 +56,14 @@ def pt_rec(r):
     return {**base, "deposit": round(r[6] / 10000, 3), "monthly": 0, "contract_type": None, "pre_deposit": None, "is_new": False}
 
 def jeonse_new(deposits):
-    """전세 중앙값(신규 추정): 갱신 계약(2년 거주 후 5% 상한으로 낮게 형성)을 빼고 계산.
-    계약 구분이 없을 때는 최근 계약들의 상위 20% 기준값(p80)의 85% 미만을 갱신으로 보고 제외."""
+    """전세 기준가 = 최근 계약 중 가장 높은 보증금.
+    갱신 계약(2년 거주 후 상승 폭 제한)이 낮게 섞여 있어 중앙값은 실제 신규 전세보다 낮게 나오므로,
+    시장에서 새로 체결되는 전세가에 가장 가까운 '최고가'를 쓴다. (중앙값은 jeonse_all_median 으로 함께 제공)
+    반환: (기준가, 최고가와 같은 달에 체결된 건수가 아닌 전체 표본 수, 전체 중앙값)"""
     xs = sorted(x for x in deposits if x)
-    if len(xs) < 3:
-        return median(xs), len(xs), median(xs)
-    p80 = xs[int(0.8 * (len(xs) - 1))]
-    keep = [x for x in xs if x >= 0.85 * p80]
-    return median(keep), len(keep), median(xs)
+    if not xs:
+        return None, 0, None
+    return xs[-1], len(xs), median(xs)
 
 
 def norm(s):

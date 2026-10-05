@@ -63,4 +63,4 @@ scripts/build.py                  지표 계산 → dashboard.json
 ## PropX 실거래 (data/raw/propx_trades.json.gz)
 - PropX 단지상세의 실거래(매매·전세) 36개월치. 브라우저에서 수집한 JSON을 gzip 해서 둔 것.
 - 갱신하려면 새 `propx_trades.json`을 받아 `gzip -c propx_trades.json > data/raw/propx_trades.json.gz` 후 push.
-- 전세 중앙값은 갱신 계약(낮게 형성) 추정 제외: 최근 계약 p80의 85% 미만 제외. `jeonse_all_median`이 갱신 포함 값.
+- 전세 기준가는 최근 계약 중 최고가(갱신 계약이 낮게 섞이므로). `jeonse_all_median`이 갱신 포함 값.
