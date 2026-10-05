@@ -5,7 +5,7 @@ const pct = x => x == null ? '—' : (x > 0 ? '+' : '') + fmt(x, 1) + '%';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const TILE = 'https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=cb1_2jst_1_f20036d2498b9af9e4827f69';
 
-let D, map, markers = {}, tip, discMarkers = [];
+let D, map, markers = {}, tip, discMarkers = [], mapReady = false;
 const state = { group: 'all', onlyBudget: false, onlyNew: false, sel: null, area: null };
 
 function budgetState(u) {
@@ -58,7 +58,7 @@ function initMap() {
     center: [127.12, 37.46], zoom: 9.6, pitch: 0, antialias: true,
   });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
-  map.on('load', () => { $('map-status').textContent = ''; if (!focus) fitAll(); setTimeout(() => map.resize(), 300); });
+  map.on('load', () => { mapReady = true; $('map-status').textContent = ''; if (!focus) fitAll(); setTimeout(() => map.resize(), 300); });
   map.on('moveend', scheduleLabels); map.on('zoomend', scheduleLabels); map.on('resize', scheduleLabels); map.on('idle', scheduleLabels); map.on('movestart', () => { if (labelLayer) { labelLayer.innerHTML = ''; labelSvg.innerHTML = ''; } });
   window.addEventListener('resize', () => { map.resize(); scheduleLabels(); });
   window.addEventListener('orientationchange', () => setTimeout(() => { map.resize(); scheduleLabels(); }, 400));
@@ -157,7 +157,7 @@ function initInfra() {
       infraLoaded = true;
       if (focus) focusInfra(focus.lng, focus.lat, true); else map.once('idle', scheduleLabels);
     };
-    map.loaded() ? add() : map.on('load', add);
+    mapReady ? add() : map.once('load', add);   // map.loaded()는 타일 로딩 중이면 false라 load 이벤트를 놓칠 수 있음
     $('infra-chips').innerHTML = Object.entries(INFRA_STYLE).map(([k, [label, col]]) => `<button class="chip" data-k="${k}" aria-pressed="${infraOn[k]}"><i style="background:${col}"></i>${label}</button>`).join('') + `<span class="chip-note">${j.points.length.toLocaleString()}개 시설 · OSM</span>`;
     $('infra-chips').querySelectorAll('.chip').forEach(b => b.onclick = () => { const k = b.dataset.k; infraOn[k] = !infraOn[k]; b.setAttribute('aria-pressed', infraOn[k]); if (infraLoaded) map.setLayoutProperty((focus ? 'infra-near-' : 'infra-') + k, 'visibility', infraOn[k] ? 'visible' : 'none'); setTimeout(scheduleLabels, 150); });
   }).catch(() => {});
