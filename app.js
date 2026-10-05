@@ -121,7 +121,7 @@ function renderDetail(c) {
 function quarterChart(u) {
   const qs = (u.quarters || []).filter(q => q.sale_median || q.chg != null);
   if (!qs.length) return '<p class="muted" style="font-size:14px">분기 자료가 없습니다.</p>';
-  const W = 560, H = 190, pl = 40, pr = 10, pt = 14, pb = 40, iw = W - pl - pr, ih = H - pt - pb;
+  const W = 560, H = 210, pl = 40, pr = 10, pt = 14, pb = 40, iw = W - pl - pr, ih = H - pt - pb;
   const vals = qs.flatMap(q => [q.sale_median, q.jeonse_median]).filter(Boolean);
   const hasVals = vals.length > 0;
   const lo = hasVals ? Math.min(...vals) * 0.85 : 0, hi = hasVals ? Math.max(...vals) * 1.05 : 10;
@@ -141,7 +141,7 @@ function quarterChart(u) {
 function tradeChart(u, asking) {
   const ts = u.trades || [];
   if (!ts.length) return `<p class="muted" style="font-size:14px">${u.source === 'seed' ? '국토부 API가 연결되면 개별 거래가 표시됩니다.' : '해당 평형 거래가 없습니다.'}${u.sale_min ? `<br>보고서 범위 ${fmt(u.sale_min, 1)}~${fmt(u.sale_max, 1)}억 · ${u.sale_n}건` : ''}</p>`;
-  const W = 560, H = 190, pl = 40, pr = 10, pt = 14, pb = 26, iw = W - pl - pr, ih = H - pt - pb;
+  const W = 560, H = 210, pl = 40, pr = 10, pt = 14, pb = 26, iw = W - pl - pr, ih = H - pt - pb;
   const t0 = Date.parse(ts[0].date), t1 = Math.max(Date.parse(ts[ts.length - 1].date), t0 + 86400e3 * 30);
   const prices = ts.map(t => t.price).concat(asking ? [asking.min, asking.max] : []).concat((u.listings || []).map(l => l.price).filter(Boolean));
   const lo = Math.min(...prices) * 0.96, hi = Math.max(...prices) * 1.04;
