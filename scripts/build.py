@@ -218,6 +218,36 @@ for c in cfg["complexes"]:
         "units": out_units,
     })
 
+# ---------- 좌표 사전 (PropX GIS) ----------
+GEO = []
+gp = ROOT / "data" / "geo" / "propx_gis.json"
+if gp.exists():
+    GEO = json.loads(gp.read_text(encoding="utf-8"))["rows"]
+def _gn(s):
+    s = re.sub(r"\(.*?\)", "", str(s or ""))          # 괄호 꼬리 제거
+    return norm(s)
+GEO_IDX = {}
+for g in GEO:
+    GEO_IDX.setdefault(_gn(g["name"]), []).append(g)
+def geo_lookup(name, danji=None, bbox=None):
+    """단지명으로 좌표 찾기: 정규화 일치 → 포함 → 세대수 근접 순"""
+    n = _gn(name)
+    cands = GEO_IDX.get(n) or [g for k, gs in GEO_IDX.items() if (n and (n in k or k in n) and min(len(n), len(k)) >= 4) for g in gs]
+    if bbox:
+        cands = [g for g in cands if bbox[0] <= g["lng"] <= bbox[2] and bbox[1] <= g["lat"] <= bbox[3]] or cands
+    if not cands:
+        return None
+    if danji:
+        cands = sorted(cands, key=lambda g: abs((g.get("qty") or 0) - danji))
+    return cands[0]
+SGG_BBOX = {"남양주시": (127.08, 37.55, 127.36, 37.80), "광주시": (127.15, 37.28, 127.47, 37.52),
+            "수원": (126.92, 37.22, 127.11, 37.34), "성남": (127.06, 37.33, 127.21, 37.48)}
+def sgg_bbox(sgg):
+    for k, b in SGG_BBOX.items():
+        if k in str(sgg or ""):
+            return b
+    return None
+
 # ---------- 자동 발굴: 조건에 맞는 단지를 실거래 전체에서 찾기 ----------
 discovered = []
 disc = cfg.get("discovery", {})
@@ -301,6 +331,13 @@ if disc.get("enabled") and propx_rows:
             "mm_chg": r.get("mm_chg"), "low_floor_share": None,
         })
     discovered.sort(key=lambda x: (x["required"], -(x.get("jeonse_ratio") or 0)))
+
+for d in discovered:
+    g = geo_lookup(d["name"], d.get("danji"), sgg_bbox(d.get("region")))
+    if g:
+        d["lat"], d["lng"], d["geo_name"] = g["lat"], g["lng"], g["name"]
+        if not d.get("subway") and g.get("subway"):
+            d["subway"] = g["subway"]
 
 dash = {
     "generated_at": date.today().isoformat(),

@@ -79,3 +79,9 @@ dialog{border:0;border-radius:32px;max-width:760px;width:92%;padding:40px;line-h
 
 .disc-filters{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:14px;font-size:15px}.disc-filters label{display:flex;gap:6px;align-items:center}.disc-filters select{width:auto;min-height:40px;padding:6px 10px;font-size:15px}
 .disc td,.disc th{white-space:nowrap}.panel .disc-wrap{overflow:auto}
+
+.marker.disc{width:22px;height:22px}.marker.disc i{inset:5px;border-width:2px;background:#9cbdf2}.marker.disc.under i{background:#8fd6b8}.marker.disc span{display:none;left:24px;top:0;font-size:12px}.marker.disc:hover span{display:block}.marker.disc:hover i{inset:2px}
+.disc-row.hl td{background:#e5efff}
+button.mini{min-height:30px;padding:3px 10px;font-size:13px;margin-left:8px}
+#map-status b{font-weight:700}
+.map-legend .disc-key{background:#9cbdf2;width:7px;height:7px}

@@ -69,7 +69,8 @@
       "region": "41360",
       "umd": "다산동",
       "aliases": [
-        "다산롯데캐슬"
+        "다산롯데캐슬",
+        "다산자연앤롯데캐슬"
       ],
       "areas": [
         84
@@ -77,14 +78,15 @@
       "households": 1186,
       "built": 2017,
       "station": "다산역 6분 · 8호선 잠실 직결",
-      "lat": 37.6228,
-      "lng": 127.1552,
-      "approx": true,
+      "lat": 37.6272,
+      "lng": 127.15407,
+      "approx": false,
       "group": "now",
       "tags": [
         "모멘텀 1위",
         "예산 경계"
-      ]
+      ],
+      "gis_name": "다산자연앤롯데캐슬(B-2)"
     },
     {
       "id": "dasan-epyeon",
@@ -101,13 +103,14 @@
       "households": 1615,
       "built": 2017,
       "station": "다산역 7분",
-      "lat": 37.6198,
-      "lng": 127.1578,
-      "approx": true,
+      "lat": 37.62233,
+      "lng": 127.15571,
+      "approx": false,
       "group": "now",
       "tags": [
         "예산 초과"
-      ]
+      ],
+      "gis_name": "e편한세상다산(B-4)"
     },
     {
       "id": "dasan-river2",
@@ -124,13 +127,14 @@
       "households": 584,
       "built": 2005,
       "station": "도농역 생활권",
-      "lat": 37.6118,
-      "lng": 127.1548,
-      "approx": true,
+      "lat": 37.60736,
+      "lng": 127.15044,
+      "approx": false,
       "group": "now",
       "tags": [
         "예산 여유"
-      ]
+      ],
+      "gis_name": "다산리버펠리체2단지"
     },
     {
       "id": "dasan-natural3",
@@ -149,15 +153,16 @@
       "households": 1394,
       "built": 2018,
       "station": "다산역 11분 · 새봄초 6분",
-      "lat": 37.6288,
-      "lng": 127.1612,
-      "approx": true,
+      "lat": 37.61935,
+      "lng": 127.15622,
+      "approx": false,
       "group": "now",
       "tags": [
         "문의 매물",
         "분양전환 2026.6",
         "저층 확인"
-      ]
+      ],
+      "gis_name": "다산자연앤e편한세상3차"
     },
     {
       "id": "dasan-xi",
@@ -174,13 +179,14 @@
       "households": 1685,
       "built": 2018,
       "station": "다산 생활권",
-      "lat": 37.6272,
-      "lng": 127.1588,
-      "approx": true,
+      "lat": 37.62713,
+      "lng": 127.1511,
+      "approx": false,
       "group": "now",
       "tags": [
         "3차 비교 기준"
-      ]
+      ],
+      "gis_name": "다산자이아이비플레이스"
     },
     {
       "id": "gwangju-thesharp",
@@ -197,13 +203,14 @@
       "households": 1396,
       "built": 2022,
       "station": "오포 · 신축",
-      "lat": 37.3828,
-      "lng": 127.2068,
-      "approx": true,
+      "lat": 37.37644,
+      "lng": 127.22896,
+      "approx": false,
       "group": "now",
       "tags": [
         "전세 미확보"
-      ]
+      ],
+      "gis_name": "오포더샵센트럴포레"
     },
     {
       "id": "gwangju-ipark",
@@ -211,7 +218,8 @@
       "region": "41610",
       "umd": "태전동",
       "aliases": [
-        "태전아이파크"
+        "태전아이파크",
+        "광주태전아이파크"
       ],
       "areas": [
         84
@@ -219,13 +227,14 @@
       "households": 640,
       "built": 2017,
       "station": "태전지구",
-      "lat": 37.4218,
-      "lng": 127.2432,
-      "approx": true,
+      "lat": 37.38365,
+      "lng": 127.22947,
+      "approx": false,
       "group": "now",
       "tags": [
         "예산 여유"
-      ]
+      ],
+      "gis_name": "광주태전아이파크"
     },
     {
       "id": "gwangju-hillstate",
@@ -233,9 +242,9 @@
       "region": "41610",
       "umd": "태전동",
       "aliases": [
-        "힐스테이트태전",
-        "힐스테이트태전C7",
-        "태전힐스테이트"
+        "힐스테이트태전6지구",
+        "힐스테이트태전(C7)",
+        "힐스테이트태전 C7"
       ],
       "areas": [
         59
@@ -243,13 +252,14 @@
       "households": 556,
       "built": 2017,
       "station": "태전지구 · C7",
-      "lat": 37.4246,
-      "lng": 127.2462,
-      "approx": true,
+      "lat": 37.38051,
+      "lng": 127.22896,
+      "approx": false,
       "group": "now",
       "tags": [
         "전세 미확보"
-      ]
+      ],
+      "gis_name": "힐스테이트태전6지구(C7)"
     },
     {
       "id": "suwon-skyview",
@@ -267,14 +277,15 @@
       "households": 3498,
       "built": 2013,
       "station": "장안구 정자동 · 대단지",
-      "lat": 37.3008,
-      "lng": 127.0032,
-      "approx": true,
+      "lat": 37.30714,
+      "lng": 126.98499,
+      "approx": false,
       "group": "after_1231",
       "tags": [
         "12.31 해제 시",
         "59㎡ 현실적 선택지"
-      ]
+      ],
+      "gis_name": "수원SK스카이뷰"
     },
     {
       "id": "suwon-hwaseo",
@@ -291,14 +302,15 @@
       "households": 1744,
       "built": 2008,
       "station": "화서역 17분",
-      "lat": 37.2862,
-      "lng": 126.9992,
-      "approx": true,
+      "lat": 37.28251,
+      "lng": 127.0,
+      "approx": false,
       "group": "after_1231",
       "tags": [
         "12.31 해제 시",
         "전세 표본 1건"
-      ]
+      ],
+      "gis_name": "블루밍푸른숲"
     }
   ],
   "discovery": {
