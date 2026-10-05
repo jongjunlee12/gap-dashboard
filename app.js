@@ -91,14 +91,28 @@ function fitAll() {
 
 /* ---------- 주변 인프라 레이어 (OSM) ---------- */
 const INFRA_STYLE = { transit: ['교통', '#172126'], culture: ['문화', '#7a4fd1'], public: ['공공', '#1a9e6c'], education: ['교육', '#d9a21b'] };
-const infraOn = { transit: true, culture: false, public: false, education: innerWidth > 900 };
+const infraOn = { transit: true, culture: false, public: false, education: innerWidth > 900, shop: true };
 let infraLoaded = false, infraFC = null, focus = null;
 function distM(a, b) { const R = 6371000, p1 = a[1] * Math.PI / 180, p2 = b[1] * Math.PI / 180, dp = (b[1] - a[1]) * Math.PI / 180, dl = (b[0] - a[0]) * Math.PI / 180; const x = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); }
 function circlePoly(center, r, n = 64) { const [lng, lat] = center; const kx = 111320 * Math.cos(lat * Math.PI / 180), ky = 110574; const ring = []; for (let i = 0; i <= n; i++) { const t = i / n * 2 * Math.PI; ring.push([lng + r * Math.cos(t) / kx, lat + r * Math.sin(t) / ky]); } return { type: 'Feature', properties: { r }, geometry: { type: 'Polygon', coordinates: [ring] } }; }
 /* 단지를 고르면 반경 500m·1km 안 시설만 보여주고, 라벨도 그 안에서만 */
-function focusInfra(lng, lat, fit) {
-  if (!infraLoaded) { focus = { lng, lat }; return; }
+const SHOP_COL = '#e0571b';
+let focusShops = null;   // 포커스 단지의 shops (build.py 가 붙인 반경 1km 점포 집계)
+function setFocusShops(shops) {
+  focusShops = shops || null;
+  if (!map || !map.getSource('shops-near')) return;
+  const top = (shops && shops.top) || [];
+  map.getSource('shops-near').setData({ type: 'FeatureCollection', features: top.map((t, i) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [t.lng, t.lat] }, properties: { layer: 'shop', name: t.name, d: t.d, sales: t.sales, cat: t.cat, rank: i + 1 } })) });
+  map.setLayoutProperty('shop-near', 'visibility', infraOn.shop && top.length ? 'visible' : 'none');
+}
+function shopsLine(sh) {
+  if (!sh || !sh.n1000) return '';
+  return `<span class="tag" style="border-color:${SHOP_COL};color:${SHOP_COL}">상권 1km 점포 ${sh.n1000.toLocaleString()}개 · 월매출 ${(sh.sales1000 / 10000).toFixed(0)}억</span>`;
+}
+function focusInfra(lng, lat, fit, shops) {
+  if (!infraLoaded) { focus = { lng, lat }; focusShops = shops || null; return; }
   focus = { lng, lat };
+  setFocusShops(shops);
   Object.keys(INFRA_STYLE).forEach(k => { infraOn[k] = true; const b = document.querySelector(`#infra-chips .chip[data-k="${k}"]`); if (b) b.setAttribute('aria-pressed', 'true'); });
   const near = infraFC.features.filter(f => { const d = distM([lng, lat], f.geometry.coordinates); if (d > 1000) return false; f.properties.d = Math.round(d); return true; });
   map.getSource('infra-near').setData({ type: 'FeatureCollection', features: near });
@@ -118,7 +132,7 @@ function focusInfra(lng, lat, fit) {
     catch (e) { map.easeTo({ center: [lng, lat], zoom: Math.min(15.5, map.getZoom() < 13 ? 13.5 : map.getZoom()), duration: 600 }); }
   }
   const cnt = { r500: near.filter(f => f.properties.d <= 500).length, r1000: near.length };
-  $('focus-info').innerHTML = `<b>반경 1km</b> 시설 ${cnt.r1000}개 · 500m 안 ${cnt.r500}개 <button class="mini" id="focus-clear">전체 보기</button>`;
+  const sh = focusShops; $('focus-info').innerHTML = `<b>반경 1km</b> 시설 ${cnt.r1000}개 · 500m 안 ${cnt.r500}개${sh && sh.n1000 ? ` · <span style="color:${SHOP_COL}">점포 ${sh.n1000.toLocaleString()}개 · 월매출 ${(sh.sales1000 / 10000).toFixed(0)}억</span>` : ''} <button class="mini" id="focus-clear">전체 보기</button>`;
   $('focus-clear').onclick = clearFocus;
   scheduleLabels();
 }
@@ -129,6 +143,7 @@ function clearFocus() {
   if (!infraLoaded) return;
   Object.keys(INFRA_STYLE).forEach(k => { infraOn[k] = (k === 'transit') || (k === 'education' && innerWidth > 900); const b = document.querySelector(`#infra-chips .chip[data-k="${k}"]`); if (b) b.setAttribute('aria-pressed', String(infraOn[k])); });
   map.getSource('infra-near').setData({ type: 'FeatureCollection', features: [] });
+  setFocusShops(null);
   map.getSource('focus-ring').setData({ type: 'FeatureCollection', features: [] });
   Object.keys(INFRA_STYLE).forEach(k => { map.setLayoutProperty('infra-' + k, 'visibility', infraOn[k] ? 'visible' : 'none'); map.setLayoutProperty('infra-near-' + k, 'visibility', 'none'); });
   $('focus-info').innerHTML = '';
@@ -142,6 +157,7 @@ function initInfra() {
     const add = () => {
       map.addSource('infra', { type: 'geojson', data: fc });
       map.addSource('infra-near', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+      map.addSource('shops-near', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
       map.addSource('focus-ring', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
       map.addLayer({ id: 'focus-fill', type: 'fill', source: 'focus-ring', paint: { 'fill-color': '#0064e0', 'fill-opacity': ['case', ['==', ['get', 'r'], 500], 0.10, 0.05] } });
       map.addLayer({ id: 'focus-line', type: 'line', source: 'focus-ring', paint: { 'line-color': '#0064e0', 'line-width': ['case', ['==', ['get', 'r'], 500], 1.5, 1], 'line-dasharray': [3, 2], 'line-opacity': 0.7 } });
@@ -155,12 +171,16 @@ function initInfra() {
           map.on('mousemove', id, e => { const p = e.features[0].properties; tip.style.display = 'block'; tip.textContent = `${label} · ${p.name}${p.d ? ' · ' + p.d + 'm' : ''}`; tip.style.left = e.originalEvent.clientX + 14 + 'px'; tip.style.top = e.originalEvent.clientY + 14 + 'px'; });
         });
       });
+      map.addLayer({ id: 'shop-near', type: 'circle', source: 'shops-near', layout: { visibility: 'none' }, paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 12, 4, 15, ['-', 11, ['*', 0.5, ['get', 'rank']]]], 'circle-color': SHOP_COL, 'circle-opacity': 0.9, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5 } });
+      map.on('mouseenter', 'shop-near', () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', 'shop-near', () => { map.getCanvas().style.cursor = ''; tip.style.display = 'none'; });
+      map.on('mousemove', 'shop-near', e => { const p = e.features[0].properties; tip.style.display = 'block'; tip.textContent = `상권 ${p.rank}위 · ${p.name} (${p.cat}) · 월매출 ${(p.sales / 10000).toFixed(1)}억 · ${p.d}m`; tip.style.left = e.originalEvent.clientX + 14 + 'px'; tip.style.top = e.originalEvent.clientY + 14 + 'px'; });
       infraLoaded = true;
-      if (focus) focusInfra(focus.lng, focus.lat, true); else map.once('idle', scheduleLabels);
+      if (focus) focusInfra(focus.lng, focus.lat, true, focusShops); else map.once('idle', scheduleLabels);
     };
     mapReady ? add() : map.once('load', add);   // map.loaded()는 타일 로딩 중이면 false라 load 이벤트를 놓칠 수 있음
-    $('infra-chips').innerHTML = Object.entries(INFRA_STYLE).map(([k, [label, col]]) => `<button class="chip" data-k="${k}" aria-pressed="${infraOn[k]}"><i style="background:${col}"></i>${label}</button>`).join('') + `<span class="chip-note">${j.points.length.toLocaleString()}개 시설 · OSM</span>`;
-    $('infra-chips').querySelectorAll('.chip').forEach(b => b.onclick = () => { const k = b.dataset.k; infraOn[k] = !infraOn[k]; b.setAttribute('aria-pressed', infraOn[k]); if (infraLoaded) map.setLayoutProperty((focus ? 'infra-near-' : 'infra-') + k, 'visibility', infraOn[k] ? 'visible' : 'none'); setTimeout(scheduleLabels, 150); });
+    $('infra-chips').innerHTML = Object.entries(INFRA_STYLE).map(([k, [label, col]]) => `<button class="chip" data-k="${k}" aria-pressed="${infraOn[k]}"><i style="background:${col}"></i>${label}</button>`).join('') + (D.stores ? `<button class="chip" data-k="shop" aria-pressed="${infraOn.shop}" title="단지를 고르면 반경 1km 안 매출 상위 매장"><i style="background:${SHOP_COL}"></i>상권</button>` : '') + `<span class="chip-note">${j.points.length.toLocaleString()}개 시설 · OSM</span>`;
+    $('infra-chips').querySelectorAll('.chip').forEach(b => b.onclick = () => { const k = b.dataset.k; infraOn[k] = !infraOn[k]; b.setAttribute('aria-pressed', infraOn[k]); if (infraLoaded) { if (k === 'shop') setFocusShops(focusShops); else map.setLayoutProperty((focus ? 'infra-near-' : 'infra-') + k, 'visibility', infraOn[k] ? 'visible' : 'none'); } setTimeout(scheduleLabels, 150); });
   }).catch(() => {});
 }
 function infraChart(inf) {
@@ -181,6 +201,11 @@ function infraChart(inf) {
   });
   return svg + '</svg>';
 }
+function shopsCard(sh) {
+  if (!sh || !sh.n1000) return '';
+  const rows = sh.top.map((t, i) => `<tr><td>${i + 1}</td><td><b>${esc(t.name)}</b><small style="color:#8a969d"> ${esc(t.cat)}</small></td><td>${(t.sales / 10000).toFixed(1)}억</td><td>${t.cnt.toLocaleString()}건</td><td>${t.d}m</td></tr>`).join('');
+  return `<div class="card"><h4>주변 상권 <span class="badge gray">오픈업 · 최근 12개월 월평균</span></h4><p class="sub">500m 안 점포 ${sh.n500.toLocaleString()}개 · 월매출 ${(sh.sales500 / 10000).toFixed(0)}억 / 1km 안 ${sh.n1000.toLocaleString()}개 · ${(sh.sales1000 / 10000).toFixed(0)}억 · 주유소 제외 매출 상위</p><table class="mini-table"><tr><th></th><th>매장</th><th>월매출</th><th>월 거래</th><th>거리</th></tr>${rows}</table></div>`;
+}
 function infraLine(inf) {
   if (!inf) return '';
   const r = inf.r1000 || {}, n = inf.nearest || {};
@@ -196,11 +221,11 @@ try { favs = JSON.parse(localStorage.getItem('gap-favs') || '[]'); } catch (e) {
 function favKey(x) { return `${x.name}|${x.area}`; }
 function favRecFromComplex(c, u) {
   const inf = c.infra || {};
-  return { key: favKey({ name: c.name, area: u.area }), kind: 'c', id: c.id, name: c.name, area: u.area, region: c.region_label, umd: c.umd, sale: u.sale_median, jeonse: u.jeonse_median, ratio: u.jeonse_ratio, required: u.required, chg: u.change_1y, sedae: c.households, built: c.built, lng: c.lng, lat: c.lat, station: inf.nearest?.transit || null, r1000: Object.values(inf.r1000 || {}).reduce((a, b) => a + b, 0), r500: Object.values(inf.r500 || {}).reduce((a, b) => a + b, 0) };
+  return { key: favKey({ name: c.name, area: u.area }), kind: 'c', id: c.id, name: c.name, area: u.area, region: c.region_label, umd: c.umd, sale: u.sale_median, jeonse: u.jeonse_median, ratio: u.jeonse_ratio, required: u.required, chg: u.change_1y, sedae: c.households, built: c.built, lng: c.lng, lat: c.lat, station: inf.nearest?.transit || null, r1000: Object.values(inf.r1000 || {}).reduce((a, b) => a + b, 0), r500: Object.values(inf.r500 || {}).reduce((a, b) => a + b, 0), shops: c.shops?.n1000 || null, shopSales: c.shops?.sales1000 || null };
 }
 function favRecFromDisc(d) {
   const inf = d.infra || {};
-  return { key: favKey(d), kind: 'd', name: d.name, area: d.area, region: d.region, umd: d.umd, sale: d.sale_median, jeonse: d.jeonse_median, ratio: d.jeonse_ratio, required: d.required, chg: d.mm_chg, sedae: d.sedae, built: d.built, lng: d.lng, lat: d.lat, station: inf.nearest?.transit || (d.subway ? { name: d.subway, d: null } : null), r1000: Object.values(inf.r1000 || {}).reduce((a, b) => a + b, 0), r500: Object.values(inf.r500 || {}).reduce((a, b) => a + b, 0) };
+  return { key: favKey(d), kind: 'd', name: d.name, area: d.area, region: d.region, umd: d.umd, sale: d.sale_median, jeonse: d.jeonse_median, ratio: d.jeonse_ratio, required: d.required, chg: d.mm_chg, sedae: d.sedae, built: d.built, lng: d.lng, lat: d.lat, station: inf.nearest?.transit || (d.subway ? { name: d.subway, d: null } : null), r1000: Object.values(inf.r1000 || {}).reduce((a, b) => a + b, 0), r500: Object.values(inf.r500 || {}).reduce((a, b) => a + b, 0), shops: d.shops?.n1000 || null, shopSales: d.shops?.sales1000 || null };
 }
 function isFav(key) { return favs.some(f => f.key === key); }
 function toggleFav(rec) {
@@ -221,11 +246,11 @@ function renderFavs() {
   const box = $('fav-panel'); if (!box) return;
   if (!favs.length) { box.innerHTML = ''; box.classList.remove('open'); return; }
   const best = k => { const vals = favs.map(f => f[k]).filter(v => v != null); if (!vals.length) return null; return k === 'required' ? Math.min(...vals) : Math.max(...vals); };
-  const bReq = best('required'), bRatio = best('ratio'), bChg = best('chg'), bInf = best('r1000');
+  const bReq = best('required'), bRatio = best('ratio'), bChg = best('chg'), bInf = best('r1000'), bShop = best('shopSales');
   const hi = (v, b) => v != null && v === b ? ' class="best"' : '';
   box.innerHTML = `<div class="fav-head"><b>★ 즐겨찾기 비교</b><span class="muted-s">${favs.length}/${FAV_MAX}</span><span class="grow"></span><button class="mini" id="fav-fit">지도에 맞추기</button><button class="mini" id="fav-toggle">${box.classList.contains('open') ? '접기' : '펼치기'}</button></div>
-  <div class="fav-table-wrap"><table class="fav-table"><tr><th>단지</th><th>매매</th><th>전세</th><th>전세가율</th><th>필요자금</th><th>1년</th><th>세대·연식</th><th>역</th><th>시설 1km</th><th></th></tr>
-  ${favs.map(f => `<tr data-key="${esc(f.key)}"><td class="nm"><b>${esc(f.name)}</b> ${f.area}㎡<small>${esc(f.region)} ${esc(f.umd)}</small></td><td>${fmt(f.sale)}억</td><td>${fmt(f.jeonse)}억</td><td${hi(f.ratio, bRatio)}>${f.ratio != null ? fmt(f.ratio, 1) + '%' : '—'}</td><td${hi(f.required, bReq)}><b>${fmt(f.required)}억</b></td><td${hi(f.chg, bChg)}>${f.chg != null ? pct(f.chg) : '—'}</td><td>${f.sedae || '—'}·${f.built || '—'}</td><td>${f.station ? `${esc(f.station.name)}${f.station.d != null ? ' ' + f.station.d + 'm' : ''}` : '—'}</td><td${hi(f.r1000, bInf)}>${f.r1000}<small>(500m ${f.r500})</small></td><td><button class="fav-x" data-key="${esc(f.key)}" title="빼기">✕</button></td></tr>`).join('')}</table></div>
+  <div class="fav-table-wrap"><table class="fav-table"><tr><th>단지</th><th>매매</th><th>전세</th><th>전세가율</th><th>필요자금</th><th>1년</th><th>세대·연식</th><th>역</th><th>시설 1km</th><th>상권 1km</th><th></th></tr>
+  ${favs.map(f => `<tr data-key="${esc(f.key)}"><td class="nm"><b>${esc(f.name)}</b> ${f.area}㎡<small>${esc(f.region)} ${esc(f.umd)}</small></td><td>${fmt(f.sale)}억</td><td>${fmt(f.jeonse)}억</td><td${hi(f.ratio, bRatio)}>${f.ratio != null ? fmt(f.ratio, 1) + '%' : '—'}</td><td${hi(f.required, bReq)}><b>${fmt(f.required)}억</b></td><td${hi(f.chg, bChg)}>${f.chg != null ? pct(f.chg) : '—'}</td><td>${f.sedae || '—'}·${f.built || '—'}</td><td>${f.station ? `${esc(f.station.name)}${f.station.d != null ? ' ' + f.station.d + 'm' : ''}` : '—'}</td><td${hi(f.r1000, bInf)}>${f.r1000}<small>(500m ${f.r500})</small></td><td${hi(f.shopSales, bShop)}>${f.shops ? `${f.shops.toLocaleString()}개<small>${(f.shopSales / 10000).toFixed(0)}억/월</small>` : '—'}</td><td><button class="fav-x" data-key="${esc(f.key)}" title="빼기">✕</button></td></tr>`).join('')}</table></div>
   <p class="fav-note">파란 칸 = 다섯 중 가장 좋은 값 · 행을 누르면 지도에서 이동</p>`;
   $('fav-fit').onclick = e => { e.stopPropagation(); clearFocus(); const b = new maplibregl.LngLatBounds(); favs.forEach(f => b.extend([f.lng, f.lat])); map.fitBounds(b, { padding: 80, maxZoom: 14, duration: 700 }); };
   $('fav-toggle').onclick = e => { e.stopPropagation(); box.classList.toggle('open'); $('fav-toggle').textContent = box.classList.contains('open') ? '접기' : '펼치기'; scheduleLabels(); };
@@ -308,13 +333,13 @@ function placeLabels() {
   labelLayer.innerHTML = ''; labelSvg.innerHTML = '';
   if (!infraLoaded || !focus || map.getZoom() < 12) return;
   const vis = Object.keys(INFRA_STYLE).filter(k => infraOn[k] && map.getLayer('infra-near-' + k));
-  if (!vis.length) return;
+  if (!vis.length && !(infraOn.shop && focusShops)) return;
   let feats = [];
-  try { feats = map.queryRenderedFeatures({ layers: vis.map(k => 'infra-near-' + k) }); } catch (e) { return; }
+  try { feats = map.queryRenderedFeatures({ layers: vis.map(k => 'infra-near-' + k).concat(infraOn.shop && map.getLayer('shop-near') ? ['shop-near'] : []) }); } catch (e) { return; }
   const seen = new Set();
-  const pts = feats.map(f => ({ layer: f.properties.layer, name: f.properties.name, d: f.properties.d || 0, lngLat: f.geometry.coordinates })).filter(f => { const k = f.layer + f.name; if (seen.has(k)) return false; seen.add(k); return true; });
+  const pts = feats.map(f => ({ layer: f.properties.layer, name: f.properties.layer === 'shop' ? `${f.properties.rank}. ${f.properties.name}` : f.properties.name, d: f.properties.d || 0, rank: f.properties.rank || 99, lngLat: f.geometry.coordinates })).filter(f => { const k = f.layer + f.name; if (seen.has(k)) return false; seen.add(k); return true; });
   const maxN = W < 600 ? 14 : 40;   // 반경 안에서 겹치지 않는 만큼만
-  pts.sort((a, b) => ((a.d <= 500) === (b.d <= 500) ? (LAYER_PRI[a.layer] - LAYER_PRI[b.layer]) || a.d - b.d : a.d <= 500 ? -1 : 1));
+  pts.sort((a, b) => (a.layer === 'shop') !== (b.layer === 'shop') ? (a.layer === 'shop' ? -1 : 1) : a.layer === 'shop' ? a.rank - b.rank : ((a.d <= 500) === (b.d <= 500) ? (LAYER_PRI[a.layer] - LAYER_PRI[b.layer]) || a.d - b.d : a.d <= 500 ? -1 : 1));
   const sfs = Math.round(fs * 0.7); // 아파트명의 0.7배
   let n = 0;
   for (const pt of pts) {
@@ -333,8 +358,8 @@ function placeLabels() {
     }
     if (!hit) continue;
     placed.push(hit); n++;
-    const col = INFRA_STYLE[pt.layer][1];
-    const el = document.createElement('div'); el.className = 'ilabel'; el.style.cssText = `left:${hit.x1}px;top:${hit.y1}px;font-size:${sfs}px;border-color:${col};color:${col}`; el.textContent = text;
+    const col = pt.layer === 'shop' ? SHOP_COL : INFRA_STYLE[pt.layer][1];
+    const el = document.createElement('div'); el.className = 'ilabel' + (pt.layer === 'shop' ? ' shop' : ''); el.style.cssText = `left:${hit.x1}px;top:${hit.y1}px;font-size:${sfs}px;border-color:${col};color:${col}`; el.textContent = text;
     labelLayer.appendChild(el);
     // 지시선: 라벨이 점에서 떨어져 있으면 그림
     const cx = Math.max(hit.x1, Math.min(hit.x2, p.x)), cy = Math.max(hit.y1, Math.min(hit.y2, p.y));
@@ -354,7 +379,7 @@ function select(id, fly) {
   Object.entries(markers).forEach(([k, m]) => m.getElement().classList.toggle('selected', k === id));
   renderList(); renderInfraCompare();
   if (fly) map.flyTo({ center: [c.lng, c.lat], zoom: Math.max(map.getZoom(), 13.5), padding: { top: 60, bottom: 40 } });
-  focusInfra(c.lng, c.lat, true);
+  focusInfra(c.lng, c.lat, true, c.shops);
   renderDetail(c);
   if (fly) requestAnimationFrame(() => $('detail-section').scrollIntoView({ behavior: 'smooth', block: 'start' }));
 }
@@ -386,6 +411,7 @@ function renderDetail(c) {
       <div class="card"><h4>PropX 시세 ${u.propx ? `<span class="badge gray">${esc(u.propx.file || '')}</span>` : ''}</h4>
         ${u.propx ? `<p class="sub">부동산114 단지 시세 · 세대수 가중 평균 · ${u.propx.sedae ?? '—'}세대${u.propx.subway ? ' · ' + esc(u.propx.subway) : ''}</p><div class="metric-row" style="grid-template-columns:1fr 1fr 1fr;margin:8px 0"><div><strong>${fmt(u.propx.mm)}억</strong><span>매매 평균 · ${fmt(u.propx.mm_l, 1)}~${fmt(u.propx.mm_h, 1)}</span></div><div><strong>${fmt(u.propx.js)}억</strong><span>전세 평균</span></div><div><strong>${pct(u.propx.mm_chg)}</strong><span>매매 1년 · 전세 ${pct(u.propx.js_chg)}</span></div></div>${u.source === 'rtms' && u.propx.mm && u.sale_median ? `<p class="sub">실거래 중앙값 대비 시세 ${pct(u.propx.mm / u.sale_median * 100 - 100)}</p>` : ''}` : '<p class="muted" style="font-size:15px">propx/ 폴더에 PropX 단지정보 엑셀을 올리면 표시됩니다.</p>'}</div>
       <div class="card"><h4>주변 시설 · 반경 500m / 1km</h4><p class="sub">진한 막대 = 500m 안 · 연한 막대 = 1km 안 · 오른쪽 = 가장 가까운 시설과 거리</p>${c.infra ? infraChart(c.infra) : '<p class="muted" style="font-size:14px">시설 자료가 아직 없습니다.</p>'}</div>
+      ${shopsCard(c.shops)}
       <div class="card"><h4>최근 전세 계약</h4><p class="sub">신규/갱신 구분 · 종전 보증금 = 승계 보증금의 실체</p>${rentTable(u)}</div>
     </div>`;
   bindTips($('detail'));
@@ -514,9 +540,9 @@ function renderDiscMarkers() {
 function showDisc(d) {
   discMarkers.forEach(m => m.getElement().classList.toggle('selected', m.getLngLat().lng === d.lng && m.getLngLat().lat === d.lat && m.getElement().querySelector('span').textContent === `${d.name} ${d.area}`));
   Object.values(markers).forEach(m => m.getElement().classList.remove('selected'));
-  focusInfra(d.lng, d.lat, true);
+  focusInfra(d.lng, d.lat, true, d.shops);
   focusMarkers.forEach(m => m.getElement().classList.toggle('selected', distM(m.getLngLat().toArray(), [d.lng, d.lat]) < 5));
-  $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''}${d.infra?.nearest?.transit ? ` · 🚇 ${esc(d.infra.nearest.transit.name)} ${d.infra.nearest.transit.d}m` : ''}${d.infra?.nearest?.education ? ` · 🏫 ${d.infra.nearest.education.d}m` : ''} ${favBtn(favRecFromDisc(d))} <button class="mini" id="disc-add">후보에 추가 요청</button> <span class="close-hint">✕ 탭하면 닫힘</span>`;
+  $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''}${d.infra?.nearest?.transit ? ` · 🚇 ${esc(d.infra.nearest.transit.name)} ${d.infra.nearest.transit.d}m` : ''}${d.infra?.nearest?.education ? ` · 🏫 ${d.infra.nearest.education.d}m` : ''}${d.shops?.n1000 ? ` · 🛍 1km 점포 ${d.shops.n1000.toLocaleString()}개 · 월매출 ${(d.shops.sales1000 / 10000).toFixed(0)}억` : ''} ${favBtn(favRecFromDisc(d))} <button class="mini" id="disc-add">후보에 추가 요청</button> <span class="close-hint">✕ 탭하면 닫힘</span>`;
   bindFavBtn($('map-status'), favRecFromDisc(d));
   $('disc-add').onclick = () => { navigator.clipboard?.writeText(`${d.name} ${d.area}㎡ (${d.region} ${d.umd}) 후보 추가`); $('disc-add').textContent = '복사됨 · 채팅에 붙여넣기'; };
   const row = [...document.querySelectorAll('.disc-row')].find(r => r.dataset.name === d.name && r.dataset.area == d.area);

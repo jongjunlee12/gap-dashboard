@@ -5,7 +5,7 @@
 <title>갭 대시보드 · 3억으로 사는 아파트</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="style.css?v=20261006b">
+<link rel="stylesheet" href="style.css?v=20261006c">
 </head>
 <body>
 <header><a class="brand" href="./"><span class="brand-symbol">g.</span> 갭 대시보드</a><span class="header-note">실거래 위에, 3억의 자리를.</span><span id="updated" class="header-updated"></span><button id="info">데이터 안내 ↗</button></header>
@@ -75,9 +75,10 @@
 <li><b>저층</b>: 5층 이하. 실거래에는 동·층은 있으나 호수는 없습니다.</li>
 <li><b>호가</b>: 유료 매물 사이트에서 내려받아 <code>listings/</code>에 올린 파일 기준. 직전 파일과 비교해 신규·인하·사라짐을 표시합니다. 호가는 실거래가 아닙니다.</li>
 <li><b>좌표</b>: ≈ 표시 단지는 추정 좌표입니다. <code>config/targets.json</code>에서 수정할 수 있습니다.</li>
+<li><b>상권</b>: 오픈업(MyBIZMAP) 점포 월매출(최근 12개월 평균). 단지를 고르면 반경 1km 안 매출 상위 매장(주유소 제외)을 지도와 상세에 보여 줍니다. PG·할부·온라인·본사 등 상권과 무관한 결제 계정은 제외했습니다.</li>
 <li><b>배경지도</b>: OpenStreetMap contributors / CARTO. 인터넷 연결이 필요합니다.</li>
 </ul><p id="data-stats" class="muted"></p></dialog>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="app.js?v=20261006b"></script>
+<script src="app.js?v=20261006c"></script>
 </body></html>

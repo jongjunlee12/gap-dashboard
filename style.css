@@ -167,3 +167,6 @@ body.has-zoom{overflow:hidden}
   body.map-full .map-legend{bottom:20px}
   body.map-full .focus-info{bottom:56px}
 }
+
+.ilabel.shop{font-weight:700;background:#fff7f2}
+.mini-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}.mini-table th{text-align:left;color:#8a969d;font-weight:600;font-size:12.5px;padding:3px 6px;border-bottom:1px solid #e3e8ec}.mini-table td{padding:5px 6px;border-bottom:1px solid #eef1f4;white-space:nowrap}

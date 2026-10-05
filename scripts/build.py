@@ -483,15 +483,46 @@ def nearby(lat, lng):
         if d <= 2500 and (L not in out["nearest"] or d < out["nearest"][L]["d"]):
             out["nearest"][L] = {"name": pt["name"], "d": int(d), "kind": pt.get("kind")}
     return out
+# ---------- 상권 (오픈업 점포 월매출) : 반경 안 점포 수·매출 합·상위 매장 ----------
+STORES = []
+sp = RAW / "stores.json.gz"
+if sp.exists():
+    with gzip.open(sp, "rt", encoding="utf-8") as f:
+        STORES = [x for x in json.load(f)["stores"] if x.get("lat") and x.get("lng")]
+TOP_SKIP = re.compile(r"주유소|충전소")   # 상위 목록에서는 편의시설 성격이 아닌 업종 제외 (집계에는 포함)
+def shops_near(lat, lng, top_n=10):
+    if not STORES or lat is None:
+        return None
+    r500, r1000, s500, s1000, cand = 0, 0, 0, 0, []
+    for st in STORES:
+        if abs(st["lat"] - lat) > 0.01 or abs(st["lng"] - lng) > 0.012:
+            continue
+        d = _dist_m(lat, lng, st["lat"], st["lng"])
+        if d > 1000:
+            continue
+        r1000 += 1; s1000 += st["sales"]
+        if d <= 500:
+            r500 += 1; s500 += st["sales"]
+        if not TOP_SKIP.search(st["cat2"] + st["cat3"]):
+            cand.append((st, int(d)))
+    if not r1000:
+        return {"n500": 0, "n1000": 0, "sales500": 0, "sales1000": 0, "top": []}
+    cand.sort(key=lambda x: -x[0]["sales"])
+    top = [{"name": st["name"], "cat": st["cat3"] or st["cat2"], "lng": st["lng"], "lat": st["lat"], "sales": st["sales"], "cnt": st["cnt"], "d": d} for st, d in cand[:top_n]]
+    return {"n500": r500, "n1000": r1000, "sales500": int(s500), "sales1000": int(s1000), "top": top}
+
 for c in complexes:
     c["infra"] = nearby(c["lat"], c["lng"])
+    c["shops"] = shops_near(c["lat"], c["lng"])
 for d in discovered:
     if d.get("lat") is not None:
         d["infra"] = nearby(d["lat"], d["lng"])
+        d["shops"] = shops_near(d["lat"], d["lng"])
 
 dash = {
     "generated_at": date.today().isoformat(),
     "source": "rtms" if has_raw else ("propx_rt" if has_pt else "seed"),
+    "stores": {"n": len(STORES), "last": max((x.get("last") or "") for x in STORES)} if STORES else None,
     "propx_trades": {"fetched": PT.get("fetched"), "units": len(PT_UNITS), "rows": len(PT.get("rows", []))} if has_pt else None,
     "seed_note": seed.get("note"),
     "budget": cfg["budget"],
