@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""국토교통부 아파트 실거래가(매매 상세 · 전월세) 수집.
+"""국토교통부 아파트 실거래가(매매 상세 · 전월세) 수집. v1.1
 
 - config/targets.json 의 regions × 월 단위로 조회
 - data/raw/{trade|rent}/{lawd}/{YYYYMM}.json 에 저장 (이미 받은 과거 달은 건너뜀)
