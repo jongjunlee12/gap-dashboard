@@ -66,7 +66,7 @@ dialog{border:0;border-radius:32px;max-width:760px;width:92%;padding:40px;line-h
 .marker.hover i{inset:3px}
 @media(max-width:1100px){.layout{grid-template-columns:minmax(0,1fr) minmax(360px,44%)}}
 @media(max-width:900px){
-  .layout{display:flex;flex-direction:column}
+  .layout{display:flex;flex-direction:column;align-items:stretch}
   .col-map{order:-1;position:fixed;top:0;left:0;right:0;height:44vh;min-height:280px;z-index:5;margin:0}
   body{padding-top:44vh}
   .col-left{padding-top:14px}
