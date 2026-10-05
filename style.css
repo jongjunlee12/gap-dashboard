@@ -111,3 +111,13 @@ html,body{overflow-x:hidden;max-width:100%}
 
 /* PC: 발굴·호가 표는 전체 폭 사용 */
 .wide{margin-top:10px}.wide .market{padding:46px 0 0}
+
+.only-mobile{display:none}
+@media(max-width:900px){
+  .only-mobile{display:inline-block}
+  body.map-full{overflow:hidden}
+  body.map-full .col-map{height:100vh;height:100dvh;min-height:0}
+  body.map-full .col-map .map-panel{border-radius:0}
+  body.map-full .map-legend{bottom:20px}
+  body.map-full .focus-info{bottom:56px}
+}
