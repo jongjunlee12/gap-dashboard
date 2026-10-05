@@ -416,6 +416,21 @@ function renderDiscover() {
   renderDiscMarkers();
 }
 
+/* ---------- 차트 전체 화면 토글 (PC·휴대폰) ---------- */
+function toggleZoom(el) {
+  const on = el.classList.toggle('zoomed');
+  document.body.classList.toggle('has-zoom', on);
+  let x = el.querySelector('.zoom-close');
+  if (on && !x) { x = document.createElement('button'); x.className = 'zoom-close'; x.textContent = '✕ 닫기'; x.onclick = e => { e.stopPropagation(); toggleZoom(el); }; el.appendChild(x); }
+  if (!on && x) x.remove();
+}
+document.addEventListener('click', e => {
+  const svg = e.target.closest('svg.chart'); if (!svg) return;
+  if (e.target.closest('[data-sel], [data-tip]') && !svg.closest('.zoomed')) return;   // 점·막대 클릭은 원래 동작
+  const box = svg.closest('.card, .panel'); if (box) toggleZoom(box);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.zoomed').forEach(el => toggleZoom(el)); });
+
 /* ---------- 툴팁 · 필터 ---------- */
 function bindTips(root) {
   root.querySelectorAll('[data-tip]').forEach(el => {

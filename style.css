@@ -121,3 +121,13 @@ html,body{overflow-x:hidden;max-width:100%}
   body.map-full .map-legend{bottom:20px}
   body.map-full .focus-info{bottom:56px}
 }
+
+/* 차트 전체 화면 */
+svg.chart{cursor:zoom-in}
+.zoomed{position:fixed!important;inset:0!important;z-index:50!important;margin:0!important;border-radius:0!important;overflow:auto!important;padding:28px 4% 40px!important;background:#fff!important;max-width:none!important;width:auto!important;height:auto!important;box-shadow:none!important}
+.zoomed svg.chart{cursor:zoom-out;height:auto;max-height:calc(100vh - 160px);width:100%}
+.zoomed .zoom-close{position:fixed;top:14px;right:16px;z-index:51;background:#172126;color:#fff;border-color:#172126}
+.zoomed h4{font-size:22px;margin-top:40px}.zoomed .sub{font-size:16px}
+.zoomed .metric-row{grid-template-columns:repeat(3,1fr)}
+body.has-zoom{overflow:hidden}
+@media(max-width:900px){.zoomed{padding:52px 12px 30px!important}.zoomed svg.chart{max-height:calc(100vh - 120px)}}
