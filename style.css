@@ -92,3 +92,9 @@ button.mini{min-height:30px;padding:3px 10px;font-size:13px;margin-left:8px}
 #map-status{top:120px}
 .infra-tags{margin:10px 0 4px}.infra-tags .dot{width:8px;height:8px;margin-right:6px}
 @media(max-width:900px){.infra-chips{top:64px;left:12px}.chip{min-height:30px;font-size:13px;padding:3px 10px}#map-status{top:104px}}
+
+/* 가로 넘침 방지: 표는 패널 안에서 가로 스크롤 */
+html,body{overflow-x:hidden;max-width:100%}
+.panel{overflow-x:auto}
+.col-left,.layout,main{max-width:100%;min-width:0}
+@media(max-width:900px){.disc td,.disc th{white-space:normal}.metric-row strong{font-size:24px}}
