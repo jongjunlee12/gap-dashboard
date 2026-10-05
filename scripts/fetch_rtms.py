@@ -95,22 +95,34 @@ def main():
         months = months[-args.months:]
     refresh = set(months[-3:])  # 신고 지연 구간은 매번 갱신
 
-    calls = 0
-    for region in cfg["regions"]:
+    calls, errors, skipped = 0, [], 0
+    # '지금 가능' 지역을 먼저, 최근 달부터 받아서 한도에 걸려도 중요한 데이터가 먼저 남게 함
+    regions = sorted(cfg["regions"], key=lambda r: r["group"] != "now")
+    for region in regions:
         lawd = region["code"]
         for kind in ("trade", "rent"):
             d = RAW / kind / lawd
             d.mkdir(parents=True, exist_ok=True)
-            for ym in months:
+            for ym in reversed(months):
                 f = d / f"{ym}.json"
                 if f.exists() and ym not in refresh:
+                    skipped += 1
                     continue
-                items = fetch(kind, key, lawd, ym)
+                if len(errors) >= 5:
+                    continue  # 연속 오류(한도 초과 등)면 나머지는 다음 실행으로
+                try:
+                    items = fetch(kind, key, lawd, ym)
+                except Exception as e:  # noqa: BLE001
+                    errors.append(str(e))
+                    print(f"::warning::{e}", file=sys.stderr)
+                    continue
                 f.write_text(json.dumps(items, ensure_ascii=False), encoding="utf-8")
                 calls += 1
                 print(f"{kind} {region['name']} {ym}: {len(items)}건")
                 time.sleep(0.2)
-    print(f"완료 · API 호출 {calls}회")
+    print(f"완료 · API 호출 {calls}회 · 건너뜀 {skipped} · 오류 {len(errors)}")
+    if errors:
+        print("::warning::일부 달을 받지 못했습니다. 다음 실행에서 이어서 받습니다. 첫 오류: " + errors[0][:200], file=sys.stderr)
 
 
 if __name__ == "__main__":
