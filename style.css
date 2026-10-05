@@ -141,3 +141,5 @@ body.has-zoom{overflow:hidden}
 
 .marker.disc.near{width:26px;height:26px}.marker.disc.near i{inset:5px;background:#6a9ff0}.marker.disc.near span{display:block;font-size:13px;color:#172126;font-weight:600;background:#fffffff0}.marker.disc.near span small{font-weight:500;color:#596971;font-size:11px}
 .marker.disc.near.selected i{inset:0;background:#0064e0;border-width:3px}.marker.disc.near.selected span{font-size:15px;font-weight:700}
+/* 폰: 지도 위 정보 카드는 2줄로 접고, 지도 전체화면(.map-full)에서는 다 보임 */
+@media(max-width:900px){#map-status{font-size:15px;padding:8px 10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.35}#map-status:empty{display:none}#map-status .mini,#map-status .close-hint{display:none}body.map-full #map-status{display:block;font-size:17px;-webkit-line-clamp:unset}body.map-full #map-status .mini,body.map-full #map-status .close-hint{display:inline}}
