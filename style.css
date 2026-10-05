@@ -53,3 +53,26 @@ dialog{border:0;border-radius:32px;max-width:760px;width:92%;padding:40px;line-h
 .maplibregl-ctrl-bottom-right{font-size:13.2px!important}.maplibregl-ctrl-top-right{top:80px!important}
 @media(max-width:1100px){.workspace{grid-template-columns:310px 1fr}.kpis{grid-template-columns:repeat(2,1fr)}.map-tag{display:none}.map-top{justify-content:flex-end}.metric-row{grid-template-columns:repeat(3,1fr)}.detail-grid{grid-template-columns:1fr}}
 @media(max-width:760px){header{height:78px;gap:12px}.header-note,.header-updated{display:none}.intro{padding:30px 0 20px;display:block}.intro p{text-align:left;margin-top:16px}.workspace{grid-template-columns:1fr}.map-panel{min-height:520px}.panel{padding:20px}#complex-list{max-height:300px}.metric-row{grid-template-columns:repeat(2,1fr)}footer{flex-wrap:wrap}footer span:last-child{margin-left:0}dialog{padding:24px}.map-legend{font-size:13.2px;left:14px}}
+
+/* ---- 지도 고정 레이아웃: 스크롤해도 지도가 항상 보임 ---- */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,46%);gap:20px;align-items:start}
+.col-left{min-width:0}.col-left .market{padding:40px 0 0}.col-left .market:first-of-type{padding-top:34px}
+.col-map{position:sticky;top:16px;height:calc(100vh - 32px)}
+.col-map .map-panel{position:absolute;inset:0;min-height:0}
+.col-left .route-panel{margin-bottom:0}
+.col-left .metric-row{grid-template-columns:repeat(3,1fr)}
+.col-left .detail-grid{grid-template-columns:1fr}
+.row:hover{background:#fff}
+.marker.hover i{inset:3px}
+@media(max-width:1100px){.layout{grid-template-columns:minmax(0,1fr) minmax(360px,44%)}}
+@media(max-width:900px){
+  .layout{display:flex;flex-direction:column}
+  .col-map{order:-1;position:sticky;top:0;height:44vh;min-height:300px;z-index:5;margin:0 -4%;}
+  .col-map .map-panel{min-height:0!important}
+  .row{flex-wrap:wrap}.row .amt{text-align:left}
+  .seg button{font-size:14px;padding:6px 4px}
+  #complex-list{max-height:none}
+  .col-map .map-panel{border-radius:0 0 28px 28px}
+  .map-top{top:12px;left:12px;right:12px}.map-legend{bottom:12px;left:12px}
+  .col-left{padding-top:14px}
+}

@@ -14,7 +14,7 @@
 
 <div class="kpis" id="kpis"></div>
 
-<div class="workspace">
+<div class="layout"><div class="col-left">
 <aside class="panel route-panel">
   <div class="eyebrow">01 / FILTER</div>
   <h2>어디를 볼까요?</h2>
@@ -26,13 +26,8 @@
   <div id="complex-list"></div>
   <div class="notice"><span class="status-dot"></span> 필요자금 = 매매 중앙값 − 전세 중앙값 + 취득세 1.1%<span>세금·중개비 외 비용 별도. 좌표가 추정치인 단지는 ≈ 표시.</span></div>
 </aside>
-<section class="map-panel" aria-label="후보 단지 지도">
-  <div id="map"></div>
-  <div class="map-top"><span class="map-tag">GYEONGGI · CARTO LIGHT</span><div><button id="view" aria-pressed="false">2D 보기</button><button id="fit">전체 보기</button></div></div>
-  <div id="map-status" role="status">지도를 불러오는 중입니다…</div>
-  <div class="map-legend"><i class="in"></i> 예산 안 <i class="under"></i> 예산 여유 <i class="over"></i> 예산 초과 <i class="na"></i> 자료 없음 <i class="newdot"></i> 새 신고</div>
-</section>
-</div>
+
+
 
 <section class="market" id="detail-section">
   <div class="market-heading"><div><div class="eyebrow">02 / COMPLEX</div><h2 id="detail-title">단지를 선택해 주세요</h2></div><div class="filters" id="unit-tabs"></div></div>
@@ -53,6 +48,12 @@
   <div class="market-heading"><div><div class="eyebrow">05 / LISTINGS</div><h2>현재 호가 · 지난 파일과 비교</h2></div><span id="listing-meta" class="muted"></span></div>
   <div class="panel" id="listings"></div>
 </section>
+</div><div class="col-map"><section class="map-panel" aria-label="후보 단지 지도">
+  <div id="map"></div>
+  <div class="map-top"><span class="map-tag">GYEONGGI · CARTO LIGHT</span><div><button id="view" aria-pressed="false">2D 보기</button><button id="fit">전체 보기</button></div></div>
+  <div id="map-status" role="status">지도를 불러오는 중입니다…</div>
+  <div class="map-legend"><i class="in"></i> 예산 안 <i class="under"></i> 예산 여유 <i class="over"></i> 예산 초과 <i class="na"></i> 자료 없음 <i class="newdot"></i> 새 신고</div>
+</section></div></div>
 </main>
 <footer><strong>갭 대시보드</strong><span>판단 근거이며 매수 권유가 아닙니다 · 세금 별도</span><span>PRIVATE PREVIEW · 2026</span></footer>
 

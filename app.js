@@ -35,7 +35,7 @@ function renderList() {
     const best = c.units.filter(u => u.required != null).sort((a, b) => a.required - b.required)[0];
     return `<button class="row ${c.id === state.sel ? 'selected' : ''}" data-id="${c.id}"><span><i class="dot ${st}"></i>${esc(c.name)}${hasNew(c) ? '<span class="badge new">NEW</span>' : ''}<small>${esc(c.region_label)} · ${c.units.map(u => u.area + '㎡').join(' · ')} · ${c.households.toLocaleString()}세대${c.approx ? ' · ≈' : ''}</small></span><span class="amt">${best ? fmt(best.required) + '억' : '—'}<small>${best ? best.area + '㎡ · ' + (best.jeonse_ratio ? fmt(best.jeonse_ratio, 0) + '%' : '전세 미확인') : '확인 필요'}</small></span></button>`;
   }).join('') || '<p class="muted">조건에 맞는 단지가 없습니다.</p>';
-  $('complex-list').querySelectorAll('.row').forEach(b => b.onclick = () => select(b.dataset.id, true));
+  $('complex-list').querySelectorAll('.row').forEach(b => { b.onclick = () => select(b.dataset.id, true); b.onmouseenter = () => markers[b.dataset.id]?.getElement().classList.add('hover'); b.onmouseleave = () => markers[b.dataset.id]?.getElement().classList.remove('hover'); });
   Object.entries(markers).forEach(([id, m]) => m.getElement().style.display = visible(D.complexes.find(c => c.id === id)) ? '' : 'none');
 }
 function renderKpis() {
@@ -83,7 +83,7 @@ function select(id, fly) {
   if (!c.units.some(u => u.area === state.area)) state.area = (c.units.find(u => u.source === 'rtms' || u.sale_median) || c.units[0]).area;
   Object.entries(markers).forEach(([k, m]) => m.getElement().classList.toggle('selected', k === id));
   renderList();
-  if (fly) map.flyTo({ center: [c.lng, c.lat], zoom: Math.max(map.getZoom(), 13.5) });
+  if (fly) map.flyTo({ center: [c.lng, c.lat], zoom: Math.max(map.getZoom(), 13.5), padding: { top: 60, bottom: 40 } });
   renderDetail(c);
   if (fly) requestAnimationFrame(() => $('detail-section').scrollIntoView({ behavior: 'smooth', block: 'start' }));
 }
@@ -197,11 +197,18 @@ function renderListings() {
 }
 
 /* ---------- 자동 발굴 ---------- */
+function flyToUmd(umd, name) {
+  const c = D.complexes.find(x => x.umd === umd);
+  $('map-status').textContent = `${name} · ${umd} — 단지 좌표 미등록. 같은 동의 후보 단지 위치로 이동했습니다.`;
+  setTimeout(() => { if ($('map-status').textContent.startsWith(name)) $('map-status').textContent = ''; }, 4000);
+  if (c) map.flyTo({ center: [c.lng, c.lat], zoom: 14 });
+}
 function renderDiscover() {
   const ds = D.discovered || [], rule = D.discovery || {};
   $('discover-meta').textContent = rule.note || '';
   if (!ds.length) { $('discover').innerHTML = `<p class="muted" style="font-size:15px">${D.source === 'rtms' ? '조건에 맞는 단지가 아직 없습니다.' : '국토부 실거래가 연결되면 수원·성남·남양주·광주 전체에서 조건에 맞는 단지를 자동으로 찾아 여기에 올립니다.'}</p>`; return; }
-  $('discover').innerHTML = `<table><tr><th>지역</th><th>단지</th><th>㎡</th><th>준공</th><th>매매 중앙값</th><th>6개월 거래</th><th>전세 중앙값</th><th>전세가율</th><th>필요자금</th><th>저층 비중</th></tr>${ds.map(d => `<tr><td>${esc(d.region)} · ${esc(d.umd)}</td><td><b>${esc(d.name)}</b></td><td>${d.area}</td><td>${d.built || '—'}</td><td>${fmt(d.sale_median)}억<small style="color:#8a969d"> ${fmt(d.sale_min, 1)}~${fmt(d.sale_max, 1)}</small></td><td>${d.sale_n}건</td><td>${fmt(d.jeonse_median)}억 <small style="color:#8a969d">${d.jeonse_n}건</small></td><td>${fmt(d.jeonse_ratio, 1)}%${d.jeonse_ratio >= 70 ? ' <span class="badge">안전선 위</span>' : ''}</td><td><b style="color:var(--blue)">${fmt(d.required)}억</b></td><td>${d.low_floor_share}%</td></tr>`).join('')}</table><p class="chart-caption" style="margin-top:12px"><span>지도에 올리려면 config/targets.json 에 단지와 좌표를 추가하세요.</span><span>${ds.length}개 단지</span></p>`;
+  $('discover').innerHTML = `<table class="disc"><tr><th>지역</th><th>단지</th><th>㎡</th><th>준공</th><th>매매 중앙값</th><th>6개월 거래</th><th>전세 중앙값</th><th>전세가율</th><th>필요자금</th><th>저층 비중</th></tr>${ds.map(d => `<tr class="disc-row" data-name="${esc(d.name)}" data-umd="${esc(d.umd)}" style="cursor:pointer"><td>${esc(d.region)} · ${esc(d.umd)}</td><td><b>${esc(d.name)}</b></td><td>${d.area}</td><td>${d.built || '—'}</td><td>${fmt(d.sale_median)}억<small style="color:#8a969d"> ${fmt(d.sale_min, 1)}~${fmt(d.sale_max, 1)}</small></td><td>${d.sale_n}건</td><td>${fmt(d.jeonse_median)}억 <small style="color:#8a969d">${d.jeonse_n}건</small></td><td>${fmt(d.jeonse_ratio, 1)}%${d.jeonse_ratio >= 70 ? ' <span class="badge">안전선 위</span>' : ''}</td><td><b style="color:var(--blue)">${fmt(d.required)}억</b></td><td>${d.low_floor_share}%</td></tr>`).join('')}</table><p class="chart-caption" style="margin-top:12px"><span>행을 누르면 지도에서 해당 읍면동으로 이동합니다 (단지 좌표는 등록 후 표시).</span><span>${ds.length}개 단지</span></p>`;
+  $('discover').querySelectorAll('.disc-row').forEach(r => r.onclick = () => flyToUmd(r.dataset.umd, r.dataset.name));
 }
 
 /* ---------- 툴팁 · 필터 ---------- */
