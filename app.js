@@ -47,7 +47,7 @@ function renderKpis() {
     <div class="kpi dark"><strong>${inB}<small style="font-size:16px"> / ${units.length}</small></strong><span>예산 2.8~3.5억 안쪽 평형 (실거래 중앙값 기준)</span></div>
     <div class="kpi"><strong>${D.totals.new_trades + D.totals.new_rents}</strong><span>지난 갱신 이후 새로 신고된 매매·전세</span></div>
     <div class="kpi"><strong>${ls ? ls.total : '—'}</strong><span>현재 호가 매물 ${ls ? `· 신규 ${ls.new} · 인하 ${ls.reduced} · 사라짐 ${ls.removed}` : '(listings/ 파일 없음)'}</span></div>
-    <div class="kpi"><strong>${D.source === 'rtms' ? '실거래 API' : (D.propx && D.propx.n ? 'PropX 시세' : '보고서 값')}</strong><span>${D.source === 'rtms' ? `국토부 ${D.history_from}~ · 매주 자동 갱신` : (D.propx && D.propx.n ? `PropX ${D.propx.n}개 단지·평형 · ${D.propx.generated_at}` : '국토부 API 연결 전 · 2026.09.30 자료')}</span></div>`;
+    <div class="kpi"><strong>${D.source === 'rtms' ? '실거래 API' : D.propx_trades ? 'PropX 실거래' : (D.propx && D.propx.n ? 'PropX 시세' : '보고서 값')}</strong><span>${D.source === 'rtms' ? `국토부 ${D.history_from}~ · 매주 자동 갱신` : D.propx_trades ? `${D.propx_trades.units.toLocaleString()}개 단지·평형 · ${D.propx_trades.rows.toLocaleString()}건 · 36개월 · ${D.propx_trades.fetched}` : (D.propx && D.propx.n ? `PropX ${D.propx.n}개 단지·평형 · ${D.propx.generated_at}` : '국토부 API 연결 전 · 2026.09.30 자료')}</span></div>`;
 }
 
 /* ---------- 지도 ---------- */
@@ -614,7 +614,7 @@ function bindFilters() {
 
 fetch('data/dashboard.json?v=' + Date.now()).then(r => r.json()).then(d => {
   D = d; tip = document.createElement('div'); tip.className = 'tip'; document.body.appendChild(tip);
-  $('updated').textContent = `갱신 ${D.generated_at} · ${D.source === 'rtms' ? '국토부 실거래' : '보고서 seed'}`;
+  $('updated').textContent = `갱신 ${D.generated_at} · ${{ rtms: '국토부 실거래', propx_rt: 'PropX 실거래' }[D.source] || '보고서 seed'}`;
   const nT = D.complexes.flatMap(c => c.units).reduce((a, u) => a + (u.trades || []).length, 0);
   $('data-stats').textContent = `단지 ${D.complexes.length} · 평형 ${D.complexes.flatMap(c => c.units).length} · 보유 매매 거래 ${nT}건 · 생성 ${D.generated_at}${D.seed_note ? ' · ' + D.seed_note : ''}`;
   renderKpis(); initMap(); renderList(); renderScatter(); renderInfraCompare(); renderDiscover(); renderListings(); bindFilters(); renderFavs();
