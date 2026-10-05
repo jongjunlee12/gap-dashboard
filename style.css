@@ -131,3 +131,6 @@ svg.chart{cursor:zoom-in}
 .zoomed .metric-row{grid-template-columns:repeat(3,1fr)}
 body.has-zoom{overflow:hidden}
 @media(max-width:900px){.zoomed{padding:52px 12px 30px!important}.zoomed svg.chart{max-height:calc(100vh - 120px)}}
+
+#map-status{cursor:pointer}.close-hint{float:right;font-size:12px;color:#8a6a1a;margin-left:8px}
+.focus-info{cursor:pointer}.focus-info.mini-mode{font-size:0;padding:6px 10px}.focus-info.mini-mode::before{content:"반경 ⓘ";font-size:13px}.focus-info.mini-mode button{display:none}

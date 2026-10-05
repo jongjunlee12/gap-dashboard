@@ -377,7 +377,7 @@ function renderDiscMarkers() {
 }
 function showDisc(d) {
   focusInfra(d.lng, d.lat, true);
-  $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''}${d.infra?.nearest?.transit ? ` · 🚇 ${esc(d.infra.nearest.transit.name)} ${d.infra.nearest.transit.d}m` : ''}${d.infra?.nearest?.education ? ` · 🏫 ${d.infra.nearest.education.d}m` : ''} <button class="mini" id="disc-add">후보에 추가 요청</button>`;
+  $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''}${d.infra?.nearest?.transit ? ` · 🚇 ${esc(d.infra.nearest.transit.name)} ${d.infra.nearest.transit.d}m` : ''}${d.infra?.nearest?.education ? ` · 🏫 ${d.infra.nearest.education.d}m` : ''} <button class="mini" id="disc-add">후보에 추가 요청</button> <span class="close-hint">✕ 탭하면 닫힘</span>`;
   $('disc-add').onclick = () => { navigator.clipboard?.writeText(`${d.name} ${d.area}㎡ (${d.region} ${d.umd}) 후보 추가`); $('disc-add').textContent = '복사됨 · 채팅에 붙여넣기'; };
   const row = [...document.querySelectorAll('.disc-row')].find(r => r.dataset.name === d.name && r.dataset.area == d.area);
   if (row) { document.querySelectorAll('.disc-row.hl').forEach(r => r.classList.remove('hl')); row.classList.add('hl'); row.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
@@ -442,6 +442,8 @@ function bindFilters() {
   $('group-seg').querySelectorAll('button').forEach(b => b.onclick = () => { state.group = b.dataset.g; $('group-seg').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); renderList(); fitAll(); });
   $('only-budget').onchange = e => { state.onlyBudget = e.target.checked; renderList(); };
   $('only-new').onchange = e => { state.onlyNew = e.target.checked; renderList(); };
+  $('map-status').onclick = e => { if (e.target.closest('button')) return; $('map-status').innerHTML = ''; };
+  $('focus-info').onclick = e => { if (e.target.closest('button')) return; $('focus-info').classList.toggle('mini-mode'); };
   $('info').onclick = () => $('data-dialog').showModal(); $('close-info').onclick = () => $('data-dialog').close();
 }
 
