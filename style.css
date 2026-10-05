@@ -39,7 +39,7 @@ h2{font-size:31.2px;letter-spacing:-1px;font-weight:500;margin:12px 0 20px}h3{fo
 .marker{position:relative;width:34px;height:34px;cursor:pointer}.marker i{position:absolute;inset:7px;border-radius:50%;background:var(--blue);border:2.5px solid #fff;box-shadow:0 2px 8px #1d2f3c33}
 .marker.under i{background:var(--green)}.marker.over i{background:var(--gray)}.marker.na i{background:#fff;border-color:#9aa6ad}.marker.selected i{inset:3px;border-width:3px}
 .marker b{position:absolute;top:1px;right:1px;width:11px;height:11px;border-radius:50%;background:var(--orange);border:2px solid #fff}
-.marker span{position:absolute;left:36px;top:6px;white-space:nowrap;font-size:15px;font-weight:600;background:#ffffffe6;padding:2px 7px;border-radius:8px;color:#172126;pointer-events:none}
+.marker span{position:absolute;left:36px;top:6px;transform:translate(0,-50%);white-space:nowrap;font-size:15px;font-weight:600;background:#ffffffe6;padding:2px 7px;border-radius:8px;color:#172126;pointer-events:none}
 .market{padding:46px 0 0}.market-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}.filters{display:flex;gap:8px}.filters button{font-size:16.8px;min-height:38px;padding:6px 14px}
 .store-detail{background:#f7f8fa}.metric-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:18px 0}.metric-row strong{font-size:33.6px;font-weight:500;display:block;letter-spacing:-1px}.metric-row span{font-size:15.6px;color:#58676f}
 .detail-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-top:10px}.card{background:#fff;border-radius:22px;padding:20px}.card h4{margin:0 0 6px;font-size:18px;font-weight:600}.card .sub{font-size:15.6px;color:var(--ink2);margin:0 0 10px}
@@ -134,3 +134,7 @@ body.has-zoom{overflow:hidden}
 
 #map-status{cursor:pointer}.close-hint{float:right;font-size:12px;color:#8a6a1a;margin-left:8px}
 .focus-info{cursor:pointer}.focus-info.mini-mode{font-size:0;padding:6px 10px}.focus-info.mini-mode::before{content:"반경 ⓘ";font-size:13px}.focus-info.mini-mode button{display:none}
+
+.marker.disc.selected i{inset:1px;background:#0064e0;border-width:3px}.marker.disc.selected span{font-weight:700;color:#172126;font-size:13px;display:block!important}
+.marker span{transform:none}
+@media(max-width:900px){.disc td:nth-child(2),.disc td:nth-child(3){white-space:nowrap}}

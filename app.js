@@ -192,20 +192,26 @@ function placeLabels() {
   const cr = map.getContainer().getBoundingClientRect();
   ['.map-top', '.infra-chips', '.map-legend', '.focus-info', '.maplibregl-ctrl-top-right'].forEach(sel => { const el = map.getContainer().parentElement.querySelector(sel) || document.querySelector(sel); if (!el || !el.offsetParent) return; const r = el.getBoundingClientRect(); placed.push({ x1: r.left - cr.left - 4, y1: r.top - cr.top - 4, x2: r.right - cr.left + 4, y2: r.bottom - cr.top + 4 }); });
   const overlaps = box => placed.some(b => !(box.x2 < b.x1 || box.x1 > b.x2 || box.y2 < b.y1 || box.y1 > b.y2));
-  // 1) 단지 라벨 (DOM span)
+  // 1) 단지 라벨 (DOM span) — 선택 단지 > 후보 > (포커스 반경 안 발굴) > 나머지 발굴. 자리가 없으면 다른 방향으로 옮겨 봄
   const items = [];
-  D.complexes.forEach(c => { const m = markers[c.id]; if (!m || m.getElement().style.display === 'none') return; items.push({ el: m.getElement(), lngLat: [c.lng, c.lat], pri: c.id === state.sel ? 0 : 1, text: c.name }); });
-  discMarkers.forEach((m, i) => items.push({ el: m.getElement(), lngLat: m.getLngLat().toArray(), pri: 2 + i / 1000, text: m.getElement().querySelector('span').textContent }));
+  const inRing = ll => focus ? distM([focus.lng, focus.lat], ll) <= 1000 : false;
+  D.complexes.forEach(c => { const m = markers[c.id]; if (!m || m.getElement().style.display === 'none') return; items.push({ el: m.getElement(), lngLat: [c.lng, c.lat], pri: c.id === state.sel ? 0 : (inRing([c.lng, c.lat]) ? 0.5 : 1), text: c.name }); });
+  discMarkers.forEach((m, i) => { const ll = m.getLngLat().toArray(); const sel = m.getElement().classList.contains('selected'); items.push({ el: m.getElement(), lngLat: ll, pri: sel ? 0 : (inRing(ll) ? 1.5 + i / 1000 : 3 + i / 1000), text: m.getElement().querySelector('span').textContent }); });
   const fs = 13;
   items.sort((a, b) => a.pri - b.pri).forEach(it => {
     const p = map.project(it.lngLat), span = it.el.querySelector('span');
     if (!span) return;
     if (p.x < -40 || p.y < -40 || p.x > W + 40 || p.y > H + 40) { span.style.display = 'none'; return; }
+    if (focus && it.pri >= 3 && map.getZoom() >= 12) { span.style.display = 'none'; return; }   // 포커스 중엔 반경 밖 발굴 라벨은 생략
     const w = Math.min(220, it.text.length * fs * 0.95 + 14), h = fs + 10;
-    const box = { x1: p.x + 14, y1: p.y - h / 2, x2: p.x + 14 + w, y2: p.y + h / 2 };
-    if (overlaps(box) && it.pri >= 1) { span.style.display = 'none'; return; }
-    span.style.display = ''; placed.push(box);
-    placed.push({ x1: p.x - 10, y1: p.y - 10, x2: p.x + 10, y2: p.y + 10 }); // 마커 자체도 점유
+    const cands = [[14, -h / 2], [-w - 14, -h / 2], [-w / 2, -h - 12], [-w / 2, 12]];
+    let hit = null;
+    for (const [dx, dy] of cands) { const box = { x1: p.x + dx, y1: p.y + dy, x2: p.x + dx + w, y2: p.y + dy + h }; if (!overlaps(box)) { hit = { box, dx, dy }; break; } }
+    if (!hit && it.pri >= 1) { span.style.display = 'none'; return; }
+    if (!hit) hit = { box: { x1: p.x + 14, y1: p.y - h / 2, x2: p.x + 14 + w, y2: p.y + h / 2 }, dx: 14, dy: -h / 2 };
+    span.style.display = ''; span.style.left = (hit.dx + it.el.offsetWidth / 2) + 'px'; span.style.top = (hit.dy + it.el.offsetHeight / 2) + 'px';
+    placed.push(hit.box);
+    placed.push({ x1: p.x - 10, y1: p.y - 10, x2: p.x + 10, y2: p.y + 10 });
   });
   // 2) 시설 라벨: 보이는 레이어의 화면 안 점 중 우선순위대로, 화면이 붐비지 않을 만큼만
   labelLayer.innerHTML = ''; labelSvg.innerHTML = '';
@@ -394,6 +400,8 @@ function renderDiscMarkers() {
   scheduleLabels();
 }
 function showDisc(d) {
+  discMarkers.forEach(m => m.getElement().classList.toggle('selected', m.getLngLat().lng === d.lng && m.getLngLat().lat === d.lat && m.getElement().querySelector('span').textContent === `${d.name} ${d.area}`));
+  Object.values(markers).forEach(m => m.getElement().classList.remove('selected'));
   focusInfra(d.lng, d.lat, true);
   $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''}${d.infra?.nearest?.transit ? ` · 🚇 ${esc(d.infra.nearest.transit.name)} ${d.infra.nearest.transit.d}m` : ''}${d.infra?.nearest?.education ? ` · 🏫 ${d.infra.nearest.education.d}m` : ''} <button class="mini" id="disc-add">후보에 추가 요청</button> <span class="close-hint">✕ 탭하면 닫힘</span>`;
   $('disc-add').onclick = () => { navigator.clipboard?.writeText(`${d.name} ${d.area}㎡ (${d.region} ${d.umd}) 후보 추가`); $('disc-add').textContent = '복사됨 · 채팅에 붙여넣기'; };
