@@ -19,6 +19,8 @@ ENDPOINTS = {
     "trade": "https://apis.data.go.kr/1613000/RTMSDataSvcAptTrade/getRTMSDataSvcAptTrade",
     "rent": "https://apis.data.go.kr/1613000/RTMSDataSvcAptRent/getRTMSDataSvcAptRent",
 }
+# 매매는 '기본'과 '상세(Dev)' 두 API가 따로 있어, 등록된 쪽을 자동으로 고름
+TRADE_ALT = "https://apis.data.go.kr/1613000/RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev"
 
 
 def months_between(start: str, end: date):
@@ -83,14 +85,26 @@ def main():
 
     cfg = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
 
-    # 키 점검: 한 달치 1건만 조회
-    try:
-        probe = fetch("trade", key, cfg["regions"][0]["code"], date.today().strftime("%Y%m"), rows=1)
-        print(f"키 확인 OK · 남양주 이번 달 매매 표본 {len(probe)}건")
-    except Exception as e:  # noqa: BLE001
-        print(f"::error::키 점검 실패: {e}", file=sys.stderr)
-        print("※ 흔한 원인: (1) 활용신청 직후라 키가 아직 활성화 전(최대 1시간) (2) 매매 '상세' 자료가 아닌 다른 API 신청 (3) 일일 한도 초과", file=sys.stderr)
+    # 키 점검: 매매(기본 → 상세) · 전월세 각각 1건씩 조회해 어느 API가 등록됐는지 로그로 남김
+    lawd0, ym0 = cfg["regions"][0]["code"], date.today().strftime("%Y%m")
+    ok = {}
+    for kind, url in (("trade", ENDPOINTS["trade"]), ("trade", TRADE_ALT), ("rent", ENDPOINTS["rent"])):
+        if ok.get(kind):
+            continue
+        ENDPOINTS[kind] = url
+        try:
+            n = len(fetch(kind, key, lawd0, ym0, rows=1))
+            ok[kind] = True
+            print(f"키 확인 OK · {kind} {url.rsplit('/', 1)[-1]} · 이번 달 표본 {n}건")
+        except Exception as e:  # noqa: BLE001
+            print(f"::warning::{kind} {url.rsplit('/', 1)[-1]} 실패: {e}", file=sys.stderr)
+    if not ok:
+        print("::error::키 점검 실패: 매매(기본·상세)·전월세 모두 '등록되지 않은 서비스키'. data.go.kr 마이페이지 → 활용신청 현황에서 승인 여부와 신청한 API 이름을 확인하세요.", file=sys.stderr)
         sys.exit(3)
+    if not ok.get("trade"):
+        ENDPOINTS["trade"] = ""  # 매매 미등록 → 전월세만 수집
+    if not ok.get("rent"):
+        ENDPOINTS["rent"] = ""
     today = date.today()
     months = months_between(cfg["history_from"], today)
     if args.months:
@@ -103,6 +117,8 @@ def main():
     for region in regions:
         lawd = region["code"]
         for kind in ("trade", "rent"):
+            if not ENDPOINTS[kind]:
+                continue
             d = RAW / kind / lawd
             d.mkdir(parents=True, exist_ok=True)
             for ym in reversed(months):
