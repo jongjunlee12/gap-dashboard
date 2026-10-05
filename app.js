@@ -37,6 +37,7 @@ function renderList() {
   }).join('') || '<p class="muted">조건에 맞는 단지가 없습니다.</p>';
   $('complex-list').querySelectorAll('.row').forEach(b => { b.onclick = () => select(b.dataset.id, true); b.onmouseenter = () => markers[b.dataset.id]?.getElement().classList.add('hover'); b.onmouseleave = () => markers[b.dataset.id]?.getElement().classList.remove('hover'); });
   Object.entries(markers).forEach(([id, m]) => m.getElement().style.display = visible(D.complexes.find(c => c.id === id)) ? '' : 'none');
+  scheduleLabels();
 }
 function renderKpis() {
   const units = D.complexes.flatMap(c => c.units);
@@ -57,7 +58,11 @@ function initMap() {
     center: [127.12, 37.46], zoom: 9.6, pitch: 0, antialias: true,
   });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
-  map.on('load', () => { $('map-status').textContent = ''; fitAll(); });
+  map.on('load', () => { $('map-status').textContent = ''; fitAll(); setTimeout(() => map.resize(), 300); });
+  map.on('moveend', scheduleLabels); map.on('zoomend', scheduleLabels); map.on('resize', scheduleLabels);
+  window.addEventListener('resize', () => { map.resize(); scheduleLabels(); });
+  window.addEventListener('orientationchange', () => setTimeout(() => { map.resize(); scheduleLabels(); }, 400));
+  if (!maplibregl.supported || maplibregl.supported({ failIfMajorPerformanceCaveat: false }) === false) $('map-status').textContent = '이 기기 브라우저가 지도를 그릴 수 없습니다(WebGL 꺼짐). 최신 크롬·사파리로 열어 주세요.';
   map.on('error', e => { if (!map.loaded()) $('map-status').textContent = '배경지도를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.'; });
   D.complexes.forEach(c => {
     const el = document.createElement('div');
@@ -110,6 +115,31 @@ function infraLine(inf) {
   const parts = Object.entries(INFRA_STYLE).map(([k, [label]]) => `<span class="tag"><i class="dot" style="background:${INFRA_STYLE[k][1]}"></i>${label} ${r[k] || 0}${n[k] ? ` · ${esc(n[k].name)} ${n[k].d}m` : ''}</span>`);
   return `<div class="tags infra-tags"><span class="tag" style="background:#172126;color:#fff;border-color:#172126">반경 1km</span>${parts.join('')}</div>`;
 }
+
+/* ---------- 라벨 충돌 회피 ---------- */
+let labelTimer = null;
+function placeLabels() {
+  if (!map) return;
+  const items = [];
+  D.complexes.forEach(c => { const m = markers[c.id]; if (!m || m.getElement().style.display === 'none') return; items.push({ el: m.getElement(), lngLat: [c.lng, c.lat], pri: c.id === state.sel ? 0 : 1, text: c.name }); });
+  discMarkers.forEach((m, i) => items.push({ el: m.getElement(), lngLat: m.getLngLat().toArray(), pri: 2 + i / 1000, text: m.getElement().querySelector('span').textContent }));
+  const W = map.getContainer().clientWidth, H = map.getContainer().clientHeight;
+  const placed = [];
+  const fs = 13;
+  items.sort((a, b) => a.pri - b.pri).forEach(it => {
+    const p = map.project(it.lngLat);
+    const span = it.el.querySelector('span');
+    if (!span) return;
+    if (p.x < -40 || p.y < -40 || p.x > W + 40 || p.y > H + 40) { span.style.display = 'none'; return; }
+    const w = Math.min(220, it.text.length * fs * 0.95 + 14), h = fs + 10;
+    const box = { x1: p.x + 14, y1: p.y - h / 2, x2: p.x + 14 + w, y2: p.y + h / 2 };
+    const hit = placed.some(b => !(box.x2 < b.x1 || box.x1 > b.x2 || box.y2 < b.y1 || box.y1 > b.y2));
+    if (hit && it.pri >= 1) { span.style.display = 'none'; return; }
+    span.style.display = '';
+    placed.push(box);
+  });
+}
+function scheduleLabels() { clearTimeout(labelTimer); labelTimer = setTimeout(placeLabels, 60); }
 
 /* ---------- 선택 · 상세 ---------- */
 function select(id, fly) {
@@ -251,6 +281,7 @@ function renderDiscMarkers() {
     el.onclick = e => { e.stopPropagation(); showDisc(d); };
     discMarkers.push(new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([d.lng, d.lat]).addTo(map));
   });
+  scheduleLabels();
 }
 function showDisc(d) {
   map.flyTo({ center: [d.lng, d.lat], zoom: Math.max(map.getZoom(), 14) });
