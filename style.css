@@ -145,3 +145,15 @@ body.has-zoom{overflow:hidden}
 @media(max-width:900px){#map-status{font-size:15px;padding:8px 10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.35}#map-status:empty{display:none}#map-status .mini,#map-status .close-hint{display:none}body.map-full #map-status{display:block;font-size:17px;-webkit-line-clamp:unset}body.map-full #map-status .mini,body.map-full #map-status .close-hint{display:inline}}
 /* 마커는 반드시 absolute: relative 이면 문서 흐름에 쌓여 뒤쪽 마커(다산 이외)가 수천 px 아래로 밀림 */
 .maplibregl-marker.marker{position:absolute;top:0;left:0}
+
+/* 즐겨찾기 */
+.fav-btn{display:inline-flex;align-items:center;gap:4px;border:1.5px solid #cfd8de;background:#fff;border-radius:999px;padding:3px 10px;font:inherit;font-size:14px;color:#596971;cursor:pointer;vertical-align:middle}
+.fav-btn.on{background:#fff3d2;border-color:#e0a400;color:#8a6a1a}.fav-btn.lg{font-size:16px;padding:5px 12px;margin-left:8px}.fav-btn.sm{padding:2px 7px}.fav-btn.sm span{display:none}
+.marker.fav::after{content:"★";position:absolute;top:-6px;right:-6px;font-size:14px;color:#e0a400;text-shadow:0 0 2px #fff,0 0 2px #fff}.marker.disc.fav::after{top:-8px;right:-8px}
+.fav-panel{position:absolute;left:16px;right:16px;bottom:52px;z-index:3;background:#fffffff2;border-radius:16px;box-shadow:0 4px 18px #1d2f3c22;font-size:15px;overflow:hidden}
+.fav-panel:empty{display:none}.fav-head{display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer}.fav-head .grow{flex:1}
+.fav-table-wrap{display:none;max-height:38vh;overflow:auto;padding:0 10px 6px}.fav-panel.open .fav-table-wrap{display:block}.fav-note{display:none;margin:0;padding:0 14px 8px;font-size:12.5px;color:#8a969d}.fav-panel.open .fav-note{display:block}
+.fav-table{width:100%;border-collapse:collapse;white-space:nowrap}.fav-table th{font-size:12.5px;color:#8a969d;font-weight:600;text-align:left;padding:4px 8px;border-bottom:1px solid #e3e8ec}.fav-table td{padding:6px 8px;border-bottom:1px solid #eef1f4}.fav-table tr[data-key]{cursor:pointer}.fav-table tr[data-key]:hover td{background:#f1f4f7}
+.fav-table td.nm small{display:block;color:#8a969d;font-size:12px}.fav-table td.best{background:#e6f0fd;color:#0064e0;font-weight:700;border-radius:6px}.fav-table td small{color:#8a969d;font-size:12px;margin-left:3px}
+.fav-x{border:0;background:transparent;color:#8a969d;cursor:pointer;font-size:14px}.fav-x:hover{color:#c8322f}
+@media(max-width:900px){.fav-panel{left:8px;right:8px;bottom:44px;font-size:13.5px}.fav-head{padding:6px 10px}.fav-table-wrap{max-height:30vh}body:not(.map-full) .fav-panel.open .fav-table-wrap{max-height:22vh}}

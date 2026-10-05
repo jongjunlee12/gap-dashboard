@@ -187,6 +187,53 @@ function infraLine(inf) {
   return `<div class="tags infra-tags"><span class="tag" style="background:#172126;color:#fff;border-color:#172126">반경 1km</span>${parts.join('')}</div>`;
 }
 
+
+/* ---------- 즐겨찾기 (최대 5개) · 지도 위 비교표 ---------- */
+const FAV_MAX = 5;
+let favs = [];
+try { favs = JSON.parse(localStorage.getItem('gap-favs') || '[]'); } catch (e) { favs = []; }
+function favKey(x) { return `${x.name}|${x.area}`; }
+function favRecFromComplex(c, u) {
+  const inf = c.infra || {};
+  return { key: favKey({ name: c.name, area: u.area }), kind: 'c', id: c.id, name: c.name, area: u.area, region: c.region_label, umd: c.umd, sale: u.sale_median, jeonse: u.jeonse_median, ratio: u.jeonse_ratio, required: u.required, chg: u.change_1y, sedae: c.households, built: c.built, lng: c.lng, lat: c.lat, station: inf.nearest?.transit || null, r1000: Object.values(inf.r1000 || {}).reduce((a, b) => a + b, 0), r500: Object.values(inf.r500 || {}).reduce((a, b) => a + b, 0) };
+}
+function favRecFromDisc(d) {
+  const inf = d.infra || {};
+  return { key: favKey(d), kind: 'd', name: d.name, area: d.area, region: d.region, umd: d.umd, sale: d.sale_median, jeonse: d.jeonse_median, ratio: d.jeonse_ratio, required: d.required, chg: d.mm_chg, sedae: d.sedae, built: d.built, lng: d.lng, lat: d.lat, station: inf.nearest?.transit || (d.subway ? { name: d.subway, d: null } : null), r1000: Object.values(inf.r1000 || {}).reduce((a, b) => a + b, 0), r500: Object.values(inf.r500 || {}).reduce((a, b) => a + b, 0) };
+}
+function isFav(key) { return favs.some(f => f.key === key); }
+function toggleFav(rec) {
+  if (isFav(rec.key)) favs = favs.filter(f => f.key !== rec.key);
+  else { if (favs.length >= FAV_MAX) { $('map-status').innerHTML = `<b>즐겨찾기는 ${FAV_MAX}개까지</b> · 비교표에서 하나를 지운 뒤 추가해 주세요 <span class="close-hint">✕ 탭하면 닫힘</span>`; return; } favs.push(rec); }
+  try { localStorage.setItem('gap-favs', JSON.stringify(favs)); } catch (e) {}
+  renderFavs();
+}
+function favBtn(rec, cls = '') { const on = isFav(rec.key); return `<button class="fav-btn ${cls}${on ? ' on' : ''}" data-key="${esc(rec.key)}" title="${on ? '즐겨찾기 해제' : '즐겨찾기에 추가 (최대 5개)'}">${on ? '★' : '☆'}<span>${on ? '즐겨찾기 중' : '즐겨찾기'}</span></button>`; }
+function bindFavBtn(root, rec) { root.querySelectorAll(`.fav-btn[data-key="${CSS.escape(rec.key)}"]`).forEach(b => b.onclick = e => { e.stopPropagation(); toggleFav(rec); }); }
+function renderFavs() {
+  // 마커 표시
+  Object.values(markers).forEach(m => { const c = D.complexes.find(x => markers[x.id] === m); m.getElement().classList.toggle('fav', !!c && favs.some(f => f.kind === 'c' && f.id === c.id)); });
+  [...discMarkers, ...focusMarkers].forEach(m => { const ll = m.getLngLat(); m.getElement().classList.toggle('fav', favs.some(f => f.kind === 'd' && Math.abs(f.lng - ll.lng) < 1e-5 && Math.abs(f.lat - ll.lat) < 1e-5)); });
+  // 버튼 상태 갱신
+  document.querySelectorAll('.fav-btn').forEach(b => { const on = isFav(b.dataset.key); b.classList.toggle('on', on); b.innerHTML = `${on ? '★' : '☆'}<span>${on ? '즐겨찾기 중' : '즐겨찾기'}</span>`; });
+  // 지도 위 비교표
+  const box = $('fav-panel'); if (!box) return;
+  if (!favs.length) { box.innerHTML = ''; box.classList.remove('open'); return; }
+  const best = k => { const vals = favs.map(f => f[k]).filter(v => v != null); if (!vals.length) return null; return k === 'required' ? Math.min(...vals) : Math.max(...vals); };
+  const bReq = best('required'), bRatio = best('ratio'), bChg = best('chg'), bInf = best('r1000');
+  const hi = (v, b) => v != null && v === b ? ' class="best"' : '';
+  box.innerHTML = `<div class="fav-head"><b>★ 즐겨찾기 비교</b><span class="muted-s">${favs.length}/${FAV_MAX}</span><span class="grow"></span><button class="mini" id="fav-fit">지도에 맞추기</button><button class="mini" id="fav-toggle">${box.classList.contains('open') ? '접기' : '펼치기'}</button></div>
+  <div class="fav-table-wrap"><table class="fav-table"><tr><th>단지</th><th>매매</th><th>전세</th><th>전세가율</th><th>필요자금</th><th>1년</th><th>세대·연식</th><th>역</th><th>시설 1km</th><th></th></tr>
+  ${favs.map(f => `<tr data-key="${esc(f.key)}"><td class="nm"><b>${esc(f.name)}</b> ${f.area}㎡<small>${esc(f.region)} ${esc(f.umd)}</small></td><td>${fmt(f.sale)}억</td><td>${fmt(f.jeonse)}억</td><td${hi(f.ratio, bRatio)}>${f.ratio != null ? fmt(f.ratio, 1) + '%' : '—'}</td><td${hi(f.required, bReq)}><b>${fmt(f.required)}억</b></td><td${hi(f.chg, bChg)}>${f.chg != null ? pct(f.chg) : '—'}</td><td>${f.sedae || '—'}·${f.built || '—'}</td><td>${f.station ? `${esc(f.station.name)}${f.station.d != null ? ' ' + f.station.d + 'm' : ''}` : '—'}</td><td${hi(f.r1000, bInf)}>${f.r1000}<small>(500m ${f.r500})</small></td><td><button class="fav-x" data-key="${esc(f.key)}" title="빼기">✕</button></td></tr>`).join('')}</table></div>
+  <p class="fav-note">파란 칸 = 다섯 중 가장 좋은 값 · 행을 누르면 지도에서 이동</p>`;
+  $('fav-fit').onclick = e => { e.stopPropagation(); clearFocus(); const b = new maplibregl.LngLatBounds(); favs.forEach(f => b.extend([f.lng, f.lat])); map.fitBounds(b, { padding: 80, maxZoom: 14, duration: 700 }); };
+  $('fav-toggle').onclick = e => { e.stopPropagation(); box.classList.toggle('open'); $('fav-toggle').textContent = box.classList.contains('open') ? '접기' : '펼치기'; scheduleLabels(); };
+  box.querySelector('.fav-head').onclick = () => $('fav-toggle').click();
+  box.querySelectorAll('.fav-x').forEach(b => b.onclick = e => { e.stopPropagation(); favs = favs.filter(f => f.key !== b.dataset.key); try { localStorage.setItem('gap-favs', JSON.stringify(favs)); } catch (e2) {} renderFavs(); });
+  box.querySelectorAll('tr[data-key]').forEach(tr => tr.onclick = () => { const f = favs.find(x => x.key === tr.dataset.key); if (!f) return; if (f.kind === 'c') { state.area = f.area; select(f.id, true); } else { const d = (D.discovered || []).find(x => x.name === f.name && x.area === f.area); if (d) showDisc(d); } });
+  scheduleLabels();
+}
+
 /* ---------- 포커스 반경 안 단지 마커 (04 표 필터와 무관하게 전부) ---------- */
 let focusMarkers = [];
 function renderFocusMarkers(lng, lat) {
@@ -212,6 +259,7 @@ function renderFocusMarkers(lng, lat) {
     el.onclick = e => { e.stopPropagation(); showDisc(d); };
     focusMarkers.push(new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([d.lng, d.lat]).addTo(map));
   });
+  renderFavs();
 }
 
 /* ---------- 라벨 충돌 회피 (단지 라벨 + 시설 라벨·지시선) ---------- */
@@ -231,7 +279,7 @@ function placeLabels() {
   const placed = [];
   // 지도 위 UI(칩·범례·버튼·요약 상자)가 차지한 영역은 라벨 금지
   const cr = map.getContainer().getBoundingClientRect();
-  ['.map-top', '.infra-chips', '.map-legend', '.focus-info', '.maplibregl-ctrl-top-right'].forEach(sel => { const el = map.getContainer().parentElement.querySelector(sel) || document.querySelector(sel); if (!el || !el.offsetParent) return; const r = el.getBoundingClientRect(); placed.push({ x1: r.left - cr.left - 4, y1: r.top - cr.top - 4, x2: r.right - cr.left + 4, y2: r.bottom - cr.top + 4 }); });
+  ['.map-top', '.infra-chips', '.map-legend', '.focus-info', '.fav-panel', '.maplibregl-ctrl-top-right'].forEach(sel => { const el = map.getContainer().parentElement.querySelector(sel) || document.querySelector(sel); if (!el || !el.offsetParent) return; const r = el.getBoundingClientRect(); placed.push({ x1: r.left - cr.left - 4, y1: r.top - cr.top - 4, x2: r.right - cr.left + 4, y2: r.bottom - cr.top + 4 }); });
   const overlaps = box => placed.some(b => !(box.x2 < b.x1 || box.x1 > b.x2 || box.y2 < b.y1 || box.y1 > b.y2));
   // 1) 단지 라벨 (DOM span) — 선택 단지 > 후보 > (포커스 반경 안 발굴) > 나머지 발굴. 자리가 없으면 다른 방향으로 옮겨 봄
   const items = [];
@@ -311,7 +359,7 @@ function select(id, fly) {
 }
 function renderDetail(c) {
   const u = c.units.find(x => x.area === state.area);
-  $('detail-title').textContent = `${c.name} ${u.area}㎡`;
+  $('detail-title').innerHTML = `${esc(c.name)} ${u.area}㎡ ${favBtn(favRecFromComplex(c, u), 'lg')}`; bindFavBtn($('detail-title'), favRecFromComplex(c, u));
   $('unit-tabs').innerHTML = c.units.map(x => `<button aria-pressed="${x.area === u.area}" data-a="${x.area}">${x.area}㎡</button>`).join('');
   $('unit-tabs').querySelectorAll('button').forEach(b => b.onclick = () => { state.area = +b.dataset.a; renderDetail(c); });
   const st = budgetState(u);
@@ -440,6 +488,7 @@ function renderDiscMarkers() {
     discMarkers.push(new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([d.lng, d.lat]).addTo(map));
   });
   if (focus) renderFocusMarkers(focus.lng, focus.lat);
+  renderFavs();
   scheduleLabels();
 }
 function showDisc(d) {
@@ -447,7 +496,8 @@ function showDisc(d) {
   Object.values(markers).forEach(m => m.getElement().classList.remove('selected'));
   focusInfra(d.lng, d.lat, true);
   focusMarkers.forEach(m => m.getElement().classList.toggle('selected', distM(m.getLngLat().toArray(), [d.lng, d.lat]) < 5));
-  $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''}${d.infra?.nearest?.transit ? ` · 🚇 ${esc(d.infra.nearest.transit.name)} ${d.infra.nearest.transit.d}m` : ''}${d.infra?.nearest?.education ? ` · 🏫 ${d.infra.nearest.education.d}m` : ''} <button class="mini" id="disc-add">후보에 추가 요청</button> <span class="close-hint">✕ 탭하면 닫힘</span>`;
+  $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''}${d.infra?.nearest?.transit ? ` · 🚇 ${esc(d.infra.nearest.transit.name)} ${d.infra.nearest.transit.d}m` : ''}${d.infra?.nearest?.education ? ` · 🏫 ${d.infra.nearest.education.d}m` : ''} ${favBtn(favRecFromDisc(d))} <button class="mini" id="disc-add">후보에 추가 요청</button> <span class="close-hint">✕ 탭하면 닫힘</span>`;
+  bindFavBtn($('map-status'), favRecFromDisc(d));
   $('disc-add').onclick = () => { navigator.clipboard?.writeText(`${d.name} ${d.area}㎡ (${d.region} ${d.umd}) 후보 추가`); $('disc-add').textContent = '복사됨 · 채팅에 붙여넣기'; };
   const row = [...document.querySelectorAll('.disc-row')].find(r => r.dataset.name === d.name && r.dataset.area == d.area);
   if (row) { document.querySelectorAll('.disc-row.hl').forEach(r => r.classList.remove('hl')); row.classList.add('hl'); row.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
@@ -504,10 +554,11 @@ function renderDiscover() {
     .map(d => ({ ...d, score: score(d) })).sort((a, b) => dstate.sort === 'score' ? b.score - a.score : dstate.sort === 'ratio' ? (b.jeonse_ratio || 0) - (a.jeonse_ratio || 0) : dstate.sort === 'chg' ? (b.mm_chg || 0) - (a.mm_chg || 0) : dstate.sort === 'danji' ? (b.danji || 0) - (a.danji || 0) : a.required - b.required);
   const ctl = `<div class="disc-filters"><label>지역 <select id="df-region"><option value="all">전체</option>${regions.map(r => `<option ${dstate.region === r ? 'selected' : ''}>${esc(r)}</option>`).join('')}</select></label><label>세대수 <select id="df-danji">${[0, 200, 300, 500, 1000].map(v => `<option value="${v}" ${dstate.minDanji === v ? 'selected' : ''}>${v ? v + '세대↑' : '전체'}</option>`).join('')}</select></label><label>입주 <select id="df-built">${[0, 2000, 2010, 2015, 2020].map(v => `<option value="${v}" ${dstate.minBuilt === v ? 'selected' : ''}>${v ? v + '년↑' : '전체'}</option>`).join('')}</select></label><label>전세가율 <select id="df-ratio">${[0, 60, 65, 70].map(v => `<option value="${v}" ${dstate.minRatio === v ? 'selected' : ''}>${v ? v + '%↑' : '전체'}</option>`).join('')}</select></label><label>정렬 <select id="df-sort">${[['score', '추천순 (예산 활용·전세가율·상승·규모)'], ['required', '필요자금 낮은 순'], ['ratio', '전세가율 높은 순'], ['chg', '1년 상승 순'], ['danji', '세대수 순']].map(([v, l]) => `<option value="${v}" ${dstate.sort === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label class="check" style="margin:0"><input type="checkbox" id="show-disc" ${dstate.showOnMap ? 'checked' : ''}> 지도에 표시</label><span class="muted-s">${ds.length} / ${all.length}개</span></div>`;
   if (!all.length) { $('discover').innerHTML = `<p class="muted" style="font-size:15px">propx/ 폴더에 PropX 단지정보 엑셀을 올리거나 국토부 실거래가 연결되면 조건에 맞는 단지를 자동으로 찾아 여기에 올립니다.</p>`; return; }
-  $('discover').innerHTML = ctl + (ds.length ? `<table class="disc"><tr><th>추천</th><th>지역</th><th>단지</th><th>㎡</th><th>입주</th><th>매매</th><th>표본</th><th>전세</th><th>전세가율</th><th>필요자금</th><th>1년 변동</th></tr>${ds.map((d, i) => `<tr class="disc-row" data-name="${esc(d.name)}" data-umd="${esc(d.umd)}" data-area="${d.area}" data-i="${i}" style="cursor:pointer"><td><b style="color:${d.score >= 70 ? 'var(--blue)' : '#596971'}">${d.score}</b>${i < 3 ? ' <span class="badge">TOP</span>' : ''}</td><td>${esc(d.region)} · ${esc(d.umd)}</td><td><b>${esc(d.name)}</b>${d.source === 'propx' ? '' : ' <span class="badge">실거래</span>'}</td><td>${d.area}</td><td>${d.built || '—'}${d.sedae ? `<small style="color:#8a969d"> · ${d.sedae}세대</small>` : ''}</td><td>${fmt(d.sale_median)}억<small style="color:#8a969d"> ${d.sale_min ? fmt(d.sale_min, 1) + '~' + fmt(d.sale_max, 1) : ''}</small></td><td>${d.sale_n != null ? d.sale_n + '건' : '시세'}</td><td>${fmt(d.jeonse_median)}억${d.jeonse_n != null ? ` <small style="color:#8a969d">${d.jeonse_n}건</small>` : ''}</td><td>${fmt(d.jeonse_ratio, 1)}%${d.jeonse_ratio >= 70 ? ' <span class="badge">안전선 위</span>' : ''}</td><td><b style="color:${d.required < D.budget.min ? 'var(--green)' : 'var(--blue)'}">${fmt(d.required)}억</b></td><td>${d.mm_chg != null ? pct(d.mm_chg) : (d.low_floor_share != null ? '저층 ' + d.low_floor_share + '%' : '—')}</td></tr>`).join('')}</table><p class="chart-caption" style="margin-top:12px"><span>추천 점수 = 예산 3.5억 활용도 40% · 전세가율 25% · 1년 상승 15% · 세대수 10% · 연식 10%. 행을 누르면 지도에서 그 단지로 이동합니다.</span><span>${ds.length}개 단지</span></p>` : '<p class="muted" style="font-size:15px;margin-top:12px">조건에 맞는 단지가 없습니다. 필터를 풀어 보세요.</p>');
+  $('discover').innerHTML = ctl + (ds.length ? `<table class="disc"><tr><th></th><th>추천</th><th>지역</th><th>단지</th><th>㎡</th><th>입주</th><th>매매</th><th>표본</th><th>전세</th><th>전세가율</th><th>필요자금</th><th>1년 변동</th></tr>${ds.map((d, i) => `<tr class="disc-row" data-name="${esc(d.name)}" data-umd="${esc(d.umd)}" data-area="${d.area}" data-i="${i}" style="cursor:pointer"><td>${favBtn(favRecFromDisc(d), 'sm')}</td><td><b style="color:${d.score >= 70 ? 'var(--blue)' : '#596971'}">${d.score}</b>${i < 3 ? ' <span class="badge">TOP</span>' : ''}</td><td>${esc(d.region)} · ${esc(d.umd)}</td><td><b>${esc(d.name)}</b>${d.source === 'propx' ? '' : ' <span class="badge">실거래</span>'}</td><td>${d.area}</td><td>${d.built || '—'}${d.sedae ? `<small style="color:#8a969d"> · ${d.sedae}세대</small>` : ''}</td><td>${fmt(d.sale_median)}억<small style="color:#8a969d"> ${d.sale_min ? fmt(d.sale_min, 1) + '~' + fmt(d.sale_max, 1) : ''}</small></td><td>${d.sale_n != null ? d.sale_n + '건' : '시세'}</td><td>${fmt(d.jeonse_median)}억${d.jeonse_n != null ? ` <small style="color:#8a969d">${d.jeonse_n}건</small>` : ''}</td><td>${fmt(d.jeonse_ratio, 1)}%${d.jeonse_ratio >= 70 ? ' <span class="badge">안전선 위</span>' : ''}</td><td><b style="color:${d.required < D.budget.min ? 'var(--green)' : 'var(--blue)'}">${fmt(d.required)}억</b></td><td>${d.mm_chg != null ? pct(d.mm_chg) : (d.low_floor_share != null ? '저층 ' + d.low_floor_share + '%' : '—')}</td></tr>`).join('')}</table><p class="chart-caption" style="margin-top:12px"><span>추천 점수 = 예산 3.5억 활용도 40% · 전세가율 25% · 1년 상승 15% · 세대수 10% · 연식 10%. 행을 누르면 지도에서 그 단지로 이동합니다.</span><span>${ds.length}개 단지</span></p>` : '<p class="muted" style="font-size:15px;margin-top:12px">조건에 맞는 단지가 없습니다. 필터를 풀어 보세요.</p>');
   const sd = $('show-disc'); if (sd) sd.onchange = () => { dstate.showOnMap = sd.checked; renderDiscMarkers(); };
   ['region', 'danji', 'built', 'ratio', 'sort'].forEach(k => { const el = $('df-' + k); if (el) el.onchange = () => { const v = el.value; dstate[{ region: 'region', danji: 'minDanji', built: 'minBuilt', ratio: 'minRatio', sort: 'sort' }[k]] = (k === 'region' || k === 'sort') ? v : +v; renderDiscover(); }; });
   $('discover').querySelectorAll('.disc-row').forEach(r => r.onclick = () => { const d = ds[+r.dataset.i]; d.lat != null ? showDisc(d) : flyToUmd(d.umd, d.name); });
+  ds.forEach(d => bindFavBtn($('discover'), favRecFromDisc(d)));
   renderDiscMarkers();
 }
 
@@ -547,6 +598,6 @@ fetch('data/dashboard.json?v=' + Date.now()).then(r => r.json()).then(d => {
   $('updated').textContent = `갱신 ${D.generated_at} · ${D.source === 'rtms' ? '국토부 실거래' : '보고서 seed'}`;
   const nT = D.complexes.flatMap(c => c.units).reduce((a, u) => a + (u.trades || []).length, 0);
   $('data-stats').textContent = `단지 ${D.complexes.length} · 평형 ${D.complexes.flatMap(c => c.units).length} · 보유 매매 거래 ${nT}건 · 생성 ${D.generated_at}${D.seed_note ? ' · ' + D.seed_note : ''}`;
-  renderKpis(); initMap(); renderList(); renderScatter(); renderInfraCompare(); renderDiscover(); renderListings(); bindFilters();
+  renderKpis(); initMap(); renderList(); renderScatter(); renderInfraCompare(); renderDiscover(); renderListings(); bindFilters(); renderFavs();
   select('dasan-natural3', false);
 }).catch(e => { $('map-status').textContent = 'data/dashboard.json 을 읽지 못했습니다. ' + e; });
