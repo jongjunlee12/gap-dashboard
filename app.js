@@ -166,6 +166,9 @@ function placeLabels() {
   ensureLabelLayer();
   const W = map.getContainer().clientWidth, H = map.getContainer().clientHeight;
   const placed = [];
+  // 지도 위 UI(칩·범례·버튼·요약 상자)가 차지한 영역은 라벨 금지
+  const cr = map.getContainer().getBoundingClientRect();
+  ['.map-top', '.infra-chips', '.map-legend', '.focus-info', '.maplibregl-ctrl-top-right'].forEach(sel => { const el = map.getContainer().parentElement.querySelector(sel) || document.querySelector(sel); if (!el || !el.offsetParent) return; const r = el.getBoundingClientRect(); placed.push({ x1: r.left - cr.left - 4, y1: r.top - cr.top - 4, x2: r.right - cr.left + 4, y2: r.bottom - cr.top + 4 }); });
   const overlaps = box => placed.some(b => !(box.x2 < b.x1 || box.x1 > b.x2 || box.y2 < b.y1 || box.y1 > b.y2));
   // 1) 단지 라벨 (DOM span)
   const items = [];
