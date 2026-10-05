@@ -114,7 +114,43 @@
      "listings": []
     }
    ],
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "education": 4
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 8
+    },
+    "nearest": {
+     "transit": {
+      "name": "다산",
+      "d": 495,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "다산아트홀",
+      "d": 1483,
+      "kind": "theatre"
+     },
+     "public": {
+      "name": "다산1동행정복지센터",
+      "d": 1467,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "남양주다산중학교",
+      "d": 396,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "도농경희한의원",
+      "d": 1899,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "id": "dasan-epyeon",
@@ -143,7 +179,44 @@
      "listings": []
     }
    ],
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 4
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 1,
+     "public": 1,
+     "education": 9
+    },
+    "nearest": {
+     "transit": {
+      "name": "다산",
+      "d": 568,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "다산아트홀",
+      "d": 936,
+      "kind": "theatre"
+     },
+     "public": {
+      "name": "다산1동행정복지센터",
+      "d": 921,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "남양주다산유치원",
+      "d": 263,
+      "kind": "school"
+     },
+     "medical": {
+      "name": "도농경희한의원",
+      "d": 1388,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "id": "dasan-river2",
@@ -172,7 +245,48 @@
      "listings": []
     }
    ],
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1,
+     "public": 1,
+     "education": 3,
+     "medical": 3
+    },
+    "r1000": {
+     "transit": 2,
+     "culture": 3,
+     "public": 7,
+     "education": 9,
+     "medical": 12
+    },
+    "nearest": {
+     "transit": {
+      "name": "구리",
+      "d": 772,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "인창도서관",
+      "d": 481,
+      "kind": "library"
+     },
+     "public": {
+      "name": "다산1동 11통·13통 마을회관",
+      "d": 443,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "인창중고등학교",
+      "d": 363,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "열린메디칼의원",
+      "d": 156,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "id": "dasan-natural3",
@@ -261,7 +375,44 @@
      "listings": []
     }
    ],
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 1,
+     "public": 1,
+     "education": 12
+    },
+    "nearest": {
+     "transit": {
+      "name": "다산",
+      "d": 793,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "다산아트홀",
+      "d": 607,
+      "kind": "theatre"
+     },
+     "public": {
+      "name": "다산1동행정복지센터",
+      "d": 592,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "다산새봄중학교",
+      "d": 251,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "도농경희한의원",
+      "d": 1084,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "id": "dasan-xi",
@@ -349,7 +500,43 @@
      "listings": []
     }
    ],
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 7
+    },
+    "nearest": {
+     "transit": {
+      "name": "다산",
+      "d": 332,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "다산아트홀",
+      "d": 1521,
+      "kind": "theatre"
+     },
+     "public": {
+      "name": "다산1동행정복지센터",
+      "d": 1505,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "다산하늘초등학교",
+      "d": 414,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "무지개연합의원",
+      "d": 1808,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "id": "gwangju-thesharp",
@@ -401,7 +588,39 @@
      "listings": []
     }
    ],
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 6
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 176,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서 오포119",
+      "d": 688,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "고산하늘초등학교",
+      "d": 249,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1643,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "id": "gwangju-ipark",
@@ -450,7 +669,38 @@
      "listings": []
     }
    ],
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 4
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 847,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 597,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태성초등학교",
+      "d": 134,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 2085,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "id": "gwangju-hillstate",
@@ -502,7 +752,38 @@
      "listings": []
     }
    ],
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 8
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 518,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 945,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "한아람초등학교",
+      "d": 117,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1883,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "id": "suwon-skyview",
@@ -544,7 +825,46 @@
      "listings": []
     }
    ],
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1,
+     "public": 2,
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 10,
+     "medical": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "성균관대",
+      "d": 1439,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "수원SK 아트리움",
+      "d": 302,
+      "kind": "gallery"
+     },
+     "public": {
+      "name": "수원중부경찰서 노송지구대",
+      "d": 451,
+      "kind": "police"
+     },
+     "education": {
+      "name": "다솔초등학교",
+      "d": 293,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "아주편한병원",
+      "d": 643,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "id": "suwon-hwaseo",
@@ -574,7 +894,45 @@
      "listings": []
     }
    ],
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 4,
+     "public": 4,
+     "education": 11
+    },
+    "nearest": {
+     "transit": {
+      "name": "화서",
+      "d": 932,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "노천극장",
+      "d": 317,
+      "kind": "theatre"
+     },
+     "public": {
+      "name": "소방안전협회 경기지부",
+      "d": 622,
+      "kind": "government"
+     },
+     "education": {
+      "name": "화서초등학교",
+      "d": 191,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "경기도립의료원 수원병원",
+      "d": 1094,
+      "kind": "hospital"
+     }
+    }
+   }
   }
  ],
  "discovered": [
@@ -602,7 +960,37 @@
    "lat": 37.43265,
    "lng": 127.25441,
    "geo_name": "대주파크빌",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 8
+    },
+    "nearest": {
+     "culture": {
+      "name": "남한산성아트홀",
+      "d": 648,
+      "kind": "arts_centre"
+     },
+     "public": {
+      "name": "광주시청",
+      "d": 372,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광주송정초등학교",
+      "d": 1085,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 1833,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -628,7 +1016,22 @@
    "lat": 37.35318,
    "lng": 127.20728,
    "geo_name": "오포우림퓨전빌",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {},
+    "nearest": {
+     "public": {
+      "name": "오포우체국",
+      "d": 1168,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "오포초등학교",
+      "d": 1133,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -654,7 +1057,31 @@
    "lat": 37.37569,
    "lng": 127.26163,
    "geo_name": "대주파크빌1차",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "public": 2,
+     "education": 1,
+     "medical": 1
+    },
+    "nearest": {
+     "public": {
+      "name": "오포2동행정복지센터",
+      "d": 657,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "양벌초등학교",
+      "d": 609,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 618,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -680,7 +1107,31 @@
    "lat": 37.39857,
    "lng": 127.29124,
    "geo_name": "우림퓨전빌2단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 4
+    },
+    "nearest": {
+     "culture": {
+      "name": "초월도서관",
+      "d": 1237,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월파출소",
+      "d": 1451,
+      "kind": "police"
+     },
+     "education": {
+      "name": "광주도평초등학교",
+      "d": 297,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -706,7 +1157,22 @@
    "lat": 37.31748,
    "lng": 127.33336,
    "geo_name": "근형심포니",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {},
+    "nearest": {
+     "public": {
+      "name": "진우3리마을회관",
+      "d": 1158,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광일중학교",
+      "d": 1588,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -732,7 +1198,31 @@
    "lat": 37.39715,
    "lng": 127.29078,
    "geo_name": "우림퓨전빌1단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 4
+    },
+    "nearest": {
+     "culture": {
+      "name": "초월도서관",
+      "d": 1079,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월파출소",
+      "d": 1289,
+      "kind": "police"
+     },
+     "education": {
+      "name": "광주도평초등학교",
+      "d": 148,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -758,7 +1248,29 @@
    "lat": 37.41638,
    "lng": 127.29657,
    "geo_name": "금강아미움",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "medical": 1
+    },
+    "nearest": {
+     "public": {
+      "name": "서하리마을회관",
+      "d": 1872,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "초월초등학교",
+      "d": 1349,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "SRC재활병원",
+      "d": 898,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -784,7 +1296,34 @@
    "lat": 37.35749,
    "lng": 127.32629,
    "geo_name": "킴스빌리지",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "culture": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "곤지암",
+      "d": 1929,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "조선관요박물관",
+      "d": 650,
+      "kind": "museum"
+     },
+     "public": {
+      "name": "광주경찰서 곤지암파출소",
+      "d": 1333,
+      "kind": "police"
+     },
+     "education": {
+      "name": "곤지암 초등학교",
+      "d": 1357,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -810,7 +1349,35 @@
    "lat": 37.37609,
    "lng": 127.2572,
    "geo_name": "쌍용2차",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1,
+     "medical": 1
+    },
+    "r1000": {
+     "public": 2,
+     "education": 2,
+     "medical": 1
+    },
+    "nearest": {
+     "public": {
+      "name": "오포2동행정복지센터",
+      "d": 287,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "양벌초등학교",
+      "d": 362,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 282,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -836,7 +1403,32 @@
    "lat": 37.36397,
    "lng": 127.30903,
    "geo_name": "대주파크빌",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1
+    },
+    "r1000": {
+     "culture": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1317,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 458,
+      "kind": "library"
+     },
+     "education": {
+      "name": "초월중학교",
+      "d": 617,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -862,7 +1454,39 @@
    "lat": 37.38955,
    "lng": 127.29446,
    "geo_name": "신일드림빌",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 8,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1864,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 380,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서",
+      "d": 624,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "초월고등학교",
+      "d": 454,
+      "kind": "high"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -888,7 +1512,40 @@
    "lat": 37.34639,
    "lng": 127.34516,
    "geo_name": "삼주노블리제",
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "culture": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 1,
+     "public": 5,
+     "education": 7
+    },
+    "nearest": {
+     "transit": {
+      "name": "곤지암",
+      "d": 468,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "곤지암도서관",
+      "d": 471,
+      "kind": "library"
+     },
+     "public": {
+      "name": "곤지암우체국",
+      "d": 558,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "곤지암중고등학교",
+      "d": 696,
+      "kind": "high"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -914,7 +1571,33 @@
    "lat": 37.39444,
    "lng": 127.28971,
    "geo_name": "대주피오레",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 6
+    },
+    "nearest": {
+     "culture": {
+      "name": "초월도서관",
+      "d": 787,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월파출소",
+      "d": 977,
+      "kind": "police"
+     },
+     "education": {
+      "name": "광주도평초등학교",
+      "d": 195,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -940,7 +1623,33 @@
    "lat": 37.35975,
    "lng": 127.21798,
    "geo_name": "오포추자서희스타힐스",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 1
+    },
+    "r1000": {
+     "public": 2,
+     "education": 1
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 2148,
+      "kind": "library"
+     },
+     "public": {
+      "name": "오포우체국",
+      "d": 188,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "오포초등학교",
+      "d": 240,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -966,7 +1675,25 @@
    "lat": 37.3547,
    "lng": 127.21259,
    "geo_name": "신영프로방스",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "public": 2,
+     "education": 1
+    },
+    "nearest": {
+     "public": {
+      "name": "오포우체국",
+      "d": 679,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "오포초등학교",
+      "d": 740,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -992,7 +1719,40 @@
    "lat": 37.42131,
    "lng": 127.24054,
    "geo_name": "우림루미아트",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "public": 2,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 2243,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "남한산성아트홀",
+      "d": 1403,
+      "kind": "arts_centre"
+     },
+     "public": {
+      "name": "탄벌동 행정복지센터",
+      "d": 523,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "탄벌초등학교",
+      "d": 740,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 1037,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1018,7 +1778,32 @@
    "lat": 37.39521,
    "lng": 127.29259,
    "geo_name": "신일",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "education": 4
+    },
+    "nearest": {
+     "culture": {
+      "name": "초월도서관",
+      "d": 874,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주경찰서 초월파출소",
+      "d": 1119,
+      "kind": "police"
+     },
+     "education": {
+      "name": "광주도평초등학교",
+      "d": 284,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1044,7 +1829,41 @@
    "lat": 37.39725,
    "lng": 127.27823,
    "geo_name": "쌍령2차동성",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 2035,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1573,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월우체국",
+      "d": 1554,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "쌍령초등학교",
+      "d": 314,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 2200,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1070,7 +1889,35 @@
    "lat": 37.37707,
    "lng": 127.25954,
    "geo_name": "양벌리우림",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1,
+     "medical": 1
+    },
+    "r1000": {
+     "public": 2,
+     "education": 1,
+     "medical": 1
+    },
+    "nearest": {
+     "public": {
+      "name": "오포2동행정복지센터",
+      "d": 439,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "양벌초등학교",
+      "d": 369,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 388,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1096,7 +1943,36 @@
    "lat": 37.35584,
    "lng": 127.32797,
    "geo_name": "현진에버빌",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1
+    },
+    "r1000": {
+     "culture": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "곤지암",
+      "d": 1723,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "조선관요박물관",
+      "d": 472,
+      "kind": "museum"
+     },
+     "public": {
+      "name": "광주경찰서 곤지암파출소",
+      "d": 1122,
+      "kind": "police"
+     },
+     "education": {
+      "name": "곤지암초등학교",
+      "d": 1126,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1122,7 +1998,42 @@
    "lat": 37.38708,
    "lng": 127.23673,
    "geo_name": "쌍용스윗닷홈3단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "public": 5,
+     "education": 7
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1966,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 1029,
+      "kind": "library"
+     },
+     "public": {
+      "name": "장지7통마을회관",
+      "d": 557,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 1921,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1148,7 +2059,31 @@
    "lat": 37.35953,
    "lng": 127.313,
    "geo_name": "코아루햇빛마을",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1
+    },
+    "r1000": {
+     "culture": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1922,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 171,
+      "kind": "library"
+     },
+     "education": {
+      "name": "초월중학교",
+      "d": 1198,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1174,7 +2109,35 @@
    "lat": 37.36353,
    "lng": 127.24635,
    "geo_name": "대성",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "education": 2,
+     "medical": 1
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 1945,
+      "kind": "library"
+     },
+     "public": {
+      "name": "양벌리마을회관",
+      "d": 1004,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "매양중학교",
+      "d": 633,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 727,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1200,7 +2163,33 @@
    "lat": 37.35975,
    "lng": 127.21798,
    "geo_name": "오포추자서희스타힐스",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 1
+    },
+    "r1000": {
+     "public": 2,
+     "education": 1
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 2148,
+      "kind": "library"
+     },
+     "public": {
+      "name": "오포우체국",
+      "d": 188,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "오포초등학교",
+      "d": 240,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1226,7 +2215,37 @@
    "lat": 37.43265,
    "lng": 127.25441,
    "geo_name": "대주파크빌",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 8
+    },
+    "nearest": {
+     "culture": {
+      "name": "남한산성아트홀",
+      "d": 648,
+      "kind": "arts_centre"
+     },
+     "public": {
+      "name": "광주시청",
+      "d": 372,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광주송정초등학교",
+      "d": 1085,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 1833,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1252,7 +2271,35 @@
    "lat": 37.37609,
    "lng": 127.2572,
    "geo_name": "쌍용2차",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1,
+     "medical": 1
+    },
+    "r1000": {
+     "public": 2,
+     "education": 2,
+     "medical": 1
+    },
+    "nearest": {
+     "public": {
+      "name": "오포2동행정복지센터",
+      "d": 287,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "양벌초등학교",
+      "d": 362,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 282,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1278,7 +2325,32 @@
    "lat": 37.3631,
    "lng": 127.31096,
    "geo_name": "벽산블루밍",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1
+    },
+    "r1000": {
+     "culture": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1499,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 274,
+      "kind": "library"
+     },
+     "education": {
+      "name": "초월중학교",
+      "d": 813,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1304,7 +2376,35 @@
    "lat": 37.37609,
    "lng": 127.2572,
    "geo_name": "쌍용2차",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1,
+     "medical": 1
+    },
+    "r1000": {
+     "public": 2,
+     "education": 2,
+     "medical": 1
+    },
+    "nearest": {
+     "public": {
+      "name": "오포2동행정복지센터",
+      "d": 287,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "양벌초등학교",
+      "d": 362,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 282,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1330,7 +2430,34 @@
    "lat": 37.38784,
    "lng": 127.22803,
    "geo_name": "성원상떼빌5단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "광남도서관",
+      "d": 701,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 205,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전초등학교",
+      "d": 168,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1356,7 +2483,35 @@
    "lat": 37.37609,
    "lng": 127.2572,
    "geo_name": "쌍용2차",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1,
+     "medical": 1
+    },
+    "r1000": {
+     "public": 2,
+     "education": 2,
+     "medical": 1
+    },
+    "nearest": {
+     "public": {
+      "name": "오포2동행정복지센터",
+      "d": 287,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "양벌초등학교",
+      "d": 362,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 282,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1382,7 +2537,43 @@
    "lat": 37.3882,
    "lng": 127.23895,
    "geo_name": "쌍용스윗닷홈1단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "public": 5,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1737,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 1087,
+      "kind": "library"
+     },
+     "public": {
+      "name": "장지7통마을회관",
+      "d": 339,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남고등학교",
+      "d": 372,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 1829,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1408,7 +2599,36 @@
    "lat": 37.42857,
    "lng": 127.23556,
    "geo_name": "신일드림빌",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1
+    },
+    "r1000": {
+     "public": 1
+    },
+    "nearest": {
+     "culture": {
+      "name": "남한산성아트홀",
+      "d": 1712,
+      "kind": "arts_centre"
+     },
+     "public": {
+      "name": "광주시농업기술센터",
+      "d": 392,
+      "kind": "government"
+     },
+     "education": {
+      "name": "탄벌초등학교",
+      "d": 1511,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 1890,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1434,7 +2654,41 @@
    "lat": 37.39941,
    "lng": 127.27867,
    "geo_name": "쌍령현대",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1912,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1723,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월우체국",
+      "d": 1738,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "쌍령초등학교",
+      "d": 254,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 2073,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1460,7 +2714,34 @@
    "lat": 37.4261,
    "lng": 127.28708,
    "geo_name": "세광엔리치빌",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "medical": 1
+    },
+    "nearest": {
+     "culture": {
+      "name": "영은미술관",
+      "d": 2155,
+      "kind": "gallery"
+     },
+     "public": {
+      "name": "서하리마을회관",
+      "d": 1860,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "경화여자고등학교",
+      "d": 2138,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "SRC재활병원",
+      "d": 730,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1486,7 +2767,43 @@
    "lat": 37.38667,
    "lng": 127.23784,
    "geo_name": "쌍용스윗닷홈2단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 2
+    },
+    "r1000": {
+     "public": 5,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1926,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 1128,
+      "kind": "library"
+     },
+     "public": {
+      "name": "장지7통마을회관",
+      "d": 482,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남고등학교",
+      "d": 196,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 1814,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1512,7 +2829,46 @@
    "lat": 37.41112,
    "lng": 127.25051,
    "geo_name": "대우",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 7
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 4,
+     "public": 5,
+     "education": 11,
+     "medical": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 961,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "광주시립도서관",
+      "d": 244,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주경찰서 경안지구대",
+      "d": 599,
+      "kind": "police"
+     },
+     "education": {
+      "name": "경안초등학교",
+      "d": 245,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 532,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1538,7 +2894,43 @@
    "lat": 37.38667,
    "lng": 127.23784,
    "geo_name": "쌍용스윗닷홈2단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 2
+    },
+    "r1000": {
+     "public": 5,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1926,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 1128,
+      "kind": "library"
+     },
+     "public": {
+      "name": "장지7통마을회관",
+      "d": 482,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남고등학교",
+      "d": 196,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 1814,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1564,7 +2956,41 @@
    "lat": 37.42769,
    "lng": 127.24626,
    "geo_name": "벽산블루밍",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "culture": 2,
+     "public": 9,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 2406,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "남한산성아트홀",
+      "d": 763,
+      "kind": "arts_centre"
+     },
+     "public": {
+      "name": "광주시선거관리위원회",
+      "d": 567,
+      "kind": "government"
+     },
+     "education": {
+      "name": "탄벌초등학교",
+      "d": 893,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 1306,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1590,7 +3016,35 @@
    "lat": 37.37707,
    "lng": 127.25954,
    "geo_name": "양벌리우림",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1,
+     "medical": 1
+    },
+    "r1000": {
+     "public": 2,
+     "education": 1,
+     "medical": 1
+    },
+    "nearest": {
+     "public": {
+      "name": "오포2동행정복지센터",
+      "d": 439,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "양벌초등학교",
+      "d": 369,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 388,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1616,7 +3070,40 @@
    "lat": 37.37022,
    "lng": 127.2489,
    "geo_name": "양촌현대",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 2,
+     "medical": 1
+    },
+    "r1000": {
+     "public": 2,
+     "education": 2,
+     "medical": 1
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 1710,
+      "kind": "library"
+     },
+     "public": {
+      "name": "양벌리마을회관",
+      "d": 280,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "매양중학교",
+      "d": 153,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 280,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1642,7 +3129,32 @@
    "lat": 37.36397,
    "lng": 127.30903,
    "geo_name": "대주파크빌",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1
+    },
+    "r1000": {
+     "culture": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1317,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 458,
+      "kind": "library"
+     },
+     "education": {
+      "name": "초월중학교",
+      "d": 617,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1668,7 +3180,40 @@
    "lat": 37.42131,
    "lng": 127.24054,
    "geo_name": "우림루미아트",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "public": 2,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 2243,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "남한산성아트홀",
+      "d": 1403,
+      "kind": "arts_centre"
+     },
+     "public": {
+      "name": "탄벌동 행정복지센터",
+      "d": 523,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "탄벌초등학교",
+      "d": 740,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 1037,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1694,7 +3239,40 @@
    "lat": 37.41924,
    "lng": 127.27633,
    "geo_name": "금강펜테리움1단지",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "culture": 2,
+     "medical": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1710,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "영은미술관",
+      "d": 944,
+      "kind": "gallery"
+     },
+     "public": {
+      "name": "송정119안전센터",
+      "d": 1177,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "광주고등학교",
+      "d": 1020,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "SRC재활병원",
+      "d": 960,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1720,7 +3298,37 @@
    "lat": 37.37629,
    "lng": 127.29003,
    "geo_name": "초월e편한세상1단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 934,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1239,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월읍행정복지센터",
+      "d": 1010,
+      "kind": "government"
+     },
+     "education": {
+      "name": "쌍동초등학교",
+      "d": 122,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1746,7 +3354,41 @@
    "lat": 37.39852,
    "lng": 127.27714,
    "geo_name": "동성1차",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1869,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1741,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월우체국",
+      "d": 1724,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "쌍령초등학교",
+      "d": 376,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 2034,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1772,7 +3414,44 @@
    "lat": 37.41865,
    "lng": 127.25556,
    "geo_name": "파라다이스2단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "culture": 4,
+     "public": 12,
+     "education": 8,
+     "medical": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1123,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "경기도립광주도서관",
+      "d": 869,
+      "kind": "library"
+     },
+     "public": {
+      "name": "경기도광주하남교육지원청",
+      "d": 541,
+      "kind": "government"
+     },
+     "education": {
+      "name": "광주송정초등학교",
+      "d": 475,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 504,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1798,7 +3477,29 @@
    "lat": 37.36777,
    "lng": 127.16122,
    "geo_name": "신현2차현대모닝사이드",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "education": 1
+    },
+    "nearest": {
+     "culture": {
+      "name": "능평도서관",
+      "d": 2012,
+      "kind": "library"
+     },
+     "education": {
+      "name": "광명초등학교",
+      "d": 903,
+      "kind": "elementary"
+     },
+     "public": {
+      "name": "율동공원",
+      "d": 1364,
+      "kind": "government"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1824,7 +3525,39 @@
    "lat": 37.38999,
    "lng": 127.29267,
    "geo_name": "쌍용더플래티넘광주",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 8,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1957,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 316,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주경찰서 초월파출소",
+      "d": 608,
+      "kind": "police"
+     },
+     "education": {
+      "name": "초월고등학교",
+      "d": 356,
+      "kind": "high"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1850,7 +3583,38 @@
    "lat": 37.36536,
    "lng": 127.24717,
    "geo_name": "대주파크빌2차",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "public": 1,
+     "education": 2,
+     "medical": 1
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 1860,
+      "kind": "library"
+     },
+     "public": {
+      "name": "양벌리마을회관",
+      "d": 790,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "매양중학교",
+      "d": 419,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 537,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1876,7 +3640,41 @@
    "lat": 37.39852,
    "lng": 127.27714,
    "geo_name": "동성1차",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1869,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1741,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월우체국",
+      "d": 1724,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "쌍령초등학교",
+      "d": 376,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 2034,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1902,7 +3700,38 @@
    "lat": 37.38065,
    "lng": 127.23188,
    "geo_name": "태전e편한세상",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 511,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 687,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "한아람초등학교",
+      "d": 186,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1698,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1928,7 +3757,41 @@
    "lat": 37.39725,
    "lng": 127.27823,
    "geo_name": "쌍령2차동성",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 2035,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1573,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월우체국",
+      "d": 1554,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "쌍령초등학교",
+      "d": 314,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 2200,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1954,7 +3817,39 @@
    "lat": 37.38999,
    "lng": 127.29267,
    "geo_name": "쌍용더플래티넘광주",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 8,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1957,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 316,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주경찰서 초월파출소",
+      "d": 608,
+      "kind": "police"
+     },
+     "education": {
+      "name": "초월고등학교",
+      "d": 356,
+      "kind": "high"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -1980,7 +3875,46 @@
    "lat": 37.40723,
    "lng": 127.24982,
    "geo_name": "해태그린",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1,
+     "education": 3
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 3,
+     "public": 5,
+     "education": 10,
+     "medical": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 975,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광주시립도서관",
+      "d": 484,
+      "kind": "library"
+     },
+     "public": {
+      "name": "경안동 행정복지센터",
+      "d": 779,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "서울장신대학교",
+      "d": 405,
+      "kind": "university"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 614,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2006,7 +3940,41 @@
    "lat": 37.39785,
    "lng": 127.27543,
    "geo_name": "광주역대광로제비앙",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1811,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "롯데시네마 광주터미널",
+      "d": 1753,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "초월우체국",
+      "d": 1756,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광주푸른초등학교",
+      "d": 407,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 1979,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2032,7 +4000,40 @@
    "lat": 37.34639,
    "lng": 127.34516,
    "geo_name": "삼주노블리제",
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "culture": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 1,
+     "public": 5,
+     "education": 7
+    },
+    "nearest": {
+     "transit": {
+      "name": "곤지암",
+      "d": 468,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "곤지암도서관",
+      "d": 471,
+      "kind": "library"
+     },
+     "public": {
+      "name": "곤지암우체국",
+      "d": 558,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "곤지암중고등학교",
+      "d": 696,
+      "kind": "high"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2058,7 +4059,37 @@
    "lat": 37.3767,
    "lng": 127.29443,
    "geo_name": "동광모닝스카이",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 612,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1225,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서",
+      "d": 1082,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "쌍동초등학교",
+      "d": 427,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2084,7 +4115,41 @@
    "lat": 37.3979,
    "lng": 127.27997,
    "geo_name": "쌍령2차현대모닝사이드",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 6
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 2105,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1521,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월우체국",
+      "d": 1536,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "쌍령초등학교",
+      "d": 144,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 2268,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2110,7 +4175,41 @@
    "lat": 37.3979,
    "lng": 127.27997,
    "geo_name": "쌍령2차현대모닝사이드",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 6
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 2105,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1521,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월우체국",
+      "d": 1536,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "쌍령초등학교",
+      "d": 144,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 2268,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2136,7 +4235,45 @@
    "lat": 37.39283,
    "lng": 127.23429,
    "geo_name": "장지리현대",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1,
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 7,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1808,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 477,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남1동행정복지센터",
+      "d": 475,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남초등학교",
+      "d": 366,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "선한빛 요양병원",
+      "d": 2255,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2162,7 +4299,39 @@
    "lat": 37.37196,
    "lng": 127.25345,
    "geo_name": "세양청마루",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "public": 2,
+     "education": 3,
+     "medical": 2
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 2035,
+      "kind": "library"
+     },
+     "public": {
+      "name": "양벌리마을회관",
+      "d": 168,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광주매곡초등학교",
+      "d": 433,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 710,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2188,7 +4357,43 @@
    "lat": 37.41052,
    "lng": 127.23774,
    "geo_name": "경남아너스빌2단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "public": 1,
+     "education": 6
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1884,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광주시립도서관",
+      "d": 1366,
+      "kind": "library"
+     },
+     "public": {
+      "name": "경기 광주경찰서",
+      "d": 289,
+      "kind": "police"
+     },
+     "education": {
+      "name": "벌원초등학교",
+      "d": 168,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "선한빛 요양병원",
+      "d": 1100,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2214,7 +4419,44 @@
    "lat": 37.38799,
    "lng": 127.23031,
    "geo_name": "성원2차",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 7
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 2364,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 686,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 122,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 316,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 2415,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2240,7 +4482,46 @@
    "lat": 37.41112,
    "lng": 127.25051,
    "geo_name": "대우",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 7
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 4,
+     "public": 5,
+     "education": 11,
+     "medical": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 961,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "광주시립도서관",
+      "d": 244,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주경찰서 경안지구대",
+      "d": 599,
+      "kind": "police"
+     },
+     "education": {
+      "name": "경안초등학교",
+      "d": 245,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 532,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2266,7 +4547,46 @@
    "lat": 37.41112,
    "lng": 127.25051,
    "geo_name": "대우",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 7
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 4,
+     "public": 5,
+     "education": 11,
+     "medical": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 961,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "광주시립도서관",
+      "d": 244,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주경찰서 경안지구대",
+      "d": 599,
+      "kind": "police"
+     },
+     "education": {
+      "name": "경안초등학교",
+      "d": 245,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 532,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2292,7 +4612,42 @@
    "lat": 37.38708,
    "lng": 127.23673,
    "geo_name": "쌍용스윗닷홈3단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "public": 5,
+     "education": 7
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1966,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 1029,
+      "kind": "library"
+     },
+     "public": {
+      "name": "장지7통마을회관",
+      "d": 557,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 1921,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2318,7 +4673,43 @@
    "lat": 37.41753,
    "lng": 127.25838,
    "geo_name": "송정현대",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "transit": 1,
+     "culture": 3,
+     "public": 8,
+     "education": 10,
+     "medical": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 916,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "경기도립광주도서관",
+      "d": 792,
+      "kind": "library"
+     },
+     "public": {
+      "name": "경기도광주하남교육지원청",
+      "d": 572,
+      "kind": "government"
+     },
+     "education": {
+      "name": "경화여자중학교",
+      "d": 517,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 700,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2344,7 +4735,44 @@
    "lat": 37.4178,
    "lng": 127.25395,
    "geo_name": "탄벌동파라다이스",
-   "infra": null
+   "infra": {
+    "r500": {
+     "medical": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 10,
+     "education": 12,
+     "medical": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1114,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "경기도립광주도서관",
+      "d": 783,
+      "kind": "library"
+     },
+     "public": {
+      "name": "경기도광주하남교육지원청",
+      "d": 703,
+      "kind": "government"
+     },
+     "education": {
+      "name": "탄벌초등학교",
+      "d": 513,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 334,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2370,7 +4798,40 @@
    "lat": 37.42131,
    "lng": 127.24054,
    "geo_name": "우림루미아트",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "public": 2,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 2243,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "남한산성아트홀",
+      "d": 1403,
+      "kind": "arts_centre"
+     },
+     "public": {
+      "name": "탄벌동 행정복지센터",
+      "d": 523,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "탄벌초등학교",
+      "d": 740,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 1037,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2396,7 +4857,40 @@
    "lat": 37.379,
    "lng": 127.25941,
    "geo_name": "e편한세상광주양벌",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1,
+     "medical": 1
+    },
+    "r1000": {
+     "public": 1,
+     "education": 1,
+     "medical": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 2278,
+      "kind": "station"
+     },
+     "public": {
+      "name": "오포2동행정복지센터",
+      "d": 448,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "양벌초등학교",
+      "d": 265,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 369,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2422,7 +4916,35 @@
    "lat": 37.34589,
    "lng": 127.17767,
    "geo_name": "오포베르빌",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1,
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "culture": 1,
+     "public": 2,
+     "education": 1
+    },
+    "nearest": {
+     "culture": {
+      "name": "역사관",
+      "d": 453,
+      "kind": "museum"
+     },
+     "public": {
+      "name": "광주경찰서 오포서부파출소",
+      "d": 466,
+      "kind": "police"
+     },
+     "education": {
+      "name": "능원초등학교",
+      "d": 461,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2448,7 +4970,37 @@
    "lat": 37.37501,
    "lng": 127.28907,
    "geo_name": "초월e편한세상2단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 978,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1389,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월읍행정복지센터",
+      "d": 1140,
+      "kind": "government"
+     },
+     "education": {
+      "name": "쌍동초등학교",
+      "d": 266,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2474,7 +5026,49 @@
    "lat": 37.40824,
    "lng": 127.25626,
    "geo_name": "광주금호리첸시아",
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "culture": 4,
+     "public": 4,
+     "education": 4,
+     "medical": 4
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 4,
+     "public": 5,
+     "education": 8,
+     "medical": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 464,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 215,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "경안동우체국",
+      "d": 287,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광주중학교",
+      "d": 186,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 137,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2500,7 +5094,40 @@
    "lat": 37.37341,
    "lng": 127.23155,
    "geo_name": "더샵오포센트리체(C2)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 5
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 300,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서 오포119",
+      "d": 282,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "고산하늘초등학교",
+      "d": 236,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1307,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2526,7 +5153,38 @@
    "lat": 37.38276,
    "lng": 127.28549,
    "geo_name": "광주초월역한라비발디",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 6
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 6,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1650,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 716,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월읍행정복지센터",
+      "d": 352,
+      "kind": "government"
+     },
+     "education": {
+      "name": "초월고등학교",
+      "d": 646,
+      "kind": "high"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2552,7 +5210,41 @@
    "lat": 37.42769,
    "lng": 127.24626,
    "geo_name": "벽산블루밍",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "culture": 2,
+     "public": 9,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 2406,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "남한산성아트홀",
+      "d": 763,
+      "kind": "arts_centre"
+     },
+     "public": {
+      "name": "광주시선거관리위원회",
+      "d": 567,
+      "kind": "government"
+     },
+     "education": {
+      "name": "탄벌초등학교",
+      "d": 893,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 1306,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2578,7 +5270,41 @@
    "lat": 37.39785,
    "lng": 127.27543,
    "geo_name": "광주역대광로제비앙",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1811,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "롯데시네마 광주터미널",
+      "d": 1753,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "초월우체국",
+      "d": 1756,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광주푸른초등학교",
+      "d": 407,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 1979,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2604,7 +5330,43 @@
    "lat": 37.40735,
    "lng": 127.23702,
    "geo_name": "벽산블루밍2단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "public": 1,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1716,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광주시립도서관",
+      "d": 1476,
+      "kind": "library"
+     },
+     "public": {
+      "name": "경기 광주경찰서",
+      "d": 259,
+      "kind": "police"
+     },
+     "education": {
+      "name": "벌원초등학교",
+      "d": 212,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "선한빛 요양병원",
+      "d": 1142,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2630,7 +5392,43 @@
    "lat": 37.41654,
    "lng": 127.27084,
    "geo_name": "송정우림필유",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1146,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "영은미술관",
+      "d": 423,
+      "kind": "gallery"
+     },
+     "public": {
+      "name": "송정119안전센터",
+      "d": 615,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "광주고등학교",
+      "d": 555,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 1134,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2656,7 +5454,44 @@
    "lat": 37.41865,
    "lng": 127.25556,
    "geo_name": "파라다이스2단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "culture": 4,
+     "public": 12,
+     "education": 8,
+     "medical": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1123,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "경기도립광주도서관",
+      "d": 869,
+      "kind": "library"
+     },
+     "public": {
+      "name": "경기도광주하남교육지원청",
+      "d": 541,
+      "kind": "government"
+     },
+     "education": {
+      "name": "광주송정초등학교",
+      "d": 475,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 504,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2682,7 +5517,43 @@
    "lat": 37.40778,
    "lng": 127.23555,
    "geo_name": "벽산블루밍1단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "public": 1,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1851,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남동행정복합문화시설",
+      "d": 1588,
+      "kind": "community_centre"
+     },
+     "public": {
+      "name": "경기 광주경찰서",
+      "d": 368,
+      "kind": "police"
+     },
+     "education": {
+      "name": "벌원초등학교",
+      "d": 192,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "선한빛 요양병원",
+      "d": 1004,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2708,7 +5579,39 @@
    "lat": 37.38625,
    "lng": 127.22838,
    "geo_name": "우림필유",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 8
+    },
+    "nearest": {
+     "culture": {
+      "name": "광남도서관",
+      "d": 874,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 333,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태성초등학교",
+      "d": 169,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 2365,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2734,7 +5637,46 @@
    "lat": 37.40723,
    "lng": 127.24982,
    "geo_name": "해태그린",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 1,
+     "education": 3
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 3,
+     "public": 5,
+     "education": 10,
+     "medical": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 975,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광주시립도서관",
+      "d": 484,
+      "kind": "library"
+     },
+     "public": {
+      "name": "경안동 행정복지센터",
+      "d": 779,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "서울장신대학교",
+      "d": 405,
+      "kind": "university"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 614,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2760,7 +5702,32 @@
    "lat": 37.36549,
    "lng": 127.30177,
    "geo_name": "힐스테이트초월역(2BL)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 890,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 1083,
+      "kind": "library"
+     },
+     "education": {
+      "name": "초월중학교",
+      "d": 192,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2786,7 +5753,44 @@
    "lat": 37.41074,
    "lng": 127.23539,
    "geo_name": "경남아너스빌1단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "public": 1,
+     "education": 4,
+     "medical": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 2056,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광주시립도서관",
+      "d": 1574,
+      "kind": "library"
+     },
+     "public": {
+      "name": "경기 광주경찰서",
+      "d": 457,
+      "kind": "police"
+     },
+     "education": {
+      "name": "벌원초등학교",
+      "d": 203,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "선한빛 요양병원",
+      "d": 891,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2812,7 +5816,46 @@
    "lat": 37.41676,
    "lng": 127.24767,
    "geo_name": "탄벌리현대",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 2,
+     "medical": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 10,
+     "medical": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1437,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "광주시립도서관",
+      "d": 836,
+      "kind": "library"
+     },
+     "public": {
+      "name": "탄벌동 행정복지센터",
+      "d": 353,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "탄벌초등학교",
+      "d": 360,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 257,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2838,7 +5881,32 @@
    "lat": 37.36549,
    "lng": 127.30177,
    "geo_name": "힐스테이트초월역(2BL)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 890,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 1083,
+      "kind": "library"
+     },
+     "education": {
+      "name": "초월중학교",
+      "d": 192,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2864,7 +5932,39 @@
    "lat": 37.38999,
    "lng": 127.29267,
    "geo_name": "쌍용더플래티넘광주",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 8,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1957,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 316,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주경찰서 초월파출소",
+      "d": 608,
+      "kind": "police"
+     },
+     "education": {
+      "name": "초월고등학교",
+      "d": 356,
+      "kind": "high"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2890,7 +5990,27 @@
    "lat": 37.33746,
    "lng": 127.20817,
    "geo_name": "오포문형양우내안애",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {},
+    "nearest": {
+     "culture": {
+      "name": "마가미술관",
+      "d": 1506,
+      "kind": "arts_centre"
+     },
+     "education": {
+      "name": "모현초등학교 운동장",
+      "d": 1905,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "고려정공",
+      "d": 1939,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2916,7 +6036,38 @@
    "lat": 37.38349,
    "lng": 127.23209,
    "geo_name": "힐스테이트태전5지구(C6)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 826,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 646,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1919,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2942,7 +6093,30 @@
    "lat": 37.35372,
    "lng": 127.16275,
    "geo_name": "오포현대",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "culture": 1,
+     "education": 1
+    },
+    "nearest": {
+     "culture": {
+      "name": "능평도서관",
+      "d": 542,
+      "kind": "library"
+     },
+     "public": {
+      "name": "마을회관",
+      "d": 1666,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광명초등학교",
+      "d": 677,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2968,7 +6142,44 @@
    "lat": 37.38676,
    "lng": 127.23046,
    "geo_name": "성원3차",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 8
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 2426,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 823,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 257,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 220,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 2296,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -2994,7 +6205,38 @@
    "lat": 37.38349,
    "lng": 127.23209,
    "geo_name": "힐스테이트태전5지구(C6)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 826,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 646,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1919,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3020,7 +6262,39 @@
    "lat": 37.3802,
    "lng": 127.23269,
    "geo_name": "힐스테이트태전2차에듀포레",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 480,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 617,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "한아람초등학교",
+      "d": 239,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1612,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3046,7 +6320,37 @@
    "lat": 37.37617,
    "lng": 127.29158,
    "geo_name": "광주초월역모아미래도파크힐스",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 802,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1249,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월읍행정복지센터",
+      "d": 1056,
+      "kind": "government"
+     },
+     "education": {
+      "name": "쌍동초등학교",
+      "d": 214,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3072,7 +6376,40 @@
    "lat": 37.39467,
    "lng": 127.26017,
    "geo_name": "광주역우방아이유쉘(2단지)",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "transit": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 769,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1444,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 1432,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광주중앙고등학교",
+      "d": 905,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1683,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3098,7 +6435,39 @@
    "lat": 37.37848,
    "lng": 127.23224,
    "geo_name": "힐스테이트태전2차(11단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 288,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 696,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "한아람초등학교",
+      "d": 249,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1516,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3124,7 +6493,44 @@
    "lat": 37.39118,
    "lng": 127.23452,
    "geo_name": "태전경남아너스빌시그니처",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 6,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1866,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 575,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 479,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남초등학교",
+      "d": 483,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 2341,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3150,7 +6556,38 @@
    "lat": 37.38276,
    "lng": 127.28549,
    "geo_name": "광주초월역한라비발디",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 6
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 6,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1650,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 716,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월읍행정복지센터",
+      "d": 352,
+      "kind": "government"
+     },
+     "education": {
+      "name": "초월고등학교",
+      "d": 646,
+      "kind": "high"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3176,7 +6613,38 @@
    "lat": 37.38349,
    "lng": 127.23209,
    "geo_name": "힐스테이트태전5지구(C6)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 826,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 646,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1919,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3202,7 +6670,38 @@
    "lat": 37.38349,
    "lng": 127.23209,
    "geo_name": "힐스테이트태전5지구(C6)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 826,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 646,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1919,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3228,7 +6727,39 @@
    "lat": 37.3802,
    "lng": 127.23269,
    "geo_name": "힐스테이트태전2차에듀포레",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 480,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 617,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "한아람초등학교",
+      "d": 239,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1612,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3254,7 +6785,38 @@
    "lat": 37.38349,
    "lng": 127.23209,
    "geo_name": "힐스테이트태전5지구(C6)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 826,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 646,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1919,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3280,7 +6842,39 @@
    "lat": 37.37325,
    "lng": 127.2277,
    "geo_name": "금호",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 4
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 426,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서 오포119",
+      "d": 555,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "고산하늘초등학교",
+      "d": 160,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1632,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3306,7 +6900,27 @@
    "lat": 37.36975,
    "lng": 127.17047,
    "geo_name": "e편한세상테라스오포3단지",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {},
+    "nearest": {
+     "culture": {
+      "name": "능평도서관",
+      "d": 2184,
+      "kind": "library"
+     },
+     "public": {
+      "name": "한국기술교육대학교 고용노동연수원",
+      "d": 2051,
+      "kind": "government"
+     },
+     "education": {
+      "name": "광명초등학교",
+      "d": 1401,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3332,7 +6946,44 @@
    "lat": 37.38835,
    "lng": 127.23219,
    "geo_name": "e편한세상태전2차(C1)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 5,
+     "education": 8
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 2202,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 693,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 222,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 280,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 2339,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3358,7 +7009,40 @@
    "lat": 37.41849,
    "lng": 127.27475,
    "geo_name": "금강펜테리움2단지",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "culture": 2,
+     "education": 2
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1549,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "영은미술관",
+      "d": 789,
+      "kind": "gallery"
+     },
+     "public": {
+      "name": "송정119안전센터",
+      "d": 1015,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "광주고등학교",
+      "d": 874,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "SRC재활병원",
+      "d": 1105,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3384,7 +7068,38 @@
    "lat": 37.37286,
    "lng": 127.22244,
    "geo_name": "오포자이디오브(C4)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 3
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 831,
+      "kind": "library"
+     },
+     "public": {
+      "name": "오포1동행정복지센터",
+      "d": 915,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "고산별빛초등학교",
+      "d": 120,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 2081,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3410,7 +7125,38 @@
    "lat": 37.37267,
    "lng": 127.29819,
    "geo_name": "초월롯데낙천대2단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "education": 2
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 173,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1753,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서",
+      "d": 1438,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "도곡초등학교",
+      "d": 260,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3436,7 +7182,38 @@
    "lat": 37.38349,
    "lng": 127.23209,
    "geo_name": "힐스테이트태전5지구(C6)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 826,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 646,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1919,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3462,7 +7239,44 @@
    "lat": 37.38835,
    "lng": 127.23219,
    "geo_name": "e편한세상태전2차(C1)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 5,
+     "education": 8
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 2202,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 693,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 222,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 280,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 2339,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3488,7 +7302,44 @@
    "lat": 37.38835,
    "lng": 127.23219,
    "geo_name": "e편한세상태전2차(C1)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 5,
+     "education": 8
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 2202,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 693,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 222,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 280,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 2339,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3514,7 +7365,39 @@
    "lat": 37.38022,
    "lng": 127.23454,
    "geo_name": "태전파크자이14BL",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 557,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 454,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남중학교",
+      "d": 158,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1501,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3540,7 +7423,32 @@
    "lat": 37.36549,
    "lng": 127.30177,
    "geo_name": "힐스테이트초월역(2BL)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 890,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 1083,
+      "kind": "library"
+     },
+     "education": {
+      "name": "초월중학교",
+      "d": 192,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3566,7 +7474,41 @@
    "lat": 37.39662,
    "lng": 127.26945,
    "geo_name": "광주센트럴푸르지오",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 2
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1450,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "롯데시네마 광주터미널",
+      "d": 1545,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "경안동우체국",
+      "d": 1865,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광주푸른초등학교",
+      "d": 306,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 1785,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3592,7 +7534,38 @@
    "lat": 37.37286,
    "lng": 127.22244,
    "geo_name": "오포자이디오브(C4)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 3
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 831,
+      "kind": "library"
+     },
+     "public": {
+      "name": "오포1동행정복지센터",
+      "d": 915,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "고산별빛초등학교",
+      "d": 120,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 2081,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3618,7 +7591,41 @@
    "lat": 37.39662,
    "lng": 127.26945,
    "geo_name": "광주센트럴푸르지오",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 2
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1450,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "롯데시네마 광주터미널",
+      "d": 1545,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "경안동우체국",
+      "d": 1865,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광주푸른초등학교",
+      "d": 306,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 1785,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3644,7 +7651,37 @@
    "lat": 37.37617,
    "lng": 127.29158,
    "geo_name": "광주초월역모아미래도파크힐스",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 802,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1249,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월읍행정복지센터",
+      "d": 1056,
+      "kind": "government"
+     },
+     "education": {
+      "name": "쌍동초등학교",
+      "d": 214,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3670,7 +7707,39 @@
    "lat": 37.37848,
    "lng": 127.23224,
    "geo_name": "힐스테이트태전2차(11단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 288,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 696,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "한아람초등학교",
+      "d": 249,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1516,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3696,7 +7765,45 @@
    "lat": 37.39186,
    "lng": 127.22836,
    "geo_name": "광주태전효성해링턴플레이스",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "public": 4,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 2336,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 257,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주태전우편취급국",
+      "d": 226,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광남초등학교",
+      "d": 311,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "선한빛 요양병원",
+      "d": 2237,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3722,7 +7829,38 @@
    "lat": 37.37196,
    "lng": 127.29944,
    "geo_name": "초월롯데캐슬",
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "education": 2
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 162,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 1685,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서",
+      "d": 1513,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "도곡초등학교",
+      "d": 158,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3748,7 +7886,45 @@
    "lat": 37.39186,
    "lng": 127.22836,
    "geo_name": "광주태전효성해링턴플레이스",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "public": 4,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 2336,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 257,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주태전우편취급국",
+      "d": 226,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광남초등학교",
+      "d": 311,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "선한빛 요양병원",
+      "d": 2237,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3774,7 +7950,49 @@
    "lat": 37.40824,
    "lng": 127.25626,
    "geo_name": "광주금호리첸시아",
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "culture": 4,
+     "public": 4,
+     "education": 4,
+     "medical": 4
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 4,
+     "public": 5,
+     "education": 8,
+     "medical": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 464,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 215,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "경안동우체국",
+      "d": 287,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광주중학교",
+      "d": 186,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 137,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3800,7 +8018,38 @@
    "lat": 37.37267,
    "lng": 127.29819,
    "geo_name": "초월롯데낙천대2단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "education": 2
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 173,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 1753,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서",
+      "d": 1438,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "도곡초등학교",
+      "d": 260,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3826,7 +8075,38 @@
    "lat": 37.38349,
    "lng": 127.23209,
    "geo_name": "힐스테이트태전5지구(C6)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 826,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 646,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1919,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3852,7 +8132,44 @@
    "lat": 37.39118,
    "lng": 127.23452,
    "geo_name": "태전경남아너스빌시그니처",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 6,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1866,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 575,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 479,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남초등학교",
+      "d": 483,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 2341,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3878,7 +8195,44 @@
    "lat": 37.38835,
    "lng": 127.23219,
    "geo_name": "e편한세상태전2차(C1)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 5,
+     "education": 8
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 2202,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "광남도서관",
+      "d": 693,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 222,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 280,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "양벌약국",
+      "d": 2339,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3904,7 +8258,40 @@
    "lat": 37.37341,
    "lng": 127.23155,
    "geo_name": "더샵오포센트리체(C2)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 5
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 300,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서 오포119",
+      "d": 282,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "고산하늘초등학교",
+      "d": 236,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1307,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3930,7 +8317,32 @@
    "lat": 37.36549,
    "lng": 127.30177,
    "geo_name": "힐스테이트초월역(2BL)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 890,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 1083,
+      "kind": "library"
+     },
+     "education": {
+      "name": "초월중학교",
+      "d": 192,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3956,7 +8368,38 @@
    "lat": 37.38349,
    "lng": 127.23209,
    "geo_name": "힐스테이트태전5지구(C6)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 826,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 646,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1919,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -3982,7 +8425,44 @@
    "lat": 37.42005,
    "lng": 127.25431,
    "geo_name": "광주행정타운아이파크(1BL)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 11,
+     "education": 6,
+     "medical": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 1312,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "남한산성아트홀",
+      "d": 750,
+      "kind": "arts_centre"
+     },
+     "public": {
+      "name": "경기도광주하남교육지원청",
+      "d": 509,
+      "kind": "government"
+     },
+     "education": {
+      "name": "광주송정초등학교",
+      "d": 329,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "광주시보건소",
+      "d": 519,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4008,7 +8488,38 @@
    "lat": 37.38349,
    "lng": 127.23209,
    "geo_name": "힐스테이트태전5지구(C6)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 3,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 826,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광남동 행정복지센터",
+      "d": 646,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "태전고등학교",
+      "d": 268,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1919,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4034,7 +8545,39 @@
    "lat": 37.3802,
    "lng": 127.23269,
    "geo_name": "힐스테이트태전2차에듀포레",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 480,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 617,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "한아람초등학교",
+      "d": 239,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1612,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4060,7 +8603,32 @@
    "lat": 37.36549,
    "lng": 127.30177,
    "geo_name": "힐스테이트초월역(2BL)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 890,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 1083,
+      "kind": "library"
+     },
+     "education": {
+      "name": "초월중학교",
+      "d": 192,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4086,7 +8654,38 @@
    "lat": 37.38276,
    "lng": 127.28549,
    "geo_name": "광주초월역한라비발디",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 6
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 6,
+     "education": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 1650,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "초월도서관",
+      "d": 716,
+      "kind": "library"
+     },
+     "public": {
+      "name": "초월읍행정복지센터",
+      "d": 352,
+      "kind": "government"
+     },
+     "education": {
+      "name": "초월고등학교",
+      "d": 646,
+      "kind": "high"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4112,7 +8711,39 @@
    "lat": 37.38124,
    "lng": 127.23449,
    "geo_name": "태전파크자이13BL",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 651,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 462,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남중학교",
+      "d": 192,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1591,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4138,7 +8769,39 @@
    "lat": 37.37848,
    "lng": 127.23224,
    "geo_name": "힐스테이트태전2차(11단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "education": 3
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 288,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 696,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "한아람초등학교",
+      "d": 249,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1516,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4164,7 +8827,38 @@
    "lat": 37.37196,
    "lng": 127.29944,
    "geo_name": "초월롯데캐슬",
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "education": 2
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 162,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 1685,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서",
+      "d": 1513,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "도곡초등학교",
+      "d": 158,
+      "kind": "elementary"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4190,7 +8884,36 @@
    "lat": 37.35692,
    "lng": 127.15014,
    "geo_name": "신현라온프라이빗",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 2
+    },
+    "nearest": {
+     "culture": {
+      "name": "능평도서관",
+      "d": 1671,
+      "kind": "library"
+     },
+     "education": {
+      "name": "신현중학교",
+      "d": 122,
+      "kind": "middle"
+     },
+     "public": {
+      "name": "장안치안센터",
+      "d": 1432,
+      "kind": "police"
+     },
+     "medical": {
+      "name": "동국대학교 분당한방병원",
+      "d": 2268,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4216,7 +8939,38 @@
    "lat": 37.37286,
    "lng": 127.22244,
    "geo_name": "오포자이디오브(C4)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 3
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 831,
+      "kind": "library"
+     },
+     "public": {
+      "name": "오포1동행정복지센터",
+      "d": 915,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "고산별빛초등학교",
+      "d": 120,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 2081,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4242,7 +8996,40 @@
    "lat": 37.39467,
    "lng": 127.26017,
    "geo_name": "광주역우방아이유쉘(2단지)",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "transit": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 769,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1444,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 1432,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광주중앙고등학교",
+      "d": 905,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1683,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4268,7 +9055,40 @@
    "lat": 37.39467,
    "lng": 127.26017,
    "geo_name": "광주역우방아이유쉘(2단지)",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "transit": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 769,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1444,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 1432,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광주중앙고등학교",
+      "d": 905,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1683,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4294,7 +9114,29 @@
    "lat": 37.36171,
    "lng": 127.15507,
    "geo_name": "신현현대모닝사이드1-1",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "education": 3
+    },
+    "nearest": {
+     "culture": {
+      "name": "능평도서관",
+      "d": 1657,
+      "kind": "library"
+     },
+     "education": {
+      "name": "신현중학교",
+      "d": 565,
+      "kind": "middle"
+     },
+     "public": {
+      "name": "장안치안센터",
+      "d": 1294,
+      "kind": "police"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4320,7 +9162,41 @@
    "lat": 37.39662,
    "lng": 127.26945,
    "geo_name": "광주센트럴푸르지오",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 2
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 1450,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "롯데시네마 광주터미널",
+      "d": 1545,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "경안동우체국",
+      "d": 1865,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광주푸른초등학교",
+      "d": 306,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "참조은병원",
+      "d": 1785,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4346,7 +9222,39 @@
    "lat": 37.38124,
    "lng": 127.23449,
    "geo_name": "태전파크자이13BL",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 651,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 462,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남중학교",
+      "d": 192,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1591,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4372,7 +9280,31 @@
    "lat": 37.35788,
    "lng": 127.15521,
    "geo_name": "e편한세상태재1단지",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "education": 3
+    },
+    "nearest": {
+     "culture": {
+      "name": "능평도서관",
+      "d": 1348,
+      "kind": "library"
+     },
+     "public": {
+      "name": "장안치안센터",
+      "d": 1591,
+      "kind": "police"
+     },
+     "education": {
+      "name": "신현중학교",
+      "d": 369,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4398,7 +9330,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4424,7 +9393,49 @@
    "lat": 37.40824,
    "lng": 127.25626,
    "geo_name": "광주금호리첸시아",
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1,
+     "culture": 4,
+     "public": 4,
+     "education": 4,
+     "medical": 4
+    },
+    "r1000": {
+     "transit": 1,
+     "culture": 4,
+     "public": 5,
+     "education": 8,
+     "medical": 4
+    },
+    "nearest": {
+     "transit": {
+      "name": "광주종합터미널",
+      "d": 464,
+      "kind": "bus_station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 215,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "경안동우체국",
+      "d": 287,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광주중학교",
+      "d": 186,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 137,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4450,7 +9461,36 @@
    "lat": 37.35692,
    "lng": 127.15014,
    "geo_name": "신현라온프라이빗",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 2
+    },
+    "nearest": {
+     "culture": {
+      "name": "능평도서관",
+      "d": 1671,
+      "kind": "library"
+     },
+     "education": {
+      "name": "신현중학교",
+      "d": 122,
+      "kind": "middle"
+     },
+     "public": {
+      "name": "장안치안센터",
+      "d": 1432,
+      "kind": "police"
+     },
+     "medical": {
+      "name": "동국대학교 분당한방병원",
+      "d": 2268,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4476,7 +9516,36 @@
    "lat": 37.35692,
    "lng": 127.15014,
    "geo_name": "신현라온프라이빗",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 2
+    },
+    "nearest": {
+     "culture": {
+      "name": "능평도서관",
+      "d": 1671,
+      "kind": "library"
+     },
+     "education": {
+      "name": "신현중학교",
+      "d": 122,
+      "kind": "middle"
+     },
+     "public": {
+      "name": "장안치안센터",
+      "d": 1432,
+      "kind": "police"
+     },
+     "medical": {
+      "name": "동국대학교 분당한방병원",
+      "d": 2268,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4502,7 +9571,39 @@
    "lat": 37.38022,
    "lng": 127.23454,
    "geo_name": "태전파크자이14BL",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 557,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 454,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남중학교",
+      "d": 158,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1501,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4528,7 +9629,24 @@
    "lat": 37.40997,
    "lng": 127.19671,
    "geo_name": "힐스테이트삼동역",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "transit": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "삼동",
+      "d": 607,
+      "kind": "station"
+     },
+     "public": {
+      "name": "중대1동새마을회관",
+      "d": 1648,
+      "kind": "townhall"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4554,7 +9672,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4580,7 +9735,40 @@
    "lat": 37.39467,
    "lng": 127.26017,
    "geo_name": "광주역우방아이유쉘(2단지)",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "transit": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 769,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1444,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 1432,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광주중앙고등학교",
+      "d": 905,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1683,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4606,7 +9794,40 @@
    "lat": 37.37341,
    "lng": 127.23155,
    "geo_name": "더샵오포센트리체(C2)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "culture": 2,
+     "public": 1,
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 5
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 300,
+      "kind": "library"
+     },
+     "public": {
+      "name": "광주소방서 오포119",
+      "d": 282,
+      "kind": "fire_station"
+     },
+     "education": {
+      "name": "고산하늘초등학교",
+      "d": 236,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1307,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4632,7 +9853,39 @@
    "lat": 37.38124,
    "lng": 127.23449,
    "geo_name": "태전파크자이13BL",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 651,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 462,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남중학교",
+      "d": 192,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1591,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4658,7 +9911,40 @@
    "lat": 37.39467,
    "lng": 127.26017,
    "geo_name": "광주역우방아이유쉘(2단지)",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "transit": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 769,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1444,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 1432,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광주중앙고등학교",
+      "d": 905,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1683,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4684,7 +9970,36 @@
    "lat": 37.35918,
    "lng": 127.14981,
    "geo_name": "e편한세상오포3차",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 2
+    },
+    "r1000": {
+     "education": 3
+    },
+    "nearest": {
+     "culture": {
+      "name": "능평도서관",
+      "d": 1820,
+      "kind": "library"
+     },
+     "education": {
+      "name": "신현중학교",
+      "d": 190,
+      "kind": "middle"
+     },
+     "public": {
+      "name": "장안치안센터",
+      "d": 1195,
+      "kind": "police"
+     },
+     "medical": {
+      "name": "동국대학교 분당한방병원",
+      "d": 2125,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4710,7 +10025,26 @@
    "lat": 37.4089,
    "lng": 127.19925,
    "geo_name": "우남퍼스트빌",
-   "infra": null
+   "infra": {
+    "r500": {
+     "transit": 1
+    },
+    "r1000": {
+     "transit": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "삼동",
+      "d": 366,
+      "kind": "station"
+     },
+     "public": {
+      "name": "중대1동새마을회관",
+      "d": 1407,
+      "kind": "townhall"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4736,7 +10070,40 @@
    "lat": 37.39467,
    "lng": 127.26017,
    "geo_name": "광주역우방아이유쉘(2단지)",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "transit": 1,
+     "education": 1
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 769,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1444,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 1432,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광주중앙고등학교",
+      "d": 905,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1683,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4762,7 +10129,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4788,7 +10192,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4814,7 +10255,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4840,7 +10318,38 @@
    "lat": 37.37286,
    "lng": 127.22244,
    "geo_name": "오포자이디오브(C4)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 4,
+     "education": 3
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 831,
+      "kind": "library"
+     },
+     "public": {
+      "name": "오포1동행정복지센터",
+      "d": 915,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "고산별빛초등학교",
+      "d": 120,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 2081,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4866,7 +10375,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4892,7 +10438,32 @@
    "lat": 37.36549,
    "lng": 127.30177,
    "geo_name": "힐스테이트초월역(2BL)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "education": 1
+    },
+    "r1000": {
+     "transit": 1,
+     "education": 3
+    },
+    "nearest": {
+     "transit": {
+      "name": "초월",
+      "d": 890,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "북적북적작은도서관",
+      "d": 1083,
+      "kind": "library"
+     },
+     "education": {
+      "name": "초월중학교",
+      "d": 192,
+      "kind": "middle"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4918,7 +10489,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4944,7 +10552,39 @@
    "lat": 37.38022,
    "lng": 127.23454,
    "geo_name": "태전파크자이14BL",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 2
+    },
+    "r1000": {
+     "culture": 2,
+     "public": 2,
+     "education": 7
+    },
+    "nearest": {
+     "culture": {
+      "name": "오포도서관",
+      "d": 557,
+      "kind": "library"
+     },
+     "public": {
+      "name": "고산1리마을회관",
+      "d": 454,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "광남중학교",
+      "d": 158,
+      "kind": "middle"
+     },
+     "medical": {
+      "name": "오포세란의원",
+      "d": 1501,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4970,7 +10610,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -4996,7 +10673,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -5022,7 +10736,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -5048,7 +10799,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -5074,7 +10862,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -5100,7 +10925,44 @@
    "lat": 37.39751,
    "lng": 127.24645,
    "geo_name": "e편한세상광주역(5단지)",
-   "infra": null
+   "infra": {
+    "r500": {
+     "public": 1,
+     "education": 5
+    },
+    "r1000": {
+     "transit": 1,
+     "public": 2,
+     "education": 5
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 623,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 1549,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "장지3통 마을회관",
+      "d": 206,
+      "kind": "townhall"
+     },
+     "education": {
+      "name": "역동초등학교",
+      "d": 115,
+      "kind": "elementary"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 1583,
+      "kind": "hospital"
+     }
+    }
+   }
   },
   {
    "region": "광주시",
@@ -5126,7 +10988,43 @@
    "lat": 37.40334,
    "lng": 127.2519,
    "geo_name": "광주역자연앤자이(공공분양)",
-   "infra": null
+   "infra": {
+    "r500": {},
+    "r1000": {
+     "transit": 1,
+     "culture": 3,
+     "public": 4,
+     "education": 12,
+     "medical": 2
+    },
+    "nearest": {
+     "transit": {
+      "name": "경기광주",
+      "d": 508,
+      "kind": "station"
+     },
+     "culture": {
+      "name": "CGV",
+      "d": 755,
+      "kind": "cinema"
+     },
+     "public": {
+      "name": "경안동우체국",
+      "d": 952,
+      "kind": "post_office"
+     },
+     "education": {
+      "name": "광주중앙고등학교",
+      "d": 584,
+      "kind": "high"
+     },
+     "medical": {
+      "name": "탄탄병원",
+      "d": 779,
+      "kind": "hospital"
+     }
+    }
+   }
   }
  ],
  "propx": {
@@ -5140,8 +11038,8 @@
   "n": 250
  },
  "infra": {
-  "n": 0,
-  "fetched": null
+  "n": 2742,
+  "fetched": "2026-10-05"
  },
  "discovery": {
   "enabled": true,
