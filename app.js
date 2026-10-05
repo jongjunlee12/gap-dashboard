@@ -367,10 +367,10 @@ function renderDetail(c) {
   const askReq = asking && u.jeonse_median ? asking.min - u.jeonse_median + asking.min * D.tax_rate : null;
   const tags = [...(c.tags || []), ...(u.flags || [])];
   $('detail').innerHTML = `
-    <div class="tags"><span class="tag">${esc(c.region_label)} · ${esc(c.umd)}</span><span class="tag">${c.households.toLocaleString()}세대 · ${c.built}년</span><span class="tag">${esc(c.station)}</span>${tags.map(t => `<span class="tag ${/의심|확인|미확보|초과/.test(t) ? 'warn' : ''}">${esc(t)}</span>`).join('')}<span class="tag">${{ rtms: '국토부 실거래', propx: 'PropX 시세', seed: '보고서 값' }[u.source] || u.source}</span></div>
+    <div class="tags"><span class="tag">${esc(c.region_label)} · ${esc(c.umd)}</span><span class="tag">${c.households.toLocaleString()}세대 · ${c.built}년</span><span class="tag">${esc(c.station)}</span>${tags.map(t => `<span class="tag ${/의심|확인|미확보|초과/.test(t) ? 'warn' : ''}">${esc(t)}</span>`).join('')}<span class="tag">${{ rtms: '국토부 실거래', propx_rt: 'PropX 실거래', propx: 'PropX 시세', seed: '보고서 값' }[u.source] || u.source}</span></div>
     <div class="metric-row">
       <div><strong>${fmt(u.sale_median)}억</strong><span>매매 중앙값 · ${u.sale_n ? u.sale_n + '건' : '표본 없음'}${u.sale_min ? ` · ${fmt(u.sale_min, 1)}~${fmt(u.sale_max, 1)}` : ''}</span></div>
-      <div><strong>${fmt(u.jeonse_median)}억</strong><span>전세 중앙값${u.jeonse_n ? ` · ${u.jeonse_n}건` : ''}</span></div>
+      <div><strong>${fmt(u.jeonse_median)}억</strong><span>전세 중앙값${u.jeonse_n ? ` · 신규 추정 ${u.jeonse_n}건` : ''}${u.jeonse_all_median && u.jeonse_all_median !== u.jeonse_median ? ` · 갱신 포함 ${fmt(u.jeonse_all_median)}` : ''}</span></div>
       <div><strong>${u.jeonse_ratio ? fmt(u.jeonse_ratio, 1) + '%' : '—'}</strong><span>전세가율 · ${u.jeonse_ratio ? (u.jeonse_ratio >= D.budget.safe_jeonse_ratio ? '70% 안전선 위' : '안전선 아래') : '확인 필요'}</span></div>
       <div><strong style="color:${st === 'in' ? 'var(--blue)' : st === 'under' ? 'var(--green)' : '#172126'}">${fmt(u.required)}억</strong><span>필요자금 · ${stateLabel[st]}${u.gap ? ` · 갭 ${fmt(u.gap)}` : ''}</span></div>
       <div><strong>${pct(u.change_1y)}</strong><span>1년 매매 변동${u.change_3y != null ? ` · 3년 ${pct(u.change_3y)}` : ''}</span></div>

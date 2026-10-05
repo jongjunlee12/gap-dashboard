@@ -5,7 +5,7 @@
 <title>갭 대시보드 · 3억으로 사는 아파트</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="style.css?v=20261005w">
+<link rel="stylesheet" href="style.css?v=20261005x">
 </head>
 <body>
 <header><a class="brand" href="./"><span class="brand-symbol">g.</span> 갭 대시보드</a><span class="header-note">실거래 위에, 3억의 자리를.</span><span id="updated" class="header-updated"></span><button id="info">데이터 안내 ↗</button></header>
@@ -69,7 +69,9 @@
 
 <dialog id="data-dialog"><button id="close-info" class="dialog-close">닫기 ×</button><div class="eyebrow">DATA & LIMITS</div><h2>어디까지 실제 데이터인가요?</h2><ul>
 <li><b>실거래</b>: 국토교통부 아파트 매매(상세)·전월세 실거래가 API. 계약 후 30일 안에 신고된 체결 거래만 포함되며, 해제된 계약은 제외합니다. 매주 월요일 새벽 자동 갱신.</li>
+<li><b>PropX 실거래</b>: 유료 사이트 단지상세의 실거래(매매·전세, 일자·층·가격·해제) 최근 36개월. 국토부 API가 없을 때 이를 씁니다.</li>
 <li><b>중앙값</b>: 최근 분기 거래의 중앙값. 표본이 5건 미만이면 최근 6개월로 보강합니다. 월세가 있는 계약은 전세 중앙값에서 제외합니다.</li>
+<li><b>전세 중앙값(신규 추정)</b>: 2년 거주 후 갱신한 계약은 상승 폭 제한으로 낮게 형성되므로 제외합니다. 계약 구분이 없는 자료는 최근 계약 상위 20% 기준값의 85% 미만을 갱신으로 보고 뺍니다. "갱신 포함" 값을 같이 보여 줍니다.</li>
 <li><b>저층</b>: 5층 이하. 실거래에는 동·층은 있으나 호수는 없습니다.</li>
 <li><b>호가</b>: 유료 매물 사이트에서 내려받아 <code>listings/</code>에 올린 파일 기준. 직전 파일과 비교해 신규·인하·사라짐을 표시합니다. 호가는 실거래가 아닙니다.</li>
 <li><b>좌표</b>: ≈ 표시 단지는 추정 좌표입니다. <code>config/targets.json</code>에서 수정할 수 있습니다.</li>
@@ -77,5 +79,5 @@
 </ul><p id="data-stats" class="muted"></p></dialog>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="app.js?v=20261005w"></script>
+<script src="app.js?v=20261005x"></script>
 </body></html>

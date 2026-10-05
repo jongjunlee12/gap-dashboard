@@ -32,6 +32,39 @@ propx_rows = propx.get("complexes", [])
 LOW_FLOOR = 5
 region_label = {r["code"]: r["label"] for r in cfg["regions"]}
 
+# ---------- PropX 단지상세 실거래 (data/raw/propx_trades.json.gz) ----------
+# rows: [code, type, gb(0 매매/1 전세), 'YYYY.MM', day, floor, price_man, deal_type, canceled]
+import gzip
+PT = {"units": [], "rows": []}
+ptp = RAW / "propx_trades.json.gz"
+if ptp.exists():
+    with gzip.open(ptp, "rt", encoding="utf-8") as f:
+        PT = json.load(f)
+PT_UNITS = {(u["code"], u["type"]): u for u in PT.get("units", [])}
+PT_BY_UNIT = {}
+for r in PT.get("rows", []):
+    PT_BY_UNIT.setdefault((r[0], r[1]), []).append(r)
+has_pt = bool(PT_BY_UNIT)
+
+def pt_rec(r):
+    """PropX 행 → 대시보드 거래 레코드"""
+    y, m = r[3].split(".")
+    floor = int(r[5] or 0)
+    base = {"date": f"{y}-{int(m):02d}-{int(r[4]):02d}", "q": quarter(y, m), "floor": floor, "low_floor": 0 < floor <= LOW_FLOOR, "src": "propx"}
+    if r[2] == "0":
+        return {**base, "price": round(r[6] / 10000, 3), "canceled": bool(r[8]), "dealing": r[7] or None, "dong": None, "is_new": False}
+    return {**base, "deposit": round(r[6] / 10000, 3), "monthly": 0, "contract_type": None, "pre_deposit": None, "is_new": False}
+
+def jeonse_new(deposits):
+    """전세 중앙값(신규 추정): 갱신 계약(2년 거주 후 5% 상한으로 낮게 형성)을 빼고 계산.
+    계약 구분이 없을 때는 최근 계약들의 상위 20% 기준값(p80)의 85% 미만을 갱신으로 보고 제외."""
+    xs = sorted(x for x in deposits if x)
+    if len(xs) < 3:
+        return median(xs), len(xs), median(xs)
+    p80 = xs[int(0.8 * (len(xs) - 1))]
+    keep = [x for x in xs if x >= 0.85 * p80]
+    return median(keep), len(keep), median(xs)
+
 
 def norm(s):
     return re.sub(r"[\s\-_()·.]", "", str(s or "")).lower().replace("이편한", "e편한")
@@ -130,10 +163,24 @@ for c in cfg["complexes"]:
             "is_new": (k not in seen) and not first_run,
         })
 
+    # PropX 실거래로 보강: 국토부 자료가 없는 평형
+    if has_pt:
+        for (code, typ), rows in PT_BY_UNIT.items():
+            um = PT_UNITS.get((code, typ))
+            if not um or not any(norm(al) in norm(um["name"]) or norm(um["name"]) in norm(al) for al in c["aliases"]):
+                continue
+            a = area_bucket(um["area"], c["areas"])
+            if a is None or units[a]["trades"] or units[a]["rents"]:
+                continue
+            for r in rows:
+                (units[a]["trades"] if r[2] == "0" else units[a]["rents"]).append(pt_rec(r))
+            units[a]["pt"] = True
+
     out_units = []
     for a, u in units.items():
         trades = sorted([t for t in u["trades"] if not t["canceled"]], key=lambda t: t["date"])
         rents = sorted([r for r in u["rents"] if r["monthly"] == 0], key=lambda r: r["date"])  # 순수 전세만
+        rents_new = [r for r in rents if not (r.get("contract_type") and "갱신" in r["contract_type"])]  # 국토부 갱신 표시는 바로 제외
         qs = sorted({t["q"] for t in trades} | {r["q"] for r in rents})
         quarters = []
         for q in qs:
@@ -142,13 +189,14 @@ for c in cfg["complexes"]:
             quarters.append({
                 "q": q, "sale_median": median(tq), "sale_n": len(tq),
                 "sale_min": min(tq) if tq else None, "sale_max": max(tq) if tq else None,
-                "jeonse_median": median(rq), "jeonse_n": len(rq),
+                "jeonse_median": jeonse_new([r["deposit"] for r in rents_new if r["q"] == q])[0], "jeonse_n": len(rq),
+                "jeonse_all_median": median(rq),
             })
         for i in range(1, len(quarters)):
             p, c0 = quarters[i - 1]["sale_median"], quarters[i]["sale_median"]
             quarters[i]["chg"] = round((c0 / p - 1) * 100, 1) if p and c0 else None
 
-        unit = {"area": a, "source": "rtms" if trades else "seed"}
+        unit = {"area": a, "source": ("propx_rt" if u.get("pt") else "rtms") if trades else "seed"}
         sd = next((s for s in seed["units"] if s["complex"] == c["id"] and s["area"] == a), {})
         if trades:
             latest_q = [q for q in quarters if q["sale_n"]][-1]
@@ -157,11 +205,12 @@ for c in cfg["complexes"]:
             if len(recent) < 5:
                 cutoff = (datetime.strptime(trades[-1]["date"], "%Y-%m-%d").toordinal() - 183)
                 recent = [t["price"] for t in trades if datetime.strptime(t["date"], "%Y-%m-%d").toordinal() >= cutoff]
-            rr = [r["deposit"] for r in rents[-20:]] if rents else []
+            rr = [r["deposit"] for r in rents_new[-20:]] if rents_new else []
+            jm, jn, jall = jeonse_new(rr)
             unit.update({
                 "sale_median": median(recent), "sale_n": len(recent),
                 "sale_min": min(recent), "sale_max": max(recent),
-                "jeonse_median": median(rr), "jeonse_n": len(rr),
+                "jeonse_median": jm, "jeonse_n": jn, "jeonse_all_median": jall, "jeonse_all_n": len(rr),
                 "quarters": quarters, "trades": trades[-80:], "rents": rents[-40:],
                 "new_trades": sum(t["is_new"] for t in trades), "new_rents": sum(r["is_new"] for r in rents),
                 "low_floor_share": round(100 * sum(t["low_floor"] for t in trades) / len(trades)) if trades else None,
@@ -304,6 +353,73 @@ if disc.get("enabled") and has_raw:
             })
     discovered.sort(key=lambda x: (x["required"], -x["jeonse_ratio"]))
 
+if disc.get("enabled") and has_pt:
+    from collections import defaultdict
+    known = {norm(a) for c in cfg["complexes"] for a in c["aliases"]}
+    have = {(d["name"], d["area"]) for d in discovered}
+    today_ord = date.today().toordinal()
+    def bucket2(x):
+        if not (disc["exclu_min"] <= x <= disc["exclu_max"]):
+            return None
+        return min(disc["area_buckets"], key=lambda b: abs(b - x))
+    T, R, META = defaultdict(list), defaultdict(list), {}
+    for (code, typ), rows in PT_BY_UNIT.items():
+        um = PT_UNITS.get((code, typ))
+        b = bucket2(um["area"]) if um else None
+        if b is None or any(norm(um["name"]) in a or a in norm(um["name"]) for a in known):
+            continue
+        k = (um["sgg"], um["umd"], um["name"], b)
+        META[k] = um
+        for r in rows:
+            y, m = r[3].split(".")
+            d0 = date(int(y), int(m), int(r[4])).toordinal()
+            if r[2] == "0":
+                if not r[8]:
+                    T[k].append((d0, round(r[6] / 10000, 3), int(r[5] or 0)))
+            else:
+                R[k].append((d0, round(r[6] / 10000, 3)))
+    for k, ts in T.items():
+        sgg, umd, apt, b = k
+        if (apt, b) in have:
+            continue
+        rec = [p for d0, p, _ in ts if d0 >= today_ord - 183 and p]
+        if len(rec) < disc["min_trades_6m"]:
+            continue
+        sm = median(rec)
+        if sm is None or sm >= disc["max_sale_median"]:
+            continue
+        rr = [p for d0, p in R.get(k, []) if d0 >= today_ord - 365 and p]
+        if len(rr) < disc["min_rents_12m"]:
+            continue
+        jm, jn, jall = jeonse_new(rr)
+        req = round(sm - jm + sm * TAX, 2)
+        if disc.get("require_budget") and req > cfg["budget"]["max"]:
+            continue
+        um = META[k]
+        if (um.get("danji") or 0) < disc.get("min_danji", 0):
+            continue
+        px = next((r for r in propx_rows if r["name"] == apt and r["area"] == b and r["sgg"] == sgg), None)
+        built = (str(px.get("ibju") or "")[:4] or None) if px else None
+        try:
+            if built and int(built) < disc.get("min_built", 0):
+                continue
+        except ValueError:
+            pass
+        # 1년 변동: 12~18개월 전 거래 중앙값 대비
+        old = [p for d0, p, _ in ts if today_ord - 548 <= d0 < today_ord - 365 and p]
+        chg = round((sm / median(old) - 1) * 100, 1) if old and median(old) else (px.get("mm_chg") if px else None)
+        discovered.append({
+            "region": sgg, "umd": umd, "name": apt, "area": b, "source": "propx_rt",
+            "sale_median": sm, "sale_n": len(rec), "sale_min": min(rec), "sale_max": max(rec),
+            "jeonse_median": jm, "jeonse_n": jn, "jeonse_all_median": jall, "jeonse_all_n": len(rr),
+            "jeonse_ratio": round(100 * jm / sm, 1), "gap": round(sm - jm, 2), "required": req,
+            "built": built, "sedae": um.get("sedae"), "danji": um.get("danji"), "subway": px.get("subway") if px else None,
+            "mm_chg": chg, "low_floor_share": round(100 * sum(1 for t in ts if 0 < t[2] <= LOW_FLOOR) / len(ts)),
+            "sise": {"mm": px.get("mm"), "js": px.get("js")} if px else None,
+        })
+        have.add((apt, b))
+    discovered.sort(key=lambda x: (x["required"], -(x.get("jeonse_ratio") or 0)))
+
 if disc.get("enabled") and propx_rows:
     known = {norm(a) for c in cfg["complexes"] for a in c["aliases"]}
     have = {(d["name"], d["area"]) for d in discovered}
@@ -375,7 +491,8 @@ for d in discovered:
 
 dash = {
     "generated_at": date.today().isoformat(),
-    "source": "rtms" if has_raw else "seed",
+    "source": "rtms" if has_raw else ("propx_rt" if has_pt else "seed"),
+    "propx_trades": {"fetched": PT.get("fetched"), "units": len(PT_UNITS), "rows": len(PT.get("rows", []))} if has_pt else None,
     "seed_note": seed.get("note"),
     "budget": cfg["budget"],
     "tax_rate": TAX,

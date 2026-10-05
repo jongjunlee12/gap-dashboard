@@ -59,3 +59,8 @@ scripts/build.py                  지표 계산 → dashboard.json
 1. PropX → 지역현황 → 주거형상품 → **지역별 단지정보** → 지역 선택(남양주시 / 광주시 / 수원 각 구 / 성남 각 구) → 조회 → **엑셀저장**
 2. 받은 파일을 그대로 `propx/` 폴더에 올립니다 (GitHub → propx → Add file → Upload files). 파일명은 자유. 같은 지역의 새 파일을 올리면 새 것이 우선합니다.
 3. 몇 분 뒤 대시보드에 단지별 매매·전세 평균, 상·하한, 1년 변동률이 반영되고, 조건(20~34평 · 12억 미만 · 필요자금 3.5억 이하)에 맞는 단지가 자동 발굴 표에 올라옵니다.
+
+## PropX 실거래 (data/raw/propx_trades.json.gz)
+- PropX 단지상세의 실거래(매매·전세) 36개월치. 브라우저에서 수집한 JSON을 gzip 해서 둔 것.
+- 갱신하려면 새 `propx_trades.json`을 받아 `gzip -c propx_trades.json > data/raw/propx_trades.json.gz` 후 push.
+- 전세 중앙값은 갱신 계약(낮게 형성) 추정 제외: 최근 계약 p80의 85% 미만 제외. `jeonse_all_median`이 갱신 포함 값.
