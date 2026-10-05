@@ -5,7 +5,7 @@
 <title>갭 대시보드 · 3억으로 사는 아파트</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="style.css?v=20261005m">
+<link rel="stylesheet" href="style.css?v=20261005o">
 </head>
 <body>
 <header><a class="brand" href="./"><span class="brand-symbol">g.</span> 갭 대시보드</a><span class="header-note">실거래 위에, 3억의 자리를.</span><span id="updated" class="header-updated"></span><button id="info">데이터 안내 ↗</button></header>
@@ -37,6 +37,11 @@
 <section class="market">
   <div class="market-heading"><div><div class="eyebrow">03 / COMPARE</div><h2>전세가율 × 필요자금</h2></div></div>
   <div class="panel"><div id="scatter"></div><p class="chart-caption"><span>가로 70% 선 = 갭투자 안전선 · 파란 띠 = 예산 2.8~3.5억</span><span>실거래 중앙값 기준</span></p></div>
+</section>
+
+<section class="market">
+  <div class="market-heading"><div><div class="eyebrow">03-2 / INFRA</div><h2>후보 단지 주변 시설 비교</h2></div></div>
+  <div class="panel"><div id="infra-compare"></div><p class="chart-caption"><span>막대 = 반경 1km 안 시설 수(분야별 색) · 오른쪽 = 가장 가까운 역과 거리(800m 안이면 파랑)</span><span>OpenStreetMap</span></p></div>
 </section>
 
 </div><div class="col-map"><section class="map-panel" aria-label="후보 단지 지도">
@@ -71,5 +76,5 @@
 </ul><p id="data-stats" class="muted"></p></dialog>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="app.js?v=20261005m"></script>
+<script src="app.js?v=20261005o"></script>
 </body></html>

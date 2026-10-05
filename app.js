@@ -148,6 +148,24 @@ function initInfra() {
     $('infra-chips').querySelectorAll('.chip').forEach(b => b.onclick = () => { const k = b.dataset.k; infraOn[k] = !infraOn[k]; b.setAttribute('aria-pressed', infraOn[k]); if (infraLoaded) map.setLayoutProperty((focus ? 'infra-near-' : 'infra-') + k, 'visibility', infraOn[k] ? 'visible' : 'none'); setTimeout(scheduleLabels, 150); });
   }).catch(() => {});
 }
+function infraChart(inf) {
+  if (!inf) return '';
+  const keys = Object.keys(INFRA_STYLE);
+  const r5 = inf.r500 || {}, r10 = inf.r1000 || {}, nr = inf.nearest || {};
+  const max = Math.max(1, ...keys.map(k => r10[k] || 0));
+  const W = 560, rowH = 30, pl = 52, pr = 130, H = keys.length * rowH + 10, iw = W - pl - pr;
+  let svg = `<svg class="chart" viewBox="0 0 ${W} ${H}">`;
+  keys.forEach((k, i) => {
+    const [label, col] = INFRA_STYLE[k], y = 6 + i * rowH;
+    const w10 = (r10[k] || 0) / max * iw, w5 = (r5[k] || 0) / max * iw;
+    svg += `<text x="${pl - 8}" y="${y + 15}" font-size="12" fill="#172126" text-anchor="end" font-weight="600">${label}</text>`;
+    svg += `<rect x="${pl}" y="${y + 4}" width="${w10}" height="14" rx="4" fill="${col}" opacity=".3" data-tip="${label} · 1km 안 ${r10[k] || 0}곳"/>`;
+    svg += `<rect x="${pl}" y="${y + 4}" width="${w5}" height="14" rx="4" fill="${col}" data-tip="${label} · 500m 안 ${r5[k] || 0}곳"/>`;
+    svg += `<text x="${pl + w10 + 6}" y="${y + 15}" font-size="11.5" fill="#596971">${r5[k] || 0} / ${r10[k] || 0}</text>`;
+    if (nr[k]) svg += `<text x="${W - 4}" y="${y + 15}" font-size="11" fill="#596971" text-anchor="end">${esc(nr[k].name.length > 9 ? nr[k].name.slice(0, 8) + '…' : nr[k].name)} ${nr[k].d}m</text>`;
+  });
+  return svg + '</svg>';
+}
 function infraLine(inf) {
   if (!inf) return '';
   const r = inf.r1000 || {}, n = inf.nearest || {};
@@ -237,7 +255,7 @@ function select(id, fly) {
   state.sel = id; const c = D.complexes.find(x => x.id === id);
   if (!c.units.some(u => u.area === state.area)) state.area = (c.units.find(u => u.source === 'rtms' || u.sale_median) || c.units[0]).area;
   Object.entries(markers).forEach(([k, m]) => m.getElement().classList.toggle('selected', k === id));
-  renderList();
+  renderList(); renderInfraCompare();
   if (fly) map.flyTo({ center: [c.lng, c.lat], zoom: Math.max(map.getZoom(), 13.5), padding: { top: 60, bottom: 40 } });
   focusInfra(c.lng, c.lat, true);
   renderDetail(c);
@@ -261,7 +279,6 @@ function renderDetail(c) {
       <div><strong style="color:${st === 'in' ? 'var(--blue)' : st === 'under' ? 'var(--green)' : '#172126'}">${fmt(u.required)}억</strong><span>필요자금 · ${stateLabel[st]}${u.gap ? ` · 갭 ${fmt(u.gap)}` : ''}</span></div>
       <div><strong>${pct(u.change_1y)}</strong><span>1년 매매 변동${u.change_3y != null ? ` · 3년 ${pct(u.change_3y)}` : ''}</span></div>
     </div>
-    ${infraLine(c.infra)}
     ${u.note ? `<p class="muted" style="font-size:15px;margin:0 0 12px">${esc(u.note)}</p>` : ''}
     <div class="detail-grid">
       <div class="card"><h4>분기별 매매 중앙값</h4><p class="sub">막대 = 중앙값 · 아래 숫자 = 거래 건수 · 전세 중앙값은 점선</p>${quarterChart(u)}</div>
@@ -271,6 +288,7 @@ function renderDetail(c) {
         ${listingTable(u.listings || [], true)}</div>
       <div class="card"><h4>PropX 시세 ${u.propx ? `<span class="badge gray">${esc(u.propx.file || '')}</span>` : ''}</h4>
         ${u.propx ? `<p class="sub">부동산114 단지 시세 · 세대수 가중 평균 · ${u.propx.sedae ?? '—'}세대${u.propx.subway ? ' · ' + esc(u.propx.subway) : ''}</p><div class="metric-row" style="grid-template-columns:1fr 1fr 1fr;margin:8px 0"><div><strong>${fmt(u.propx.mm)}억</strong><span>매매 평균 · ${fmt(u.propx.mm_l, 1)}~${fmt(u.propx.mm_h, 1)}</span></div><div><strong>${fmt(u.propx.js)}억</strong><span>전세 평균</span></div><div><strong>${pct(u.propx.mm_chg)}</strong><span>매매 1년 · 전세 ${pct(u.propx.js_chg)}</span></div></div>${u.source === 'rtms' && u.propx.mm && u.sale_median ? `<p class="sub">실거래 중앙값 대비 시세 ${pct(u.propx.mm / u.sale_median * 100 - 100)}</p>` : ''}` : '<p class="muted" style="font-size:15px">propx/ 폴더에 PropX 단지정보 엑셀을 올리면 표시됩니다.</p>'}</div>
+      <div class="card"><h4>주변 시설 · 반경 500m / 1km</h4><p class="sub">진한 막대 = 500m 안 · 연한 막대 = 1km 안 · 오른쪽 = 가장 가까운 시설과 거리</p>${c.infra ? infraChart(c.infra) : '<p class="muted" style="font-size:14px">시설 자료가 아직 없습니다.</p>'}</div>
       <div class="card"><h4>최근 전세 계약</h4><p class="sub">신규/갱신 구분 · 종전 보증금 = 승계 보증금의 실체</p>${rentTable(u)}</div>
     </div>`;
   bindTips($('detail'));
@@ -383,6 +401,31 @@ function showDisc(d) {
   if (row) { document.querySelectorAll('.disc-row.hl').forEach(r => r.classList.remove('hl')); row.classList.add('hl'); row.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
 }
 
+/* ---------- 인프라 비교 (후보 단지) ---------- */
+function renderInfraCompare() {
+  const el = $('infra-compare'); if (!el) return;
+  const cs = D.complexes.filter(c => c.infra);
+  if (!cs.length) { el.innerHTML = '<p class="muted" style="font-size:15px">시설 자료가 모이면 표시됩니다.</p>'; return; }
+  const keys = Object.keys(INFRA_STYLE);
+  const W = 1100, rowH = 42, pl = 230, pr = 190, H = cs.length * rowH + 44, iw = W - pl - pr;
+  const totals = cs.map(c => keys.reduce((a, k) => a + ((c.infra.r1000 || {})[k] || 0), 0));
+  const max = Math.max(1, ...totals);
+  const sorted = cs.map((c, i) => ({ c, t: totals[i] })).sort((a, b) => b.t - a.t);
+  let svg = `<svg class="chart" viewBox="0 0 ${W} ${H}">`;
+  svg += keys.map((k, i) => `<rect x="${pl + i * 100}" y="6" width="12" height="12" rx="2" fill="${INFRA_STYLE[k][1]}"/><text x="${pl + i * 100 + 17}" y="17" font-size="14" fill="#596971">${INFRA_STYLE[k][0]}</text>`).join('');
+  sorted.forEach(({ c, t }, i) => {
+    const y = 30 + i * rowH; let x = pl;
+    svg += `<text x="${pl - 12}" y="${y + 20}" font-size="15" fill="#172126" text-anchor="end" font-weight="${c.id === state.sel ? 700 : 500}" style="cursor:pointer" data-sel="${c.id}">${esc(c.name.length > 11 ? c.name.slice(0, 10) + '…' : c.name)}</text>`;
+    keys.forEach(k => { const n = (c.infra.r1000 || {})[k] || 0, w = n / max * iw; if (!n) return; svg += `<rect x="${x}" y="${y + 7}" width="${Math.max(0, w - 2)}" height="20" rx="4" fill="${INFRA_STYLE[k][1]}" data-tip="${esc(c.name)} · ${INFRA_STYLE[k][0]} ${n}곳 (1km)"/>`; x += w; });
+    svg += `<text x="${x + 8}" y="${y + 21}" font-size="14" fill="#596971">${t}</text>`;
+    const st = (c.infra.nearest || {}).transit;
+    svg += `<text x="${W - 4}" y="${y + 21}" font-size="14" fill="${st && st.d <= 800 ? '#0064e0' : '#596971'}" text-anchor="end" font-weight="${st && st.d <= 800 ? 600 : 400}">${st ? '🚇 ' + esc(st.name) + ' ' + st.d + 'm' : '역 1km 밖'}</text>`;
+  });
+  el.innerHTML = svg + '</svg>';
+  el.querySelectorAll('[data-sel]').forEach(t => t.onclick = () => select(t.dataset.sel, true));
+  bindTips(el);
+}
+
 /* ---------- 자동 발굴 ---------- */
 function flyToUmd(umd, name) {
   const c = D.complexes.find(x => x.umd === umd);
@@ -409,7 +452,7 @@ function renderDiscover() {
     .map(d => ({ ...d, score: score(d) })).sort((a, b) => dstate.sort === 'score' ? b.score - a.score : dstate.sort === 'ratio' ? (b.jeonse_ratio || 0) - (a.jeonse_ratio || 0) : dstate.sort === 'chg' ? (b.mm_chg || 0) - (a.mm_chg || 0) : dstate.sort === 'danji' ? (b.danji || 0) - (a.danji || 0) : a.required - b.required);
   const ctl = `<div class="disc-filters"><label>지역 <select id="df-region"><option value="all">전체</option>${regions.map(r => `<option ${dstate.region === r ? 'selected' : ''}>${esc(r)}</option>`).join('')}</select></label><label>세대수 <select id="df-danji">${[0, 200, 300, 500, 1000].map(v => `<option value="${v}" ${dstate.minDanji === v ? 'selected' : ''}>${v ? v + '세대↑' : '전체'}</option>`).join('')}</select></label><label>입주 <select id="df-built">${[0, 2000, 2010, 2015, 2020].map(v => `<option value="${v}" ${dstate.minBuilt === v ? 'selected' : ''}>${v ? v + '년↑' : '전체'}</option>`).join('')}</select></label><label>전세가율 <select id="df-ratio">${[0, 60, 65, 70].map(v => `<option value="${v}" ${dstate.minRatio === v ? 'selected' : ''}>${v ? v + '%↑' : '전체'}</option>`).join('')}</select></label><label>정렬 <select id="df-sort">${[['score', '추천순 (예산 활용·전세가율·상승·규모)'], ['required', '필요자금 낮은 순'], ['ratio', '전세가율 높은 순'], ['chg', '1년 상승 순'], ['danji', '세대수 순']].map(([v, l]) => `<option value="${v}" ${dstate.sort === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label class="check" style="margin:0"><input type="checkbox" id="show-disc" ${dstate.showOnMap ? 'checked' : ''}> 지도에 표시</label><span class="muted-s">${ds.length} / ${all.length}개</span></div>`;
   if (!all.length) { $('discover').innerHTML = `<p class="muted" style="font-size:15px">propx/ 폴더에 PropX 단지정보 엑셀을 올리거나 국토부 실거래가 연결되면 조건에 맞는 단지를 자동으로 찾아 여기에 올립니다.</p>`; return; }
-  $('discover').innerHTML = ctl + (ds.length ? `<table class="disc"><tr><th>추천</th><th>지역</th><th>단지</th><th>㎡</th><th>입주</th><th>매매</th><th>표본</th><th>전세</th><th>전세가율</th><th>필요자금</th><th>1년 변동</th><th>출처</th></tr>${ds.map((d, i) => `<tr class="disc-row" data-name="${esc(d.name)}" data-umd="${esc(d.umd)}" data-area="${d.area}" data-i="${i}" style="cursor:pointer"><td><b style="color:${d.score >= 70 ? 'var(--blue)' : '#596971'}">${d.score}</b>${i < 3 ? ' <span class="badge">TOP</span>' : ''}</td><td>${esc(d.region)} · ${esc(d.umd)}</td><td><b>${esc(d.name)}</b></td><td>${d.area}</td><td>${d.built || '—'}${d.sedae ? `<small style="color:#8a969d"> · ${d.sedae}세대</small>` : ''}</td><td>${fmt(d.sale_median)}억<small style="color:#8a969d"> ${d.sale_min ? fmt(d.sale_min, 1) + '~' + fmt(d.sale_max, 1) : ''}</small></td><td>${d.sale_n != null ? d.sale_n + '건' : '시세'}</td><td>${fmt(d.jeonse_median)}억${d.jeonse_n != null ? ` <small style="color:#8a969d">${d.jeonse_n}건</small>` : ''}</td><td>${fmt(d.jeonse_ratio, 1)}%${d.jeonse_ratio >= 70 ? ' <span class="badge">안전선 위</span>' : ''}</td><td><b style="color:${d.required < D.budget.min ? 'var(--green)' : 'var(--blue)'}">${fmt(d.required)}억</b></td><td>${d.mm_chg != null ? pct(d.mm_chg) : (d.low_floor_share != null ? '저층 ' + d.low_floor_share + '%' : '—')}</td><td><span class="badge ${d.source === 'propx' ? 'gray' : ''}">${d.source === 'propx' ? 'PropX 시세' : '실거래'}</span></td></tr>`).join('')}</table><p class="chart-caption" style="margin-top:12px"><span>추천 점수 = 예산 3.5억 활용도 40% · 전세가율 25% · 1년 상승 15% · 세대수 10% · 연식 10%. 행을 누르면 지도에서 그 단지로 이동합니다.</span><span>${ds.length}개 단지</span></p>` : '<p class="muted" style="font-size:15px;margin-top:12px">조건에 맞는 단지가 없습니다. 필터를 풀어 보세요.</p>');
+  $('discover').innerHTML = ctl + (ds.length ? `<table class="disc"><tr><th>추천</th><th>지역</th><th>단지</th><th>㎡</th><th>입주</th><th>매매</th><th>표본</th><th>전세</th><th>전세가율</th><th>필요자금</th><th>1년 변동</th></tr>${ds.map((d, i) => `<tr class="disc-row" data-name="${esc(d.name)}" data-umd="${esc(d.umd)}" data-area="${d.area}" data-i="${i}" style="cursor:pointer"><td><b style="color:${d.score >= 70 ? 'var(--blue)' : '#596971'}">${d.score}</b>${i < 3 ? ' <span class="badge">TOP</span>' : ''}</td><td>${esc(d.region)} · ${esc(d.umd)}</td><td><b>${esc(d.name)}</b>${d.source === 'propx' ? '' : ' <span class="badge">실거래</span>'}</td><td>${d.area}</td><td>${d.built || '—'}${d.sedae ? `<small style="color:#8a969d"> · ${d.sedae}세대</small>` : ''}</td><td>${fmt(d.sale_median)}억<small style="color:#8a969d"> ${d.sale_min ? fmt(d.sale_min, 1) + '~' + fmt(d.sale_max, 1) : ''}</small></td><td>${d.sale_n != null ? d.sale_n + '건' : '시세'}</td><td>${fmt(d.jeonse_median)}억${d.jeonse_n != null ? ` <small style="color:#8a969d">${d.jeonse_n}건</small>` : ''}</td><td>${fmt(d.jeonse_ratio, 1)}%${d.jeonse_ratio >= 70 ? ' <span class="badge">안전선 위</span>' : ''}</td><td><b style="color:${d.required < D.budget.min ? 'var(--green)' : 'var(--blue)'}">${fmt(d.required)}억</b></td><td>${d.mm_chg != null ? pct(d.mm_chg) : (d.low_floor_share != null ? '저층 ' + d.low_floor_share + '%' : '—')}</td></tr>`).join('')}</table><p class="chart-caption" style="margin-top:12px"><span>추천 점수 = 예산 3.5억 활용도 40% · 전세가율 25% · 1년 상승 15% · 세대수 10% · 연식 10%. 행을 누르면 지도에서 그 단지로 이동합니다.</span><span>${ds.length}개 단지</span></p>` : '<p class="muted" style="font-size:15px;margin-top:12px">조건에 맞는 단지가 없습니다. 필터를 풀어 보세요.</p>');
   const sd = $('show-disc'); if (sd) sd.onchange = () => { dstate.showOnMap = sd.checked; renderDiscMarkers(); };
   ['region', 'danji', 'built', 'ratio', 'sort'].forEach(k => { const el = $('df-' + k); if (el) el.onchange = () => { const v = el.value; dstate[{ region: 'region', danji: 'minDanji', built: 'minBuilt', ratio: 'minRatio', sort: 'sort' }[k]] = (k === 'region' || k === 'sort') ? v : +v; renderDiscover(); }; });
   $('discover').querySelectorAll('.disc-row').forEach(r => r.onclick = () => { const d = ds[+r.dataset.i]; d.lat != null ? showDisc(d) : flyToUmd(d.umd, d.name); });
@@ -452,6 +495,6 @@ fetch('data/dashboard.json?v=' + Date.now()).then(r => r.json()).then(d => {
   $('updated').textContent = `갱신 ${D.generated_at} · ${D.source === 'rtms' ? '국토부 실거래' : '보고서 seed'}`;
   const nT = D.complexes.flatMap(c => c.units).reduce((a, u) => a + (u.trades || []).length, 0);
   $('data-stats').textContent = `단지 ${D.complexes.length} · 평형 ${D.complexes.flatMap(c => c.units).length} · 보유 매매 거래 ${nT}건 · 생성 ${D.generated_at}${D.seed_note ? ' · ' + D.seed_note : ''}`;
-  renderKpis(); initMap(); renderList(); renderScatter(); renderDiscover(); renderListings(); bindFilters();
+  renderKpis(); initMap(); renderList(); renderScatter(); renderInfraCompare(); renderDiscover(); renderListings(); bindFilters();
   select('dasan-natural3', false);
 }).catch(e => { $('map-status').textContent = 'data/dashboard.json 을 읽지 못했습니다. ' + e; });
