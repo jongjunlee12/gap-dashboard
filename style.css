@@ -76,3 +76,6 @@ dialog{border:0;border-radius:32px;max-width:760px;width:92%;padding:40px;line-h
   .map-top{top:12px;left:12px;right:12px}.map-legend{bottom:12px;left:12px}
   .col-left{padding-top:14px}
 }
+
+.disc-filters{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:14px;font-size:15px}.disc-filters label{display:flex;gap:6px;align-items:center}.disc-filters select{width:auto;min-height:40px;padding:6px 10px;font-size:15px}
+.disc td,.disc th{white-space:nowrap}.panel .disc-wrap{overflow:auto}

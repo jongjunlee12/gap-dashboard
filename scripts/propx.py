@@ -58,16 +58,26 @@ def num(v):
 
 
 def read(path):
-    import openpyxl
-    wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
+    import openpyxl, warnings
+    warnings.simplefilter("ignore")
+    wb = openpyxl.load_workbook(path, data_only=True)   # SheetJS 파일은 read_only 모드에서 행이 안 읽힘
     ws = wb[wb.sheetnames[0]]
     rows = [list(r) for r in ws.iter_rows(values_only=True)]
     rows = [r for r in rows if any(c not in (None, "") for c in r)]
-    hi = next((i for i, r in enumerate(rows[:5]) if "name" in map_cols(r) and "area" in map_cols(r)), None)
+    # PropX 엑셀은 2행 헤더(그룹 '정보' + 세부 열). 두 행을 합쳐 하나의 헤더로 만든다
+    hi = None
+    for i in range(min(5, len(rows) - 1)):
+        merged = [(rows[i + 1][j] if (rows[i][j] in (None, "", "정보")) and j < len(rows[i + 1]) and rows[i + 1][j] not in (None, "") else rows[i][j]) for j in range(len(rows[i]))]
+        if "name" in map_cols(merged) and "area" in map_cols(merged):
+            hi, header = i + 1, merged
+            break
     if hi is None:
-        print(f"::warning::{path.name}: 헤더를 찾지 못했습니다. 건너뜁니다.")
-        return []
-    m = map_cols(rows[hi])
+        hi = next((i for i, r in enumerate(rows[:5]) if "name" in map_cols(r) and "area" in map_cols(r)), None)
+        if hi is None:
+            print(f"::warning::{path.name}: 헤더를 찾지 못했습니다. 건너뜁니다.")
+            return []
+        header = rows[hi]
+    m = map_cols(header)
     out = []
     for r in rows[hi + 1:]:
         g = lambda k: r[m[k]] if k in m and m[k] < len(r) else None

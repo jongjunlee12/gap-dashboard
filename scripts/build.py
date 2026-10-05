@@ -286,6 +286,13 @@ if disc.get("enabled") and propx_rows:
             continue
         if (r["name"], r["area"]) in have:
             continue
+        if (r.get("danji") or 0) < disc.get("min_danji", 0):
+            continue
+        try:
+            if int(str(r.get("ibju") or "0")[:4]) < disc.get("min_built", 0):
+                continue
+        except ValueError:
+            pass
         discovered.append({
             "region": r["sgg"], "umd": r["umd"], "name": r["name"], "area": r["area"], "source": "propx",
             "sale_median": r["mm"], "sale_n": None, "sale_min": r.get("mm_l"), "sale_max": r.get("mm_h"),
