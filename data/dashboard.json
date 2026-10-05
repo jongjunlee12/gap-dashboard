@@ -1,0 +1,519 @@
+{
+ "generated_at": "2026-10-05",
+ "source": "seed",
+ "seed_note": "2026.09.30 보고서(PropX 실거래 중앙값 · 호갱노노 단지정보) 수치. 국토부 실거래 API가 연결되면 자동으로 교체됩니다.",
+ "budget": {
+  "min": 2.8,
+  "max": 3.5,
+  "safe_jeonse_ratio": 70
+ },
+ "tax_rate": 0.011,
+ "history_from": "2023-10",
+ "complexes": [
+  {
+   "id": "dasan-lotte",
+   "name": "다산롯데캐슬",
+   "group": "now",
+   "lat": 37.6228,
+   "lng": 127.1552,
+   "approx": true,
+   "households": 1186,
+   "built": 2017,
+   "station": "다산역 6분 · 8호선 잠실 직결",
+   "tags": [
+    "모멘텀 1위",
+    "예산 경계"
+   ],
+   "umd": "다산동",
+   "region_label": "남양주 다산",
+   "units": [
+    {
+     "area": 84,
+     "source": "seed",
+     "sale_median": 10.6,
+     "sale_n": 16,
+     "sale_min": 9.0,
+     "sale_max": 11.95,
+     "jeonse_median": 7.0,
+     "jeonse_n": 20,
+     "jeonse_ratio": 66.0,
+     "change_1y": 21.2,
+     "change_3y": 30.9,
+     "quarters": [
+      {
+       "q": "23Q4",
+       "chg": 2.7
+      },
+      {
+       "q": "24Q1",
+       "chg": -1.9
+      },
+      {
+       "q": "24Q2",
+       "chg": 0.1
+      },
+      {
+       "q": "24Q3",
+       "chg": 5.9,
+       "sale_median": 9.3
+      },
+      {
+       "q": "24Q4",
+       "chg": 3.3,
+       "sale_median": 9.2
+      },
+      {
+       "q": "25Q1",
+       "chg": -0.2,
+       "sale_median": 8.95
+      },
+      {
+       "q": "25Q2",
+       "chg": 0.1,
+       "sale_median": 8.75
+      },
+      {
+       "q": "25Q3",
+       "chg": -2.0,
+       "sale_n": 0
+      },
+      {
+       "q": "25Q4",
+       "chg": 3.6,
+       "sale_median": 9.45,
+       "sale_n": 22
+      },
+      {
+       "q": "26Q1",
+       "chg": 4.2,
+       "sale_median": 9.65
+      },
+      {
+       "q": "26Q2",
+       "chg": 3.9,
+       "sale_median": 10.3,
+       "sale_n": 15
+      },
+      {
+       "q": "26Q3",
+       "chg": 8.0,
+       "sale_median": 10.6,
+       "sale_n": 16
+      }
+     ],
+     "asking": {
+      "min": 10.7,
+      "max": 13.0,
+      "negotiation_start": 10.5,
+      "note": "호가 10.7~13억 · 실거래 위. 10.5억 미만에서 협상 시작"
+     },
+     "trades": [],
+     "rents": [],
+     "gap": 3.6,
+     "required": 3.72,
+     "listings": []
+    }
+   ]
+  },
+  {
+   "id": "dasan-epyeon",
+   "name": "e편한세상다산",
+   "group": "now",
+   "lat": 37.6198,
+   "lng": 127.1578,
+   "approx": true,
+   "households": 1615,
+   "built": 2017,
+   "station": "다산역 7분",
+   "tags": [
+    "예산 초과"
+   ],
+   "umd": "다산동",
+   "region_label": "남양주 다산",
+   "units": [
+    {
+     "area": 84,
+     "source": "seed",
+     "required": 4.07,
+     "note": "예산 초과 (보고서 기준 필요자금 4.07억)",
+     "quarters": [],
+     "trades": [],
+     "rents": [],
+     "listings": []
+    }
+   ]
+  },
+  {
+   "id": "dasan-river2",
+   "name": "다산리버펠리체2단지",
+   "group": "now",
+   "lat": 37.6118,
+   "lng": 127.1548,
+   "approx": true,
+   "households": 584,
+   "built": 2005,
+   "station": "도농역 생활권",
+   "tags": [
+    "예산 여유"
+   ],
+   "umd": "도농동",
+   "region_label": "남양주 다산",
+   "units": [
+    {
+     "area": 84,
+     "source": "seed",
+     "required": 1.91,
+     "note": "예산 여유 (보고서 기준 필요자금 1.91억) · 2005년 준공",
+     "quarters": [],
+     "trades": [],
+     "rents": [],
+     "listings": []
+    }
+   ]
+  },
+  {
+   "id": "dasan-natural3",
+   "name": "다산자연앤e편한세상3차",
+   "group": "now",
+   "lat": 37.6288,
+   "lng": 127.1612,
+   "approx": true,
+   "households": 1394,
+   "built": 2018,
+   "station": "다산역 11분 · 새봄초 6분",
+   "tags": [
+    "문의 매물",
+    "분양전환 2026.6",
+    "저층 확인"
+   ],
+   "umd": "다산동",
+   "region_label": "남양주 다산",
+   "units": [
+    {
+     "area": 51,
+     "source": "seed",
+     "sale_median": 7.5,
+     "sale_n": 21,
+     "sale_min": 6.4,
+     "sale_max": 8.1,
+     "jeonse_median": 4.8,
+     "jeonse_ratio": 64.0,
+     "quarters": [
+      {
+       "q": "26Q3",
+       "sale_median": 7.5,
+       "sale_n": 21,
+       "chg": 6.8
+      }
+     ],
+     "asking": {
+      "min": 8.2,
+      "max": 8.2,
+      "negotiation_start": 7.8,
+      "note": "문의 8.2억 — 실거래 최고 8.1억보다 위 · 74.87A 타입 · 5301동 저층 의심 · 7.8억 미만 협상 시작"
+     },
+     "flags": [
+      "저층 의심",
+      "실거래 최고가 초과 호가",
+      "세입자 미확인"
+     ],
+     "trades": [],
+     "rents": [],
+     "gap": 2.7,
+     "required": 2.78,
+     "listings": []
+    },
+    {
+     "area": 59,
+     "source": "seed",
+     "sale_median": 8.7,
+     "sale_n": 32,
+     "sale_min": 7.8,
+     "sale_max": 9.4,
+     "jeonse_median": 5.5,
+     "jeonse_ratio": 63.2,
+     "quarters": [
+      {
+       "q": "26Q3",
+       "sale_median": 8.7,
+       "sale_n": 32,
+       "chg": 7.0
+      }
+     ],
+     "asking": {
+      "min": 9.0,
+      "max": 9.0,
+      "negotiation_start": 8.7,
+      "note": "문의 9.0억(실거래 상단) · 전세 5.5억 · 5310동 저층 의심 · 8.7억 미만 협상 시작"
+     },
+     "flags": [
+      "저층 의심",
+      "매매 시작 2026.6",
+      "공실 추정"
+     ],
+     "trades": [],
+     "rents": [],
+     "gap": 3.2,
+     "required": 3.3,
+     "listings": []
+    }
+   ]
+  },
+  {
+   "id": "dasan-xi",
+   "name": "다산자이아이비플레이스",
+   "group": "now",
+   "lat": 37.6272,
+   "lng": 127.1588,
+   "approx": true,
+   "households": 1685,
+   "built": 2018,
+   "station": "다산 생활권",
+   "tags": [
+    "3차 비교 기준"
+   ],
+   "umd": "다산동",
+   "region_label": "남양주 다산",
+   "units": [
+    {
+     "area": 59,
+     "source": "seed",
+     "sale_median": 9.55,
+     "jeonse_median": 5.5,
+     "jeonse_ratio": 57.6,
+     "change_1y": 24.0,
+     "change_3y": 37.4,
+     "quarters": [
+      {
+       "q": "23Q3",
+       "sale_median": 6.95
+      },
+      {
+       "q": "23Q4",
+       "chg": 4.3
+      },
+      {
+       "q": "24Q1",
+       "chg": -6.9
+      },
+      {
+       "q": "24Q2",
+       "chg": 4.4
+      },
+      {
+       "q": "24Q3",
+       "chg": 3.5
+      },
+      {
+       "q": "24Q4",
+       "chg": 3.3
+      },
+      {
+       "q": "25Q1",
+       "chg": 0.5
+      },
+      {
+       "q": "25Q2",
+       "chg": 1.6
+      },
+      {
+       "q": "25Q3",
+       "chg": 0.0
+      },
+      {
+       "q": "25Q4",
+       "chg": 3.9
+      },
+      {
+       "q": "26Q1",
+       "chg": 1.9
+      },
+      {
+       "q": "26Q2",
+       "chg": 8.6
+      },
+      {
+       "q": "26Q3",
+       "chg": 7.9,
+       "sale_median": 9.55
+      }
+     ],
+     "trades": [],
+     "rents": [],
+     "gap": 4.05,
+     "required": 4.16,
+     "listings": []
+    }
+   ]
+  },
+  {
+   "id": "gwangju-thesharp",
+   "name": "더샵오포센트럴포레",
+   "group": "now",
+   "lat": 37.3828,
+   "lng": 127.2068,
+   "approx": true,
+   "households": 1396,
+   "built": 2022,
+   "station": "오포 · 신축",
+   "tags": [
+    "전세 미확보"
+   ],
+   "umd": "오포읍",
+   "region_label": "경기 광주",
+   "units": [
+    {
+     "area": 84,
+     "source": "seed",
+     "note": "전세 미수집 · 확인 필요",
+     "flags": [
+      "전세 미확보"
+     ],
+     "quarters": [],
+     "trades": [],
+     "rents": [],
+     "listings": []
+    }
+   ]
+  },
+  {
+   "id": "gwangju-ipark",
+   "name": "태전아이파크",
+   "group": "now",
+   "lat": 37.4218,
+   "lng": 127.2432,
+   "approx": true,
+   "households": 640,
+   "built": 2017,
+   "station": "태전지구",
+   "tags": [
+    "예산 여유"
+   ],
+   "umd": "태전동",
+   "region_label": "경기 광주",
+   "units": [
+    {
+     "area": 84,
+     "source": "seed",
+     "required": 1.57,
+     "note": "예산 여유 (보고서 기준 필요자금 1.57억) · 저가",
+     "quarters": [],
+     "trades": [],
+     "rents": [],
+     "listings": []
+    }
+   ]
+  },
+  {
+   "id": "gwangju-hillstate",
+   "name": "힐스테이트태전",
+   "group": "now",
+   "lat": 37.4246,
+   "lng": 127.2462,
+   "approx": true,
+   "households": 556,
+   "built": 2017,
+   "station": "태전지구 · C7",
+   "tags": [
+    "전세 미확보"
+   ],
+   "umd": "태전동",
+   "region_label": "경기 광주",
+   "units": [
+    {
+     "area": 59,
+     "source": "seed",
+     "note": "전세 미수집 · 확인 필요",
+     "flags": [
+      "전세 미확보"
+     ],
+     "quarters": [],
+     "trades": [],
+     "rents": [],
+     "listings": []
+    }
+   ]
+  },
+  {
+   "id": "suwon-skyview",
+   "name": "수원SK스카이뷰",
+   "group": "after_1231",
+   "lat": 37.3008,
+   "lng": 127.0032,
+   "approx": true,
+   "households": 3498,
+   "built": 2013,
+   "station": "장안구 정자동 · 대단지",
+   "tags": [
+    "12.31 해제 시",
+    "59㎡ 현실적 선택지"
+   ],
+   "umd": "정자동",
+   "region_label": "수원",
+   "units": [
+    {
+     "area": 59,
+     "source": "seed",
+     "required": 3.06,
+     "jeonse_ratio": 61.8,
+     "note": "3,498세대 대단지 · 59㎡로 갭 절감",
+     "quarters": [],
+     "trades": [],
+     "rents": [],
+     "listings": []
+    },
+    {
+     "area": 84,
+     "source": "seed",
+     "required": 3.75,
+     "change_2y": 16.2,
+     "note": "예산 경계 — 0.25억만 더 들어가도 초과",
+     "quarters": [],
+     "trades": [],
+     "rents": [],
+     "listings": []
+    }
+   ]
+  },
+  {
+   "id": "suwon-hwaseo",
+   "name": "화서역블루밍푸른숲",
+   "group": "after_1231",
+   "lat": 37.2862,
+   "lng": 126.9992,
+   "approx": true,
+   "households": 1744,
+   "built": 2008,
+   "station": "화서역 17분",
+   "tags": [
+    "12.31 해제 시",
+    "전세 표본 1건"
+   ],
+   "umd": "화서동",
+   "region_label": "수원",
+   "units": [
+    {
+     "area": 84,
+     "source": "seed",
+     "required": 2.64,
+     "note": "화서역 도보권 · 전세 표본 1건이라 불확실",
+     "quarters": [],
+     "trades": [],
+     "rents": [],
+     "listings": []
+    }
+   ]
+  }
+ ],
+ "listings": {
+  "date": null,
+  "file": null,
+  "prev_file": null,
+  "summary": null,
+  "removed": null
+ },
+ "totals": {
+  "new_trades": 0,
+  "new_rents": 0
+ }
+}

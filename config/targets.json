@@ -1,0 +1,88 @@
+{
+  "budget": { "min": 2.8, "max": 3.5, "safe_jeonse_ratio": 70 },
+  "acquisition_tax_rate": 0.011,
+  "history_from": "2023-10",
+  "regions": [
+    { "code": "41360", "name": "남양주시", "group": "now", "label": "남양주 다산" },
+    { "code": "41610", "name": "광주시", "group": "now", "label": "경기 광주" },
+    { "code": "41111", "name": "수원 장안구", "group": "after_1231", "label": "수원" },
+    { "code": "41113", "name": "수원 권선구", "group": "after_1231", "label": "수원" },
+    { "code": "41115", "name": "수원 팔달구", "group": "after_1231", "label": "수원" },
+    { "code": "41117", "name": "수원 영통구", "group": "after_1231", "label": "수원" },
+    { "code": "41131", "name": "성남 수정구", "group": "after_1231", "label": "성남" },
+    { "code": "41133", "name": "성남 중원구", "group": "after_1231", "label": "성남" },
+    { "code": "41210", "name": "광명시", "group": "after_1231", "label": "광명" }
+  ],
+  "complexes": [
+    {
+      "id": "dasan-lotte", "name": "다산롯데캐슬", "region": "41360", "umd": "다산동",
+      "aliases": ["다산롯데캐슬"], "areas": [84],
+      "households": 1186, "built": 2017, "station": "다산역 6분 · 8호선 잠실 직결",
+      "lat": 37.6228, "lng": 127.1552, "approx": true, "group": "now",
+      "tags": ["모멘텀 1위", "예산 경계"]
+    },
+    {
+      "id": "dasan-epyeon", "name": "e편한세상다산", "region": "41360", "umd": "다산동",
+      "aliases": ["e편한세상다산", "이편한세상다산"], "areas": [84],
+      "households": 1615, "built": 2017, "station": "다산역 7분",
+      "lat": 37.6198, "lng": 127.1578, "approx": true, "group": "now",
+      "tags": ["예산 초과"]
+    },
+    {
+      "id": "dasan-river2", "name": "다산리버펠리체2단지", "region": "41360", "umd": "도농동",
+      "aliases": ["리버펠리체2", "다산리버펠리체2단지"], "areas": [84],
+      "households": 584, "built": 2005, "station": "도농역 생활권",
+      "lat": 37.6118, "lng": 127.1548, "approx": true, "group": "now",
+      "tags": ["예산 여유"]
+    },
+    {
+      "id": "dasan-natural3", "name": "다산자연앤e편한세상3차", "region": "41360", "umd": "다산동",
+      "aliases": ["다산자연앤e편한세상3차", "자연앤e편한세상3차", "다산자연앤이편한세상3차"], "areas": [51, 59],
+      "households": 1394, "built": 2018, "station": "다산역 11분 · 새봄초 6분",
+      "lat": 37.6288, "lng": 127.1612, "approx": true, "group": "now",
+      "tags": ["문의 매물", "분양전환 2026.6", "저층 확인"]
+    },
+    {
+      "id": "dasan-xi", "name": "다산자이아이비플레이스", "region": "41360", "umd": "다산동",
+      "aliases": ["다산자이아이비플레이스", "다산자이"], "areas": [59],
+      "households": 1685, "built": 2018, "station": "다산 생활권",
+      "lat": 37.6272, "lng": 127.1588, "approx": true, "group": "now",
+      "tags": ["3차 비교 기준"]
+    },
+    {
+      "id": "gwangju-thesharp", "name": "더샵오포센트럴포레", "region": "41610", "umd": "오포읍",
+      "aliases": ["더샵오포센트럴포레"], "areas": [84],
+      "households": 1396, "built": 2022, "station": "오포 · 신축",
+      "lat": 37.3828, "lng": 127.2068, "approx": true, "group": "now",
+      "tags": ["전세 미확보"]
+    },
+    {
+      "id": "gwangju-ipark", "name": "태전아이파크", "region": "41610", "umd": "태전동",
+      "aliases": ["태전아이파크"], "areas": [84],
+      "households": 640, "built": 2017, "station": "태전지구",
+      "lat": 37.4218, "lng": 127.2432, "approx": true, "group": "now",
+      "tags": ["예산 여유"]
+    },
+    {
+      "id": "gwangju-hillstate", "name": "힐스테이트태전", "region": "41610", "umd": "태전동",
+      "aliases": ["힐스테이트태전"], "areas": [59],
+      "households": 556, "built": 2017, "station": "태전지구 · C7",
+      "lat": 37.4246, "lng": 127.2462, "approx": true, "group": "now",
+      "tags": ["전세 미확보"]
+    },
+    {
+      "id": "suwon-skyview", "name": "수원SK스카이뷰", "region": "41111", "umd": "정자동",
+      "aliases": ["수원SK스카이뷰", "SK스카이뷰"], "areas": [59, 84],
+      "households": 3498, "built": 2013, "station": "장안구 정자동 · 대단지",
+      "lat": 37.3008, "lng": 127.0032, "approx": true, "group": "after_1231",
+      "tags": ["12.31 해제 시", "59㎡ 현실적 선택지"]
+    },
+    {
+      "id": "suwon-hwaseo", "name": "화서역블루밍푸른숲", "region": "41115", "umd": "화서동",
+      "aliases": ["화서역블루밍푸른숲", "블루밍푸른숲"], "areas": [84],
+      "households": 1744, "built": 2008, "station": "화서역 17분",
+      "lat": 37.2862, "lng": 126.9992, "approx": true, "group": "after_1231",
+      "tags": ["12.31 해제 시", "전세 표본 1건"]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>갭 대시보드 · 3억으로 사는 아파트</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><a class="brand" href="./"><span class="brand-symbol">g.</span> 갭 대시보드</a><span class="header-note">실거래 위에, 3억의 자리를.</span><span id="updated" class="header-updated"></span><button id="info">데이터 안내 ↗</button></header>
+<main>
+<section class="intro"><div><div class="eyebrow">DASAN · GWANGJU · SUWON — GAP INVESTING</div><h1>3억으로 사는 아파트,<br><span>지도 위에서 다시 봅니다.</span></h1></div><p>신고된 실거래와 현재 호가를 한 화면에.<br>단지를 누르면 분기 흐름과 거래 분포가 열립니다.</p></section>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="workspace">
+<aside class="panel route-panel">
+  <div class="eyebrow">01 / FILTER</div>
+  <h2>어디를 볼까요?</h2>
+  <div class="seg" id="group-seg"><button data-g="all" aria-pressed="true">전체</button><button data-g="now">지금 가능</button><button data-g="after_1231">12.31 해제 시</button></div>
+  <label class="check"><input type="checkbox" id="only-budget"> 예산 2.8~3.5억 안쪽만</label>
+  <label class="check"><input type="checkbox" id="only-new"> 새 신고·새 매물 있는 단지만</label>
+  <div class="route-summary"><div><strong id="cnt-complex">—</strong><span>표시 단지</span></div><div><strong id="cnt-budget">—</strong><span>예산 안쪽 평형</span></div></div>
+  <div class="list-heading"><span>단지 · 평형</span><span class="muted-s">필요자금</span></div>
+  <div id="complex-list"></div>
+  <div class="notice"><span class="status-dot"></span> 필요자금 = 매매 중앙값 − 전세 중앙값 + 취득세 1.1%<span>세금·중개비 외 비용 별도. 좌표가 추정치인 단지는 ≈ 표시.</span></div>
+</aside>
+<section class="map-panel" aria-label="후보 단지 지도">
+  <div id="map"></div>
+  <div class="map-top"><span class="map-tag">GYEONGGI · CARTO LIGHT</span><div><button id="view" aria-pressed="false">2D 보기</button><button id="fit">전체 보기</button></div></div>
+  <div id="map-status" role="status">지도를 불러오는 중입니다…</div>
+  <div class="map-legend"><i class="in"></i> 예산 안 <i class="under"></i> 예산 여유 <i class="over"></i> 예산 초과 <i class="na"></i> 자료 없음 <i class="newdot"></i> 새 신고</div>
+</section>
+</div>
+
+<section class="market" id="detail-section">
+  <div class="market-heading"><div><div class="eyebrow">02 / COMPLEX</div><h2 id="detail-title">단지를 선택해 주세요</h2></div><div class="filters" id="unit-tabs"></div></div>
+  <div id="detail" class="panel store-detail"><p class="muted">지도 위 마커나 왼쪽 목록을 누르면 분기별 중앙값, 개별 실거래 분포, 전세 계약, 현재 호가를 보여드립니다.</p></div>
+</section>
+
+<section class="market">
+  <div class="market-heading"><div><div class="eyebrow">03 / COMPARE</div><h2>전세가율 × 필요자금</h2></div></div>
+  <div class="panel"><div id="scatter"></div><p class="chart-caption"><span>가로 70% 선 = 갭투자 안전선 · 파란 띠 = 예산 2.8~3.5억</span><span>실거래 중앙값 기준</span></p></div>
+</section>
+
+<section class="market">
+  <div class="market-heading"><div><div class="eyebrow">04 / LISTINGS</div><h2>현재 호가 · 지난 파일과 비교</h2></div><span id="listing-meta" class="muted"></span></div>
+  <div class="panel" id="listings"></div>
+</section>
+</main>
+<footer><strong>갭 대시보드</strong><span>판단 근거이며 매수 권유가 아닙니다 · 세금 별도</span><span>PRIVATE PREVIEW · 2026</span></footer>
+
+<dialog id="data-dialog"><button id="close-info" class="dialog-close">닫기 ×</button><div class="eyebrow">DATA & LIMITS</div><h2>어디까지 실제 데이터인가요?</h2><ul>
+<li><b>실거래</b>: 국토교통부 아파트 매매(상세)·전월세 실거래가 API. 계약 후 30일 안에 신고된 체결 거래만 포함되며, 해제된 계약은 제외합니다. 매주 월요일 새벽 자동 갱신.</li>
+<li><b>중앙값</b>: 최근 분기 거래의 중앙값. 표본이 5건 미만이면 최근 6개월로 보강합니다. 월세가 있는 계약은 전세 중앙값에서 제외합니다.</li>
+<li><b>저층</b>: 5층 이하. 실거래에는 동·층은 있으나 호수는 없습니다.</li>
+<li><b>호가</b>: 유료 매물 사이트에서 내려받아 <code>listings/</code>에 올린 파일 기준. 직전 파일과 비교해 신규·인하·사라짐을 표시합니다. 호가는 실거래가 아닙니다.</li>
+<li><b>좌표</b>: ≈ 표시 단지는 추정 좌표입니다. <code>config/targets.json</code>에서 수정할 수 있습니다.</li>
+<li><b>배경지도</b>: OpenStreetMap contributors / CARTO. 인터넷 연결이 필요합니다.</li>
+</ul><p id="data-stats" class="muted"></p></dialog>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="app.js"></script>
+</body></html>

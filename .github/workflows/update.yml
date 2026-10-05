@@ -1,0 +1,60 @@
+name: 데이터 갱신
+
+on:
+  schedule:
+    - cron: "17 21 * * 0"        # 매주 월요일 06:17 KST (일요일 21:17 UTC)
+  push:
+    paths:
+      - "listings/**"
+      - "config/**"
+      - "data/seed.json"
+      - "scripts/**"
+  workflow_dispatch:
+    inputs:
+      months:
+        description: "최근 N개월만 다시 받기 (0 = 전체)"
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install openpyxl
+
+      - name: 실거래 수집 (국토부)
+        if: ${{ env.DATA_GO_KR_KEY != '' }}
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python scripts/fetch_rtms.py --months "${{ github.event.inputs.months || '0' }}"
+
+      - name: 키 없음 안내
+        if: ${{ env.DATA_GO_KR_KEY == '' }}
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: echo "::warning::DATA_GO_KR_KEY 가 없어 실거래 수집을 건너뜁니다. 보고서 seed 값으로 빌드합니다."
+
+      - name: 매물 파일 비교
+        run: python scripts/listings.py
+
+      - name: 대시보드 데이터 빌드
+        run: python scripts/build.py
+
+      - name: 커밋
+        run: |
+          git config user.name "gap-dashboard bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
+          git commit -m "data: $(date -u -d '+9 hours' +'%Y-%m-%d %H:%M KST') 갱신"
+          git push
