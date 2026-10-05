@@ -86,7 +86,7 @@ function fitAll() {
 
 /* ---------- 주변 인프라 레이어 (OSM) ---------- */
 const INFRA_STYLE = { transit: ['교통', '#172126'], culture: ['문화', '#7a4fd1'], public: ['공공', '#1a9e6c'], education: ['교육', '#d9a21b'], medical: ['의료', '#c8322f'] };
-const infraOn = { transit: true, culture: false, public: false, education: true, medical: false };
+const infraOn = { transit: true, culture: false, public: false, education: innerWidth > 900, medical: false };
 let infraLoaded = false;
 function initInfra() {
   fetch('data/infra.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).then(j => {
