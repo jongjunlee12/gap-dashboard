@@ -196,6 +196,14 @@ function renderListings() {
   $('listings').innerHTML = listingTable(all, false);
 }
 
+/* ---------- 자동 발굴 ---------- */
+function renderDiscover() {
+  const ds = D.discovered || [], rule = D.discovery || {};
+  $('discover-meta').textContent = rule.note || '';
+  if (!ds.length) { $('discover').innerHTML = `<p class="muted" style="font-size:15px">${D.source === 'rtms' ? '조건에 맞는 단지가 아직 없습니다.' : '국토부 실거래가 연결되면 수원·성남·남양주·광주 전체에서 조건에 맞는 단지를 자동으로 찾아 여기에 올립니다.'}</p>`; return; }
+  $('discover').innerHTML = `<table><tr><th>지역</th><th>단지</th><th>㎡</th><th>준공</th><th>매매 중앙값</th><th>6개월 거래</th><th>전세 중앙값</th><th>전세가율</th><th>필요자금</th><th>저층 비중</th></tr>${ds.map(d => `<tr><td>${esc(d.region)} · ${esc(d.umd)}</td><td><b>${esc(d.name)}</b></td><td>${d.area}</td><td>${d.built || '—'}</td><td>${fmt(d.sale_median)}억<small style="color:#8a969d"> ${fmt(d.sale_min, 1)}~${fmt(d.sale_max, 1)}</small></td><td>${d.sale_n}건</td><td>${fmt(d.jeonse_median)}억 <small style="color:#8a969d">${d.jeonse_n}건</small></td><td>${fmt(d.jeonse_ratio, 1)}%${d.jeonse_ratio >= 70 ? ' <span class="badge">안전선 위</span>' : ''}</td><td><b style="color:var(--blue)">${fmt(d.required)}억</b></td><td>${d.low_floor_share}%</td></tr>`).join('')}</table><p class="chart-caption" style="margin-top:12px"><span>지도에 올리려면 config/targets.json 에 단지와 좌표를 추가하세요.</span><span>${ds.length}개 단지</span></p>`;
+}
+
 /* ---------- 툴팁 · 필터 ---------- */
 function bindTips(root) {
   root.querySelectorAll('[data-tip]').forEach(el => {
@@ -215,6 +223,6 @@ fetch('data/dashboard.json?v=' + Date.now()).then(r => r.json()).then(d => {
   $('updated').textContent = `갱신 ${D.generated_at} · ${D.source === 'rtms' ? '국토부 실거래' : '보고서 seed'}`;
   const nT = D.complexes.flatMap(c => c.units).reduce((a, u) => a + (u.trades || []).length, 0);
   $('data-stats').textContent = `단지 ${D.complexes.length} · 평형 ${D.complexes.flatMap(c => c.units).length} · 보유 매매 거래 ${nT}건 · 생성 ${D.generated_at}${D.seed_note ? ' · ' + D.seed_note : ''}`;
-  renderKpis(); initMap(); renderList(); renderScatter(); renderListings(); bindFilters();
+  renderKpis(); initMap(); renderList(); renderScatter(); renderDiscover(); renderListings(); bindFilters();
   select('dasan-natural3', false);
 }).catch(e => { $('map-status').textContent = 'data/dashboard.json 을 읽지 못했습니다. ' + e; });

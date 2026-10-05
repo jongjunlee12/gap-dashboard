@@ -202,6 +202,62 @@ for c in cfg["complexes"]:
         "units": out_units,
     })
 
+# ---------- 자동 발굴: 조건에 맞는 단지를 실거래 전체에서 찾기 ----------
+discovered = []
+disc = cfg.get("discovery", {})
+if disc.get("enabled") and has_raw:
+    from collections import defaultdict
+    known = {norm(a) for c in cfg["complexes"] for a in c["aliases"]}
+    today_ord = date.today().toordinal()
+    def bucket(x):
+        try:
+            x = float(x)
+        except (TypeError, ValueError):
+            return None
+        if not (disc["exclu_min"] <= x <= disc["exclu_max"]):
+            return None
+        return min(disc["area_buckets"], key=lambda b: abs(b - x))
+    for lawd in disc["regions"]:
+        T, R = defaultdict(list), defaultdict(list)
+        for it in load_raw("trade", lawd):
+            b = bucket(it.get("excluUseAr"))
+            if b is None or (it.get("cdealType") or "").strip() in ("O", "Y") or (it.get("cdealDay") or "").strip():
+                continue
+            d0 = date(int(it["dealYear"]), int(it["dealMonth"]), int(it["dealDay"])).toordinal()
+            T[(it.get("umdNm"), it.get("aptNm"), b)].append((d0, eok(it.get("dealAmount")), int(it.get("floor") or 0), it.get("buildYear")))
+        for it in load_raw("rent", lawd):
+            b = bucket(it.get("excluUseAr"))
+            if b is None or float(str(it.get("monthlyRent") or 0).replace(",", "") or 0) > 0:
+                continue
+            d0 = date(int(it["dealYear"]), int(it["dealMonth"]), int(it["dealDay"])).toordinal()
+            R[(it.get("umdNm"), it.get("aptNm"), b)].append((d0, eok(it.get("deposit"))))
+        for k, ts in T.items():
+            umd, apt, b = k
+            if any(norm(apt) in a or a in norm(apt) for a in known):
+                continue
+            rec = [p for d0, p, *_ in ts if d0 >= today_ord - 183 and p]
+            if len(rec) < disc["min_trades_6m"]:
+                continue
+            sm = median(rec)
+            if sm is None or sm >= disc["max_sale_median"]:
+                continue
+            rr = [p for d0, p in R.get(k, []) if d0 >= today_ord - 365 and p]
+            if len(rr) < disc["min_rents_12m"]:
+                continue
+            jm = median(rr)
+            req = round(sm - jm + sm * TAX, 2)
+            if disc.get("require_budget") and not (cfg["budget"]["min"] <= req <= cfg["budget"]["max"]):
+                continue
+            yr = [t[3] for t in ts if t[3]]
+            discovered.append({
+                "region": region_label.get(lawd, lawd), "lawd": lawd, "umd": umd, "name": apt, "area": b,
+                "sale_median": sm, "sale_n": len(rec), "sale_min": min(rec), "sale_max": max(rec),
+                "jeonse_median": jm, "jeonse_n": len(rr), "jeonse_ratio": round(100 * jm / sm, 1),
+                "gap": round(sm - jm, 2), "required": req, "built": yr[0] if yr else None,
+                "low_floor_share": round(100 * sum(1 for t in ts if 0 < t[2] <= LOW_FLOOR) / len(ts)),
+            })
+    discovered.sort(key=lambda x: (x["required"], -x["jeonse_ratio"]))
+
 dash = {
     "generated_at": date.today().isoformat(),
     "source": "rtms" if has_raw else "seed",
@@ -210,6 +266,8 @@ dash = {
     "tax_rate": TAX,
     "history_from": cfg["history_from"],
     "complexes": complexes,
+    "discovered": discovered,
+    "discovery": disc,
     "listings": {k: listings.get(k) for k in ("date", "file", "prev_file", "summary", "removed")} if listings else None,
     "totals": {
         "new_trades": sum(u.get("new_trades", 0) for c in complexes for u in c["units"]),

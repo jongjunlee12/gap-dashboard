@@ -505,6 +505,34 @@
    ]
   }
  ],
+ "discovered": [],
+ "discovery": {
+  "enabled": true,
+  "regions": [
+   "41111",
+   "41113",
+   "41115",
+   "41117",
+   "41131",
+   "41133",
+   "41135",
+   "41360",
+   "41610"
+  ],
+  "max_sale_median": 12.0,
+  "min_trades_6m": 3,
+  "min_rents_12m": 2,
+  "require_budget": true,
+  "note": "20~34평(전용 49~85㎡) · 매매 중앙값 12억 미만 · 필요자금 예산 안쪽 · 최근 6개월 매매 3건↑ · 전세 1년 2건↑ 이면 자동 후보",
+  "exclu_min": 49,
+  "exclu_max": 85.5,
+  "area_buckets": [
+   49,
+   59,
+   74,
+   84
+  ]
+ },
  "listings": {
   "date": null,
   "file": null,
