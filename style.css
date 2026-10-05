@@ -138,3 +138,6 @@ body.has-zoom{overflow:hidden}
 .marker.disc.selected i{inset:1px;background:#0064e0;border-width:3px}.marker.disc.selected span{font-weight:700;color:#172126;font-size:13px;display:block!important}
 .marker span{transform:none}
 @media(max-width:900px){.disc td:nth-child(2),.disc td:nth-child(3){white-space:nowrap}}
+
+.marker.disc.near{width:26px;height:26px}.marker.disc.near i{inset:5px;background:#6a9ff0}.marker.disc.near span{display:block;font-size:13px;color:#172126;font-weight:600;background:#fffffff0}.marker.disc.near span small{font-weight:500;color:#596971;font-size:11px}
+.marker.disc.near.selected i{inset:0;background:#0064e0;border-width:3px}.marker.disc.near.selected span{font-size:15px;font-weight:700}

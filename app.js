@@ -103,7 +103,16 @@ function focusInfra(lng, lat, fit) {
   map.getSource('infra-near').setData({ type: 'FeatureCollection', features: near });
   map.getSource('focus-ring').setData({ type: 'FeatureCollection', features: [circlePoly([lng, lat], 1000), circlePoly([lng, lat], 500)] });
   Object.keys(INFRA_STYLE).forEach(k => { map.setLayoutProperty('infra-' + k, 'visibility', 'none'); map.setLayoutProperty('infra-near-' + k, 'visibility', infraOn[k] ? 'visible' : 'none'); });
-  if (fit) { const b = new maplibregl.LngLatBounds(); circlePoly([lng, lat], 1000, 16).geometry.coordinates[0].forEach(c => b.extend(c)); map.fitBounds(b, { padding: 30, duration: 600, maxZoom: 15.5 }); }
+  renderFocusMarkers(lng, lat);
+  if (fit) {
+    // 선택 단지가 '보이는 영역'의 가운데에 오도록: 지도 위 UI(버튼·칩·요약·범례)가 가린 높이를 패딩으로 뺀다
+    const cr = map.getContainer().getBoundingClientRect();
+    let top = 8, bottom = 8;
+    ['.map-top', '.infra-chips', '.focus-info'].forEach(sel => { const el = map.getContainer().parentElement.querySelector(sel); if (el && el.offsetParent) top = Math.max(top, el.getBoundingClientRect().bottom - cr.top + 8); });
+    const lg = map.getContainer().parentElement.querySelector('.map-legend'); if (lg && lg.offsetParent) bottom = Math.max(bottom, cr.bottom - lg.getBoundingClientRect().top + 8);
+    const b = new maplibregl.LngLatBounds(); circlePoly([lng, lat], 1000, 16).geometry.coordinates[0].forEach(c => b.extend(c));
+    map.fitBounds(b, { padding: { top, bottom, left: 12, right: 12 }, duration: 600, maxZoom: 15.5 });
+  }
   const cnt = { r500: near.filter(f => f.properties.d <= 500).length, r1000: near.length };
   $('focus-info').innerHTML = `<b>반경 1km</b> 시설 ${cnt.r1000}개 · 500m 안 ${cnt.r500}개 <button class="mini" id="focus-clear">전체 보기</button>`;
   $('focus-clear').onclick = clearFocus;
@@ -111,6 +120,8 @@ function focusInfra(lng, lat, fit) {
 }
 function clearFocus() {
   focus = null;
+  focusMarkers.forEach(m => m.remove()); focusMarkers = [];
+  discMarkers.forEach(m => m.getElement().style.display = '');
   if (!infraLoaded) return;
   Object.keys(INFRA_STYLE).forEach(k => { infraOn[k] = (k === 'transit') || (k === 'education' && innerWidth > 900); const b = document.querySelector(`#infra-chips .chip[data-k="${k}"]`); if (b) b.setAttribute('aria-pressed', String(infraOn[k])); });
   map.getSource('infra-near').setData({ type: 'FeatureCollection', features: [] });
@@ -173,6 +184,33 @@ function infraLine(inf) {
   return `<div class="tags infra-tags"><span class="tag" style="background:#172126;color:#fff;border-color:#172126">반경 1km</span>${parts.join('')}</div>`;
 }
 
+/* ---------- 포커스 반경 안 단지 마커 (04 표 필터와 무관하게 전부) ---------- */
+let focusMarkers = [];
+function renderFocusMarkers(lng, lat) {
+  focusMarkers.forEach(m => m.remove()); focusMarkers = [];
+  if (!map || !D) return;
+  const nearCand = ll => D.complexes.some(c => distM([c.lng, c.lat], ll) < 40);
+  const groups = new Map();
+  (D.discovered || []).forEach(d => {
+    if (d.lat == null || distM([lng, lat], [d.lng, d.lat]) > 1000) return;
+    const k = `${d.name}@${d.lng.toFixed(5)},${d.lat.toFixed(5)}`;
+    if (!groups.has(k)) groups.set(k, { d, areas: [] });
+    groups.get(k).areas.push(d.area);
+  });
+  // 같은 자리의 기존 발굴 마커(평형별 중복)는 숨기고, 단지 하나당 마커 하나만
+  discMarkers.forEach(m => { m.getElement().style.display = distM([lng, lat], m.getLngLat().toArray()) <= 1000 ? 'none' : ''; });
+  groups.forEach(({ d, areas }) => {
+    if (nearCand([d.lng, d.lat])) return; // 후보 단지는 자기 마커가 있음
+    const sel = distM([lng, lat], [d.lng, d.lat]) < 5;
+    const el = document.createElement('div');
+    el.className = `marker disc near ${d.required < D.budget.min ? 'under' : 'in'}${sel ? ' selected' : ''}`;
+    el.innerHTML = `<i></i><span>${esc(d.name)} <small>${[...new Set(areas)].sort((a, b) => a - b).join('·')}</small></span>`;
+    el.title = `${d.name} ${areas.join('/')}㎡`;
+    el.onclick = e => { e.stopPropagation(); showDisc(d); };
+    focusMarkers.push(new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([d.lng, d.lat]).addTo(map));
+  });
+}
+
 /* ---------- 라벨 충돌 회피 (단지 라벨 + 시설 라벨·지시선) ---------- */
 let labelTimer = null, labelLayer = null, labelSvg = null;
 function ensureLabelLayer() {
@@ -196,7 +234,8 @@ function placeLabels() {
   const items = [];
   const inRing = ll => focus ? distM([focus.lng, focus.lat], ll) <= 1000 : false;
   D.complexes.forEach(c => { const m = markers[c.id]; if (!m || m.getElement().style.display === 'none') return; items.push({ el: m.getElement(), lngLat: [c.lng, c.lat], pri: c.id === state.sel ? 0 : (inRing([c.lng, c.lat]) ? 0.5 : 1), text: c.name }); });
-  discMarkers.forEach((m, i) => { const ll = m.getLngLat().toArray(); const sel = m.getElement().classList.contains('selected'); items.push({ el: m.getElement(), lngLat: ll, pri: sel ? 0 : (inRing(ll) ? 1.5 + i / 1000 : 3 + i / 1000), text: m.getElement().querySelector('span').textContent }); });
+  focusMarkers.forEach((m, i) => { const sel = m.getElement().classList.contains('selected'); items.push({ el: m.getElement(), lngLat: m.getLngLat().toArray(), pri: sel ? 0 : 0.6 + i / 1000, text: m.getElement().querySelector('span').textContent }); });
+  discMarkers.forEach((m, i) => { if (m.getElement().style.display === 'none') return; const ll = m.getLngLat().toArray(); const sel = m.getElement().classList.contains('selected'); items.push({ el: m.getElement(), lngLat: ll, pri: sel ? 0 : (inRing(ll) ? 1.5 + i / 1000 : 3 + i / 1000), text: m.getElement().querySelector('span').textContent }); });
   const fs = 13;
   items.sort((a, b) => a.pri - b.pri).forEach(it => {
     const p = map.project(it.lngLat), span = it.el.querySelector('span');
@@ -397,12 +436,14 @@ function renderDiscMarkers() {
     el.onclick = e => { e.stopPropagation(); showDisc(d); };
     discMarkers.push(new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([d.lng, d.lat]).addTo(map));
   });
+  if (focus) renderFocusMarkers(focus.lng, focus.lat);
   scheduleLabels();
 }
 function showDisc(d) {
   discMarkers.forEach(m => m.getElement().classList.toggle('selected', m.getLngLat().lng === d.lng && m.getLngLat().lat === d.lat && m.getElement().querySelector('span').textContent === `${d.name} ${d.area}`));
   Object.values(markers).forEach(m => m.getElement().classList.remove('selected'));
   focusInfra(d.lng, d.lat, true);
+  focusMarkers.forEach(m => m.getElement().classList.toggle('selected', distM(m.getLngLat().toArray(), [d.lng, d.lat]) < 5));
   $('map-status').innerHTML = `<b>${esc(d.name)} ${d.area}㎡</b> · ${esc(d.region)} ${esc(d.umd)} · 매매 ${fmt(d.sale_median)}억 · 전세 ${fmt(d.jeonse_median)}억 · 전세가율 ${fmt(d.jeonse_ratio, 1)}% · <b style="color:var(--blue)">필요자금 ${fmt(d.required)}억</b>${d.sedae ? ` · ${d.sedae}세대` : ''}${d.built ? ` · ${d.built}년` : ''}${d.subway ? ` · ${esc(d.subway)}` : ''}${d.infra?.nearest?.transit ? ` · 🚇 ${esc(d.infra.nearest.transit.name)} ${d.infra.nearest.transit.d}m` : ''}${d.infra?.nearest?.education ? ` · 🏫 ${d.infra.nearest.education.d}m` : ''} <button class="mini" id="disc-add">후보에 추가 요청</button> <span class="close-hint">✕ 탭하면 닫힘</span>`;
   $('disc-add').onclick = () => { navigator.clipboard?.writeText(`${d.name} ${d.area}㎡ (${d.region} ${d.umd}) 후보 추가`); $('disc-add').textContent = '복사됨 · 채팅에 붙여넣기'; };
   const row = [...document.querySelectorAll('.disc-row')].find(r => r.dataset.name === d.name && r.dataset.area == d.area);
