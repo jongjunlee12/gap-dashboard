@@ -59,7 +59,7 @@ function initMap() {
   });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
   map.on('load', () => { $('map-status').textContent = ''; fitAll(); setTimeout(() => map.resize(), 300); });
-  map.on('moveend', scheduleLabels); map.on('zoomend', scheduleLabels); map.on('resize', scheduleLabels);
+  map.on('moveend', scheduleLabels); map.on('zoomend', scheduleLabels); map.on('resize', scheduleLabels); map.on('movestart', () => { if (labelLayer) { labelLayer.innerHTML = ''; labelSvg.innerHTML = ''; } });
   window.addEventListener('resize', () => { map.resize(); scheduleLabels(); });
   window.addEventListener('orientationchange', () => setTimeout(() => { map.resize(); scheduleLabels(); }, 400));
   if (!maplibregl.supported || maplibregl.supported({ failIfMajorPerformanceCaveat: false }) === false) $('map-status').textContent = '이 기기 브라우저가 지도를 그릴 수 없습니다(WebGL 꺼짐). 최신 크롬·사파리로 열어 주세요.';
@@ -102,11 +102,11 @@ function initInfra() {
         map.on('mouseleave', 'infra-' + k, () => { map.getCanvas().style.cursor = ''; tip.style.display = 'none'; });
         map.on('mousemove', 'infra-' + k, e => { const p = e.features[0].properties; tip.style.display = 'block'; tip.textContent = `${label} · ${p.name}`; tip.style.left = e.originalEvent.clientX + 14 + 'px'; tip.style.top = e.originalEvent.clientY + 14 + 'px'; });
       });
-      infraLoaded = true;
+      infraLoaded = true; map.once('idle', scheduleLabels);
     };
     map.loaded() ? add() : map.on('load', add);
     $('infra-chips').innerHTML = Object.entries(INFRA_STYLE).map(([k, [label, col]]) => `<button class="chip" data-k="${k}" aria-pressed="${infraOn[k]}"><i style="background:${col}"></i>${label}</button>`).join('') + `<span class="chip-note">${j.points.length.toLocaleString()}개 시설 · OSM</span>`;
-    $('infra-chips').querySelectorAll('.chip').forEach(b => b.onclick = () => { const k = b.dataset.k; infraOn[k] = !infraOn[k]; b.setAttribute('aria-pressed', infraOn[k]); if (infraLoaded) map.setLayoutProperty('infra-' + k, 'visibility', infraOn[k] ? 'visible' : 'none'); });
+    $('infra-chips').querySelectorAll('.chip').forEach(b => b.onclick = () => { const k = b.dataset.k; infraOn[k] = !infraOn[k]; b.setAttribute('aria-pressed', infraOn[k]); if (infraLoaded) map.setLayoutProperty('infra-' + k, 'visibility', infraOn[k] ? 'visible' : 'none'); setTimeout(scheduleLabels, 150); });
   }).catch(() => {});
 }
 function infraLine(inf) {
@@ -116,30 +116,80 @@ function infraLine(inf) {
   return `<div class="tags infra-tags"><span class="tag" style="background:#172126;color:#fff;border-color:#172126">반경 1km</span>${parts.join('')}</div>`;
 }
 
-/* ---------- 라벨 충돌 회피 ---------- */
-let labelTimer = null;
+/* ---------- 라벨 충돌 회피 (단지 라벨 + 시설 라벨·지시선) ---------- */
+let labelTimer = null, labelLayer = null, labelSvg = null;
+function ensureLabelLayer() {
+  if (labelLayer) return;
+  const c = map.getContainer();
+  labelSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); labelSvg.setAttribute('class', 'infra-lines');
+  labelLayer = document.createElement('div'); labelLayer.className = 'infra-labels';
+  c.appendChild(labelSvg); c.appendChild(labelLayer);
+}
+const LAYER_PRI = { transit: 0, education: 1, medical: 2, culture: 3, public: 4 };
 function placeLabels() {
   if (!map) return;
+  ensureLabelLayer();
+  const W = map.getContainer().clientWidth, H = map.getContainer().clientHeight;
+  const placed = [];
+  const overlaps = box => placed.some(b => !(box.x2 < b.x1 || box.x1 > b.x2 || box.y2 < b.y1 || box.y1 > b.y2));
+  // 1) 단지 라벨 (DOM span)
   const items = [];
   D.complexes.forEach(c => { const m = markers[c.id]; if (!m || m.getElement().style.display === 'none') return; items.push({ el: m.getElement(), lngLat: [c.lng, c.lat], pri: c.id === state.sel ? 0 : 1, text: c.name }); });
   discMarkers.forEach((m, i) => items.push({ el: m.getElement(), lngLat: m.getLngLat().toArray(), pri: 2 + i / 1000, text: m.getElement().querySelector('span').textContent }));
-  const W = map.getContainer().clientWidth, H = map.getContainer().clientHeight;
-  const placed = [];
   const fs = 13;
   items.sort((a, b) => a.pri - b.pri).forEach(it => {
-    const p = map.project(it.lngLat);
-    const span = it.el.querySelector('span');
+    const p = map.project(it.lngLat), span = it.el.querySelector('span');
     if (!span) return;
     if (p.x < -40 || p.y < -40 || p.x > W + 40 || p.y > H + 40) { span.style.display = 'none'; return; }
     const w = Math.min(220, it.text.length * fs * 0.95 + 14), h = fs + 10;
     const box = { x1: p.x + 14, y1: p.y - h / 2, x2: p.x + 14 + w, y2: p.y + h / 2 };
-    const hit = placed.some(b => !(box.x2 < b.x1 || box.x1 > b.x2 || box.y2 < b.y1 || box.y1 > b.y2));
-    if (hit && it.pri >= 1) { span.style.display = 'none'; return; }
-    span.style.display = '';
-    placed.push(box);
+    if (overlaps(box) && it.pri >= 1) { span.style.display = 'none'; return; }
+    span.style.display = ''; placed.push(box);
+    placed.push({ x1: p.x - 10, y1: p.y - 10, x2: p.x + 10, y2: p.y + 10 }); // 마커 자체도 점유
   });
+  // 2) 시설 라벨: 보이는 레이어의 화면 안 점 중 우선순위대로, 화면이 붐비지 않을 만큼만
+  labelLayer.innerHTML = ''; labelSvg.innerHTML = '';
+  if (!infraLoaded || map.getZoom() < 12.5) return;
+  const vis = Object.keys(INFRA_STYLE).filter(k => infraOn[k] && map.getLayer('infra-' + k));
+  if (!vis.length) return;
+  let feats = [];
+  try { feats = map.queryRenderedFeatures({ layers: vis.map(k => 'infra-' + k) }); } catch (e) { return; }
+  const seen = new Set();
+  const pts = feats.map(f => ({ layer: f.properties.layer, name: f.properties.name, kind: f.properties.kind, lngLat: f.geometry.coordinates })).filter(f => { const k = f.layer + f.name; if (seen.has(k)) return false; seen.add(k); return true; });
+  const z = map.getZoom();
+  const maxN = Math.max(4, Math.min(W < 600 ? 8 : 22, Math.round((W * H) / (W < 600 ? 28000 : 16000) * Math.min(1, (z - 12) / 3))));
+  pts.sort((a, b) => (LAYER_PRI[a.layer] - LAYER_PRI[b.layer]) || a.name.length - b.name.length);
+  const sfs = Math.round(fs * 0.7); // 아파트명의 0.7배
+  let n = 0;
+  for (const pt of pts) {
+    if (n >= maxN) break;
+    const p = map.project(pt.lngLat);
+    if (p.x < 0 || p.y < 0 || p.x > W || p.y > H) continue;
+    const text = pt.name.length > 14 ? pt.name.slice(0, 13) + '…' : pt.name;
+    const w = text.length * sfs * 0.95 + 10, h = sfs + 6;
+    // 후보 위치: 오른쪽 → 왼쪽 → 위 → 아래 → 대각선(지시선 길게)
+    const cands = [[10, -h / 2], [-w - 10, -h / 2], [-w / 2, -h - 10], [-w / 2, 10], [22, -h - 18], [-w - 22, -h - 18], [22, 18], [-w - 22, 18]];
+    let hit = null;
+    for (const [dx, dy] of cands) {
+      const box = { x1: p.x + dx, y1: p.y + dy, x2: p.x + dx + w, y2: p.y + dy + h };
+      if (box.x1 < 2 || box.y1 < 2 || box.x2 > W - 2 || box.y2 > H - 2) continue;
+      if (!overlaps(box)) { hit = box; break; }
+    }
+    if (!hit) continue;
+    placed.push(hit); n++;
+    const col = INFRA_STYLE[pt.layer][1];
+    const el = document.createElement('div'); el.className = 'ilabel'; el.style.cssText = `left:${hit.x1}px;top:${hit.y1}px;font-size:${sfs}px;border-color:${col};color:${col}`; el.textContent = text;
+    labelLayer.appendChild(el);
+    // 지시선: 라벨이 점에서 떨어져 있으면 그림
+    const cx = Math.max(hit.x1, Math.min(hit.x2, p.x)), cy = Math.max(hit.y1, Math.min(hit.y2, p.y));
+    if (Math.hypot(cx - p.x, cy - p.y) > 6) {
+      const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      ln.setAttribute('x1', p.x); ln.setAttribute('y1', p.y); ln.setAttribute('x2', cx); ln.setAttribute('y2', cy); ln.setAttribute('stroke', col);
+      labelSvg.appendChild(ln);
+    }
+  }
 }
-function scheduleLabels() { clearTimeout(labelTimer); labelTimer = setTimeout(placeLabels, 60); }
+function scheduleLabels() { clearTimeout(labelTimer); labelTimer = setTimeout(placeLabels, 80); }
 
 /* ---------- 선택 · 상세 ---------- */
 function select(id, fly) {
