@@ -59,7 +59,7 @@ function initMap() {
   });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
   map.on('load', () => { $('map-status').textContent = ''; if (!focus) fitAll(); setTimeout(() => map.resize(), 300); });
-  map.on('moveend', scheduleLabels); map.on('zoomend', scheduleLabels); map.on('resize', scheduleLabels); map.on('movestart', () => { if (labelLayer) { labelLayer.innerHTML = ''; labelSvg.innerHTML = ''; } });
+  map.on('moveend', scheduleLabels); map.on('zoomend', scheduleLabels); map.on('resize', scheduleLabels); map.on('idle', scheduleLabels); map.on('movestart', () => { if (labelLayer) { labelLayer.innerHTML = ''; labelSvg.innerHTML = ''; } });
   window.addEventListener('resize', () => { map.resize(); scheduleLabels(); });
   window.addEventListener('orientationchange', () => setTimeout(() => { map.resize(); scheduleLabels(); }, 400));
   if (!maplibregl.supported || maplibregl.supported({ failIfMajorPerformanceCaveat: false }) === false) $('map-status').textContent = '이 기기 브라우저가 지도를 그릴 수 없습니다(WebGL 꺼짐). 최신 크롬·사파리로 열어 주세요.';
