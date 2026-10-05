@@ -8,7 +8,7 @@
 
 사용: python scripts/fetch_rtms.py [--months 6]
 """
-import json, os, sys, time, argparse, urllib.parse, urllib.request
+import json, os, sys, time, argparse, urllib.parse, urllib.request, urllib.error
 import xml.etree.ElementTree as ET
 from datetime import date
 from pathlib import Path
@@ -45,9 +45,11 @@ def fetch(kind, key, lawd, ym, rows=1000):
                 with urllib.request.urlopen(url, timeout=60) as r:
                     body = r.read()
                 break
+            except urllib.error.HTTPError as e:
+                raise RuntimeError(f"{kind} {lawd} {ym}: HTTP {e.code} → {e.read()[:300]!r}")
             except Exception as e:  # noqa: BLE001
                 if attempt == 3:
-                    raise
+                    raise RuntimeError(f"{kind} {lawd} {ym}: 연결 실패 {type(e).__name__} {e}")
                 time.sleep(2 * (attempt + 1))
         try:
             root = ET.fromstring(body)
@@ -85,8 +87,8 @@ def main():
     try:
         probe = fetch("trade", key, cfg["regions"][0]["code"], date.today().strftime("%Y%m"), rows=1)
         print(f"키 확인 OK · 남양주 이번 달 매매 표본 {len(probe)}건")
-    except RuntimeError as e:
-        print(f"::error::{e}", file=sys.stderr)
+    except Exception as e:  # noqa: BLE001
+        print(f"::error::키 점검 실패: {e}", file=sys.stderr)
         print("※ 흔한 원인: (1) 활용신청 직후라 키가 아직 활성화 전(최대 1시간) (2) 매매 '상세' 자료가 아닌 다른 API 신청 (3) 일일 한도 초과", file=sys.stderr)
         sys.exit(3)
     today = date.today()
