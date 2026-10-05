@@ -641,7 +641,7 @@
       "danji": 1396.0,
       "ibju": "2022.07",
       "subway": null,
-      "file": "unknown_20261005.xlsx"
+      "file": "gwangju_20261005.xlsx"
      },
      "sale_median": 7.287,
      "sale_min": 6.875,
@@ -723,7 +723,7 @@
       "danji": 640.0,
       "ibju": "2017.08",
       "subway": null,
-      "file": "unknown_20261005.xlsx"
+      "file": "gwangju_20261005.xlsx"
      },
      "sale_median": 5.492,
      "sale_min": 5.184,
@@ -805,7 +805,7 @@
       "danji": 620.0,
       "ibju": "2017.10",
       "subway": null,
-      "file": "unknown_20261005.xlsx"
+      "file": "gwangju_20261005.xlsx"
      },
      "sale_median": 4.898,
      "sale_min": 4.654,
@@ -41116,18 +41116,22 @@
   "files": [
    {
     "sgg": "광주시",
-    "file": "unknown_20261005.xlsx"
+    "file": "gwangju_20261005.xlsx"
    },
    {
-    "sgg": "수원시팔달구",
-    "file": "suwon_20261005.xlsx"
+    "sgg": "남양주시",
+    "file": "namyangju_20261005.xlsx"
+   },
+   {
+    "sgg": "성남시중원구",
+    "file": "seongnam_jungwon_20261005.xlsx"
+   },
+   {
+    "sgg": "성남시수정구",
+    "file": "seongnam_sujeong_20261005.xlsx"
    },
    {
     "sgg": "수원시장안구",
-    "file": "suwon_20261005.xlsx"
-   },
-   {
-    "sgg": "수원시영통구",
     "file": "suwon_20261005.xlsx"
    },
    {
@@ -41135,16 +41139,12 @@
     "file": "suwon_20261005.xlsx"
    },
    {
-    "sgg": "성남시중원구",
-    "file": "seongnam_jungwon_20261005.xlsx"
+    "sgg": "수원시팔달구",
+    "file": "suwon_20261005.xlsx"
    },
    {
-    "sgg": "남양주시",
-    "file": "namyangju_20261005.xlsx"
-   },
-   {
-    "sgg": "성남시수정구",
-    "file": "seongnam_sujeong_20261005.xlsx"
+    "sgg": "수원시영통구",
+    "file": "suwon_20261005.xlsx"
    }
   ],
   "n": 2154
