@@ -10,27 +10,27 @@
 "file": "namyangju_20261005.xlsx"
 },
 {
-"sgg": "성남시중원구",
-"file": "seongnam_jungwon_20261005.xlsx"
-},
-{
 "sgg": "성남시수정구",
 "file": "seongnam_sujeong_20261005.xlsx"
 },
 {
-"sgg": "수원시장안구",
-"file": "suwon_20261005.xlsx"
+"sgg": "성남시중원구",
+"file": "seongnam_jungwon_20261005.xlsx"
 },
 {
 "sgg": "수원시팔달구",
 "file": "suwon_20261005.xlsx"
 },
 {
-"sgg": "수원시영통구",
+"sgg": "수원시권선구",
 "file": "suwon_20261005.xlsx"
 },
 {
-"sgg": "수원시권선구",
+"sgg": "수원시장안구",
+"file": "suwon_20261005.xlsx"
+},
+{
+"sgg": "수원시영통구",
 "file": "suwon_20261005.xlsx"
 }
 ],
