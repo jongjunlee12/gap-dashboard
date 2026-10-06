@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>갭 내비 · 3억으로 사는 아파트</title>
+<meta name="description" content="남양주 다산·광주·수원·성남 — 3억 자기자본 갭투자 후보를 지도·목록·순위로 봅니다">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./"><span class="mark">g</span><b>갭 내비</b><small>다산 · 광주 · 수원 · 성남</small></a>
+  <div class="top-right"><button id="btn-guide" class="ghost">지표 안내</button><button id="btn-fav-top" class="ghost">★ <span id="fav-count">0</span></button></div>
+</header>
+
+<main class="wrap">
+  <section class="search card">
+    <label class="search-box"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="q" type="search" placeholder="단지명 또는 동 이름 검색" autocomplete="off"></label>
+    <div class="search-row">
+      <div class="icon-btns"><button id="btn-filter" title="필터">⚙︎ 필터</button><button id="btn-reset" title="초기화">↺</button><button id="btn-fav" title="즐겨찾기만">☆</button></div>
+      <div class="seg" id="region-seg"><button data-r="all" aria-pressed="true">전체</button><button data-r="남양주시">남양주</button><button data-r="광주시">광주</button><button data-r="수원">수원</button><button data-r="성남">성남</button></div>
+    </div>
+    <div class="applied" id="applied"></div>
+    <div class="filter-panel" id="filter-panel" hidden>
+      <div class="f-grid">
+        <label>필요자금 최대 <output id="o-req">3.5억</output><input type="range" id="f-req" min="1" max="6" step="0.1" value="3.5"></label>
+        <label>전세가율 최소 <output id="o-ratio">0%</output><input type="range" id="f-ratio" min="0" max="90" step="5" value="0"></label>
+        <label>단지 세대수 최소 <output id="o-danji">200</output><input type="range" id="f-danji" min="0" max="2000" step="100" value="200"></label>
+        <label>입주 연도 이후 <output id="o-built">2000</output><input type="range" id="f-built" min="1990" max="2024" step="1" value="2000"></label>
+        <label>전용면적
+          <span class="chips" id="f-area"><button data-a="49" aria-pressed="true">49</button><button data-a="59" aria-pressed="true">59</button><button data-a="74" aria-pressed="true">74</button><button data-a="84" aria-pressed="true">84</button></span></label>
+        <label>정렬
+          <select id="f-sort"><option value="score">추천 점수</option><option value="required">필요자금 적은 순</option><option value="ratio">전세가율 높은 순</option><option value="chg">1년 상승률</option><option value="shops">상권 규모</option><option value="sedae">세대수</option><option value="built">신축 순</option></select></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="view card" id="view-map">
+    <div class="card-head"><h2>단지 지도</h2><span class="muted" id="map-meta"></span></div>
+    <div class="map-wrap">
+      <div id="map"></div>
+      <div class="map-ctl top-left"><button id="btn-labels" aria-pressed="true">라벨</button><button id="btn-fit">전체</button><button id="btn-full">⤢</button></div>
+      <div class="map-chips" id="map-chips"></div>
+      <div class="map-note" id="map-note"></div>
+      <div class="map-legend"><i class="c-in"></i>예산 안 <i class="c-under"></i>예산 여유 <i class="c-over"></i>예산 초과 <i class="c-cand"></i>후보 단지</div>
+    </div>
+    <p class="foot">점을 누르면 상세로 이동 · 낮은 배율에선 지역별 단지 수</p>
+  </section>
+
+  <section class="view card" id="view-list" hidden>
+    <div class="card-head"><h2>조건에 맞는 단지 <span class="count" id="list-count">0</span></h2><button id="btn-sort" class="ghost">정렬 ▾</button></div>
+    <div id="list"></div>
+    <button id="btn-more" class="more" hidden>더 보기</button>
+  </section>
+
+  <section class="view card" id="view-rank" hidden>
+    <div class="card-head"><h2>주요 Top 순위</h2><span class="muted" id="rank-meta"></span></div>
+    <div class="tabs" id="rank-tabs"><button data-k="summary" aria-pressed="true">요약</button><button data-k="score">추천</button><button data-k="required">자금 적음</button><button data-k="ratio">전세가율</button><button data-k="chg">상승률</button><button data-k="shops">상권</button></div>
+    <div id="rank"></div>
+  </section>
+
+  <section class="view card" id="view-detail" hidden>
+    <div id="detail"><p class="muted">지도나 목록에서 단지를 고르면 여기에 상세가 열립니다.</p></div>
+  </section>
+
+  <section class="view card" id="view-favs" hidden>
+    <div class="card-head"><h2>★ 즐겨찾기 비교</h2><span class="muted" id="favs-meta"></span></div>
+    <div id="favs"></div>
+  </section>
+</main>
+
+<nav class="tabbar" id="tabbar">
+  <button data-v="map" aria-pressed="true">지도</button>
+  <button data-v="list">목록</button>
+  <button data-v="rank">순위</button>
+  <button data-v="detail" id="tab-detail">상세</button>
+</nav>
+
+<dialog id="guide"><button class="x" id="guide-x">닫기 ×</button>
+<h2>지표 안내</h2>
+<ul>
+<li><b>매매 중앙값</b> 최근 6개월(표본 5건 미만이면 보강) 실거래 중앙값. PropX 단지상세 실거래(36개월) 기준.</li>
+<li><b>전세 기준가</b> 최근 전세 계약 중 <b>최고 보증금</b>. 갱신 계약은 상승 폭 제한으로 낮게 형성돼 중앙값이 실제보다 낮아지기 때문. 중앙값은 참고로 같이 표시.</li>
+<li><b>필요자금</b> = 매매 − 전세 + 취득세 1.1%. 중개비·수리비 별도.</li>
+<li><b>추천 점수</b> = 예산 3.5억 활용도 40% · 전세가율 25% · 1년 상승 15% · 세대수 10% · 연식 10%.</li>
+<li><b>주변 시설</b> OpenStreetMap(교통·문화·공공·교육). <b>상권</b> 오픈업 점포 월매출(최근 12개월 평균), 반경 1km 점포 수·매출 합·상위 매장.</li>
+<li>판단 근거이며 매수 권유가 아닙니다.</li>
+</ul></dialog>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="app.js?v=1"></script>
+</body></html>
