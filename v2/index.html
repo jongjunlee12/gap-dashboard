@@ -6,7 +6,7 @@
 <meta name="description" content="남양주 다산·광주·수원·성남 — 3억 자기자본 갭투자 후보를 지도·목록·순위로 봅니다">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 <header class="top">
@@ -70,12 +70,14 @@
   </section>
 </main>
 
-<nav class="tabbar" id="tabbar">
-  <button data-v="map" aria-pressed="true">지도</button>
-  <button data-v="list">목록</button>
-  <button data-v="rank">순위</button>
-  <button data-v="detail" id="tab-detail">상세</button>
+<nav class="tabbar" id="tabbar" aria-label="화면 전환">
+  <span class="ind" id="tab-ind"></span>
+  <button data-v="map" aria-pressed="true"><i>🗺️</i><span>지도</span></button>
+  <button data-v="list"><i>📋</i><span>목록</span><em class="n" id="tab-list-n"></em></button>
+  <button data-v="rank"><i>🏆</i><span>순위</span></button>
+  <button data-v="detail" id="tab-detail"><i>🏢</i><span>상세</span></button>
 </nav>
+<div class="tab-hint" id="tab-hint">아래 탭을 눌러 지도 · 목록 · 순위 · 상세를 오갑니다 <b>↓</b></div>
 
 <dialog id="guide"><button class="x" id="guide-x">닫기 ×</button>
 <h2>지표 안내</h2>
@@ -89,5 +91,5 @@
 </ul></dialog>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="app.js?v=2"></script>
+<script src="app.js?v=3"></script>
 </body></html>

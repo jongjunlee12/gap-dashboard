@@ -62,13 +62,20 @@ function renderApplied() {
   if (state.q) chips.push(`"${state.q}"`);
   $('applied').innerHTML = chips.length ? '적용 조건 ' + chips.map(c => `<span class="chip">${esc(c)}</span>`).join('') : '';
 }
-function refresh() { renderApplied(); renderList(); renderRank(); renderMapMarkers(); renderFavs(); $('fav-count').textContent = favs.length; }
+function refresh() { renderApplied(); renderList(); renderRank(); renderMapMarkers(); renderFavs(); $('fav-count').textContent = favs.length; $('tab-list-n').textContent = filtered().length.toLocaleString(); }
 
 /* ---------- 탭 ---------- */
+function moveInd(v) {
+  const btns = [...$('tabbar').querySelectorAll('button')], i = Math.max(0, btns.findIndex(b => b.dataset.v === v)), b = btns[i];
+  const ind = $('tab-ind'); if (!ind || !b) return; const r = b.getBoundingClientRect(), pr = $('tabbar').getBoundingClientRect();
+  ind.style.left = (r.left - pr.left) + 'px'; ind.style.width = r.width + 'px';
+}
 function show(v) {
   state.view = v;
   ['map', 'list', 'rank', 'detail', 'favs'].forEach(k => { const el = $('view-' + k); if (el) el.hidden = k !== v; });
-  $('tabbar').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
+  $('tabbar').querySelectorAll('button').forEach(b => { const on = b.dataset.v === v; b.setAttribute('aria-pressed', String(on)); if (on) { b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop'); } });
+  moveInd(v === 'favs' ? 'detail' : v);
+  const hint = $('tab-hint'); if (hint && !hint.classList.contains('gone')) { hint.classList.add('gone'); try { localStorage.setItem('gapnavi-hint', '1'); } catch (e) {} }
   if (v === 'map' && map) setTimeout(() => { map.resize(); scheduleLabels(); }, 60);
   window.scrollTo({ top: v === 'map' ? 0 : $('view-' + v).offsetTop - 70, behavior: 'smooth' });
 }
@@ -258,7 +265,7 @@ function placeLabels() {
 /* ---------- 상세 ---------- */
 function openDetail(key) {
   state.sel = key; const u = units.find(x => x.key === key); if (!u) return;
-  $('tab-detail').textContent = '상세';
+  $('tab-detail').querySelector('span').textContent = '상세'; $('tab-detail').classList.add('flash'); setTimeout(() => $('tab-detail').classList.remove('flash'), 2500);
   renderDetail(); show('detail'); focusOn(u);
 }
 function locScores(u) {
@@ -336,5 +343,8 @@ function bind() {
 }
 fetch('../data/dashboard.json?v=' + Date.now()).then(r => r.json()).then(d => {
   D = d; units = normalize(d); bind(); refresh(); initMap();
+  try { if (localStorage.getItem('gapnavi-hint')) $('tab-hint').classList.add('gone'); } catch (e) {}
+  setTimeout(() => $('tab-hint').classList.add('gone'), 12000);
+  requestAnimationFrame(() => moveInd('map')); window.addEventListener('resize', () => moveInd(state.view === 'favs' ? 'detail' : state.view));
   fetch('../data/infra.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).then(j => { if (!j) return; infraFC = { type: 'FeatureCollection', features: j.points.filter(p => INFRA[p.layer]).map(p => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [p.lng, p.lat] }, properties: { layer: p.layer, name: p.name } })) }; infraReady = true; if (focus) focusOn(focus); }).catch(() => {});
 }).catch(e => { document.querySelector('.wrap').innerHTML = `<p class="card">데이터를 불러오지 못했습니다. ${esc(e.message)}</p>`; });
