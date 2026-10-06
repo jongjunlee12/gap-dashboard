@@ -168,7 +168,7 @@ function renderMapMarkers() {
   // 같은 좌표(같은 단지 다른 평형)는 하나로
   const byPos = new Map(); xs.forEach(u => { const k = `${u.name}@${u.lng.toFixed(5)},${u.lat.toFixed(5)}`; if (!byPos.has(k)) byPos.set(k, []); byPos.get(k).push(u); });
   if (map.getZoom() < 11.5 && !focus) {
-    const g = new Map(); xs.forEach(u => { const k = u.regionLabel; if (!g.has(k)) g.set(k, { n: 0, lng: 0, lat: 0, names: new Set() }); const o = g.get(k); o.names.add(u.name); o.lng += u.lng; o.lat += u.lat; o.n++; });
+    const g = new Map(); xs.forEach(u => { const k = u.region; if (!g.has(k)) g.set(k, { n: 0, lng: 0, lat: 0, names: new Set() }); const o = g.get(k); o.names.add(u.name); o.lng += u.lng; o.lat += u.lat; o.n++; });
     g.forEach((o, k) => { const el = document.createElement('div'); el.className = 'bubble'; el.innerHTML = `<b>${esc(k)}</b><small>${o.names.size}개 단지</small>`; el.onclick = () => map.flyTo({ center: [o.lng / o.n, o.lat / o.n], zoom: 12.5 }); bubbles.push(new maplibregl.Marker({ element: el }).setLngLat([o.lng / o.n, o.lat / o.n]).addTo(map)); });
     return;
   }
