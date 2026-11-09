@@ -1,5 +1,5 @@
 {
-"generated_at": "2026-11-02",
+"generated_at": "2026-11-09",
 "files": [
 {
 "sgg": "광주시",
@@ -18,19 +18,19 @@
 "file": "seongnam_sujeong_20261005.xlsx"
 },
 {
-"sgg": "수원시영통구",
-"file": "suwon_20261005.xlsx"
-},
-{
-"sgg": "수원시권선구",
-"file": "suwon_20261005.xlsx"
-},
-{
 "sgg": "수원시팔달구",
 "file": "suwon_20261005.xlsx"
 },
 {
+"sgg": "수원시영통구",
+"file": "suwon_20261005.xlsx"
+},
+{
 "sgg": "수원시장안구",
+"file": "suwon_20261005.xlsx"
+},
+{
+"sgg": "수원시권선구",
 "file": "suwon_20261005.xlsx"
 }
 ],
